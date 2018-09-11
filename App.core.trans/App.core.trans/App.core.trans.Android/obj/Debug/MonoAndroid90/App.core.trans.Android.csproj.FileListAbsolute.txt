@@ -1,0 +1,2 @@
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid90\App.core.trans.Android.csprojAssemblyReference.cache
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid90\res.flag
