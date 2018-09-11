@@ -2225,6 +2225,12 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F02006D
 			public const int avd_show_password_3 = 2130837613;
 			
+			// aapt resource value: 0x7F010007
+			public const int cliente = 2130771975;
+			
+			// aapt resource value: 0x7F010008
+			public const int cuentas = 2130771976;
+			
 			// aapt resource value: 0x7F020055
 			public const int design_bottom_navigation_item_background = 2130837589;
 			
@@ -2682,7 +2688,10 @@ namespace App.core.trans.Droid
 			public const int ic_vol_type_tv_light = 2130837731;
 			
 			// aapt resource value: 0x7F010003
-			public const int logo3 = 2130771971;
+			public const int lista = 2130771971;
+			
+			// aapt resource value: 0x7F010004
+			public const int logo3 = 2130771972;
 			
 			// aapt resource value: 0x7F0200E4
 			public const int mr_button_connected_dark = 2130837732;
@@ -2782,6 +2791,15 @@ namespace App.core.trans.Droid
 			
 			// aapt resource value: 0x7F020065
 			public const int notify_panel_notification_icon_bg = 2130837605;
+			
+			// aapt resource value: 0x7F010005
+			public const int operacion = 2130771973;
+			
+			// aapt resource value: 0x7F010006
+			public const int salir = 2130771974;
+			
+			// aapt resource value: 0x7F010009
+			public const int transaccion = 2130771977;
 			
 			static Drawable()
 			{

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using App.core.trans.Models;
 using App.core.trans.Views;
 using App.core.trans.Views.Count;
+using App.core.trans.Views.Transaccion;
 using Xamarin.Forms;
 
 namespace App.core.trans
@@ -26,20 +27,20 @@ namespace App.core.trans
 		{
 			menuList.Add(new MasterPageItem
 			{
-				Title = "Plan de Conteo",
-				Icon = "ic1.png",
+				Title = "Realizar Operación",
+				Icon = "operacion.png",
+				TargetType = typeof(Trans01)
+			});
+			menuList.Add(new MasterPageItem
+			{
+				Title = "Ver registros",
+				Icon = "lista.png",
 				TargetType = typeof(PlanList)
 			});
 			menuList.Add(new MasterPageItem
 			{
-				Title = "Recepcion",
-				Icon = "ic1.png",
-				TargetType = typeof(PlanList)
-			});
-			menuList.Add(new MasterPageItem
-			{
-				Title = "Tansferencia entre Bodegas",
-				Icon = "ic1.png",
+				Title = "Salir",
+				Icon = "salir.png",
 				TargetType = typeof(PlanList)
 			});
 

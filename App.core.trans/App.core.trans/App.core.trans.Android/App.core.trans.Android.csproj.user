@@ -3,5 +3,7 @@
   <PropertyGroup>
     <SelectedDevice>ALCATEL 5046G</SelectedDevice>
     <ProjectView>ShowAllFiles</ProjectView>
+    <DefaultDevice>VisualStudio_android-23_arm_phone</DefaultDevice>
+    <AndroidDesignerPreferredTheme>Theme.DeviceDefault.NoActionBar.Fullscreen</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>
