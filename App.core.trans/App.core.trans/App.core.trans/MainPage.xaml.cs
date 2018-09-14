@@ -27,7 +27,7 @@ namespace App.core.trans
 		{
 			menuList.Add(new MasterPageItem
 			{
-				Title = "Realizar Operación",
+				Title = "Transacciones",
 				Icon = "operacion.png",
 				TargetType = typeof(Trans01)
 			});

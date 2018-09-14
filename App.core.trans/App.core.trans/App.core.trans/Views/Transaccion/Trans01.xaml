@@ -1,13 +1,53 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿|<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.core.trans.Views.Transaccion.Trans01"
 			 Title="Realizar Operación">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+	<ScrollView>
+		<StackLayout>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="25" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+				</Grid.RowDefinitions>
+
+
+				<Image WidthRequest="35" Grid.Row="1" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="transaccion.png" ></Image>
+				<Label x:Name="Label1" Text="Código Transaccion" Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+
+				<Picker x:Name="PickerWarehouseInit" Grid.Row="2" Grid.Column="1"
+                            ItemsSource="{Binding TransaccionCollection }"
+                            SelectedItem="{Binding TransaccionSelect}" 
+					        WidthRequest="200" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="StartAndExpand">
+				</Picker>
+
+				<Image WidthRequest="35" Grid.Row="3" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cliente.png" ></Image>
+				<Label x:Name="Label2" Text="Datos Cliente" Grid.Row="3" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+
+				<SearchBar x:Name="EntSearch"
+                               Grid.Row="4" Grid.Column="1"
+                               Text="{Binding SearchName}"
+                               HorizontalOptions="Fill"                               
+                               Placeholder="Cliente"></SearchBar>
+
+
+				<Image WidthRequest="35" Grid.Row="4" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cuentas.png" ></Image>
+				<Label x:Name="Label2" Text="Cuentas" Grid.Row="4" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+
+
+			</Grid>
+		</StackLayout>
+	</ScrollView>
 </ContentPage>

@@ -1,5 +1,10 @@
 App.core.trans
+CommonServiceLocator
 FormsViewGroup
+GalaSoft.MvvmLight
+GalaSoft.MvvmLight.Extras
+GalaSoft.MvvmLight.Platform
+Newtonsoft.Json
 System.Runtime
 Xamarin.Android.Support.Animated.Vector.Drawable
 Xamarin.Android.Support.Annotations
@@ -21,4 +26,3 @@ Xamarin.Forms.Core
 Xamarin.Forms.Platform.Android
 Xamarin.Forms.Platform
 Xamarin.Forms.Xaml
-netstandard
