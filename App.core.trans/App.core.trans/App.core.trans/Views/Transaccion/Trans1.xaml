@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.core.trans.Views.Transaccion.Trans1"
+			 Title="Transacciones">
+    <ContentPage.Content>
+		<StackLayout>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="25" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="45"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+
+				<Image WidthRequest="35" Grid.Row="1" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="transaccion.png" ></Image>
+				<Label x:Name="Label1" Text="Código Transaccion" Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+
+				<Picker x:Name="PickerWarehouseInit" Grid.Row="2" Grid.Column="1"
+                            ItemsSource="{Binding TransaccionCollection }"
+                            SelectedItem="{Binding TransaccionSelect}" 
+					        WidthRequest="200" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="StartAndExpand">
+				</Picker>
+
+				<Image WidthRequest="35" Grid.Row="3" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cliente.png" ></Image>
+				<Label x:Name="Label2" Text="Datos Cliente" Grid.Row="3" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+
+				<SearchBar x:Name="EntSearch"
+                               Grid.Row="4" Grid.Column="1"
+                               Text="{Binding SearchName}"
+                               HorizontalOptions="Fill" 
+						       SearchCommand="{Binding SearchCliente}" 
+                               Placeholder="Cliente"></SearchBar>
+
+
+				<Image WidthRequest="35" Grid.Row="5" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cuentas.png" ></Image>
+				<Label x:Name="Label3" Text="Cuentas" Grid.Row="5" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+
+
+				<ListView x:Name="ListCount" Margin="10,0,0,0"
+                              ItemsSource="{Binding CuentasCollection}"
+                              Grid.Row="6"
+                              HasUnevenRows="true"                          
+                              HorizontalOptions="Center" VerticalOptions="Start" 
+						      SelectedItem="{Binding SelectedCuenta, Mode=TwoWay}"
+                              HeightRequest="{Binding HeightList}">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<Grid Padding="10" HorizontalOptions="Fill">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"></ColumnDefinition>
+											<ColumnDefinition Width="*"></ColumnDefinition>
+										    <ColumnDefinition Width="*"></ColumnDefinition>
+										    <ColumnDefinition Width="*"></ColumnDefinition>
+										    <!--<ColumnDefinition Width="*"></ColumnDefinition>-->
+									    </Grid.ColumnDefinitions>
+										<Label  Grid.Column="0" 
+                                                VerticalOptions="Center"
+                                                FontSize="10"
+                                                FontFamily="Exo"
+                                                Text="{Binding Codigo}" ></Label>
+										<Label  Grid.Column="1" 
+                                                VerticalOptions="Start" 
+                                                FontSize="10"
+                                                FontFamily="Exo"
+                                                Text="{Binding NombreProducto}"></Label>
+										<Label  Grid.Column="2" 
+                                                VerticalOptions="Start"
+                                                FontSize="10"
+                                                FontFamily="Exo"
+                                                Text="{Binding NombreCuenta}"></Label>
+										<Label  Grid.Column="3" 
+                                                VerticalOptions="Start" 
+                                                FontSize="10"
+                                                FontFamily="Exo"
+                                                Text="{Binding NombreEstado}"></Label>
+										<!--<Label  Grid.Column="4" 
+                                                VerticalOptions="Start"  
+                                                FontSize="10"
+                                                FontFamily="Exo"
+                                                Text="{Binding NombreDivision}"></Label>-->
+									</Grid>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+
+					</ListView>
+
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*5" />
+						<ColumnDefinition Width="*5" />
+					</Grid.ColumnDefinitions>
+
+					<!--<Button Text="Cancelar" Grid.Column="0" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}" Command="{Binding CancelTrans}"></Button>
+					<Button Text="Siguiente" Grid.Column="1" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}" Command="{Binding NextTrans}"></Button>-->
+
+					<Button Text="Cancelar" Grid.Column="0" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}"></Button>
+					<Button Text="Siguiente" Grid.Column="1" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}"></Button>
+				</Grid>
+				
+
+			</Grid>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

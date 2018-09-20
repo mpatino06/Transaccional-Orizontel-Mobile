@@ -2829,7 +2829,13 @@ containing a value of this type.
         public static int abc_textfield_search_material=0x7f020051;
         public static int abc_vector_test=0x7f020052;
         public static int avd_hide_password=0x7f020053;
+        public static int avd_hide_password_1=0x7f020115;
+        public static int avd_hide_password_2=0x7f020116;
+        public static int avd_hide_password_3=0x7f020117;
         public static int avd_show_password=0x7f020054;
+        public static int avd_show_password_1=0x7f020118;
+        public static int avd_show_password_2=0x7f020119;
+        public static int avd_show_password_3=0x7f02011a;
         public static int cliente=0x7f020055;
         public static int cuentas=0x7f020056;
         public static int design_bottom_navigation_item_background=0x7f020057;

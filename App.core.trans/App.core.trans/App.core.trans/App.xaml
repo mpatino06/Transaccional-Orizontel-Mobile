@@ -3,6 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.core.trans.App">
     <Application.Resources>
-
+		<ResourceDictionary>
+			<Style x:Key="ButtonNext" TargetType="Button">
+				<Setter Property="BackgroundColor" Value="#092f5e" />
+				<Setter Property="HeightRequest" Value="40" />
+				<Setter Property="BorderRadius" Value="20" />
+				<Setter Property="TextColor" Value="White" />
+				<Setter Property="HorizontalOptions" Value="Center" />
+			</Style>
+		</ResourceDictionary>
     </Application.Resources>
 </Application>

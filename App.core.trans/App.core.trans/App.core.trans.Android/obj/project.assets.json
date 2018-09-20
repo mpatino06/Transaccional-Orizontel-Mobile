@@ -336,6 +336,7 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "MvvmLight": "5.4.1.1",
+          "MvvmLightLibs": "5.4.1.1",
           "Newtonsoft.Json": "11.0.2",
           "Xamarin.Forms": "3.1.0.697729"
         },
@@ -392,12 +393,15 @@
         "lib/SL5/System.Windows.Interactivity.dll",
         "lib/monoandroid1/GalaSoft.MvvmLight.Extras.XML",
         "lib/monoandroid1/GalaSoft.MvvmLight.Extras.dll",
+        "lib/monoandroid1/GalaSoft.MvvmLight.Extras.dll.mdb",
         "lib/monoandroid1/GalaSoft.MvvmLight.Extras.pdb",
         "lib/monoandroid1/GalaSoft.MvvmLight.Platform.XML",
         "lib/monoandroid1/GalaSoft.MvvmLight.Platform.dll",
+        "lib/monoandroid1/GalaSoft.MvvmLight.Platform.dll.mdb",
         "lib/monoandroid1/GalaSoft.MvvmLight.Platform.pdb",
         "lib/monoandroid1/GalaSoft.MvvmLight.XML",
         "lib/monoandroid1/GalaSoft.MvvmLight.dll",
+        "lib/monoandroid1/GalaSoft.MvvmLight.dll.mdb",
         "lib/monoandroid1/GalaSoft.MvvmLight.pdb",
         "lib/net35/GalaSoft.MvvmLight.Extras.dll",
         "lib/net35/GalaSoft.MvvmLight.Extras.pdb",
@@ -878,6 +882,7 @@
     "MonoAndroid,Version=v8.1": [
       "App.core.trans >= 1.0.0",
       "MvvmLight >= 5.4.1.1",
+      "MvvmLightLibs >= 5.4.1.1",
       "Newtonsoft.Json >= 11.0.2",
       "Xamarin.Android.Support.Design >= 25.4.0.2",
       "Xamarin.Android.Support.v4 >= 25.4.0.2",
@@ -925,6 +930,10 @@
       "monoandroid81": {
         "dependencies": {
           "MvvmLight": {
+            "target": "Package",
+            "version": "[5.4.1.1, )"
+          },
+          "MvvmLightLibs": {
             "target": "Package",
             "version": "[5.4.1.1, )"
           },

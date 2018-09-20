@@ -8,6 +8,7 @@ using App.core.trans.Models;
 using App.core.trans.Views;
 using App.core.trans.Views.Count;
 using App.core.trans.Views.Transaccion;
+//using App.core.trans.Views.Transaccion;
 using Xamarin.Forms;
 
 namespace App.core.trans
@@ -29,7 +30,7 @@ namespace App.core.trans
 			{
 				Title = "Transacciones",
 				Icon = "operacion.png",
-				TargetType = typeof(Trans01)
+				TargetType = typeof(Trans1)
 			});
 			menuList.Add(new MasterPageItem
 			{
