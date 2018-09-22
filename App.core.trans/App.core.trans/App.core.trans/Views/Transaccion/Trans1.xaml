@@ -4,7 +4,22 @@
              x:Class="App.core.trans.Views.Transaccion.Trans1"
 			 Title="Transacciones">
     <ContentPage.Content>
+
 		<StackLayout>
+			<!--<AbsoluteLayout>
+				<ActivityIndicator x:Name="activity"  
+                       IsVisible="True" 
+					   IsRunning="True"  
+                       Color="Blue"  
+                       BackgroundColor="Transparent"/>
+			</AbsoluteLayout>-->
+		
+			<ActivityIndicator x:Name="activity"  
+							   IsVisible="{Binding IsBusy}" 
+							   IsRunning="{Binding IsBusy}"  
+							   VerticalOptions="FillAndExpand" 
+							   HorizontalOptions="FillAndExpand" 
+							   Color="Blue" />
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="25" />
@@ -13,50 +28,61 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="45"/>
-					<RowDefinition Height="45"/>
-					<RowDefinition Height="45"/>
-					<RowDefinition Height="45"/>
-					<RowDefinition Height="45"/>
-					<RowDefinition Height="45"/>
+					<RowDefinition Height="15"/>
+					<RowDefinition Height="35"/>
+					<RowDefinition Height="35"/>
+					<RowDefinition Height="35"/>
+					<RowDefinition Height="35"/>
+					<RowDefinition Height="35"/>
+					<RowDefinition Height="35"/>
+					<RowDefinition Height="*"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 
 
-				<Image WidthRequest="35" Grid.Row="1" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="transaccion.png" ></Image>
-				<Label x:Name="Label1" Text="Código Transaccion" Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+				<Image WidthRequest="35" Grid.Row="1" Margin="10,0,0,0" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="transaccion.png" ></Image>
+				<Label x:Name="Label1" Text="Código Transaccion"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
 
 				<Picker x:Name="PickerWarehouseInit" Grid.Row="2" Grid.Column="1"
-                            ItemsSource="{Binding TransaccionCollection }"
+                            ItemsSource="{Binding TransCollection }"
                             SelectedItem="{Binding TransaccionSelect}" 
+						    FontSize="12"
+						    Margin="10,0,0,0"
+						    FontFamily="Exo"  
 					        WidthRequest="200" 
                             VerticalOptions="Center" 
                             HorizontalOptions="StartAndExpand">
 				</Picker>
 
-				<Image WidthRequest="35" Grid.Row="3" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cliente.png" ></Image>
-				<Label x:Name="Label2" Text="Datos Cliente" Grid.Row="3" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+				<Image WidthRequest="45" Grid.Row="3" Grid.Column="0" Margin="10,0,0,0"  HeightRequest="45" VerticalOptions="Center" HorizontalOptions="End" Source="@drawable/ic1.png" ></Image>
+				<Label x:Name="Label2" Text="Datos Cliente" Margin="10,0,0,0" Grid.Row="3" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
 
 				<SearchBar x:Name="EntSearch"
                                Grid.Row="4" Grid.Column="1"
                                Text="{Binding SearchName}"
                                HorizontalOptions="Fill" 
+						       FontSize="12"
+						       FontFamily="Exo"
+						       WidthRequest="200"
 						       SearchCommand="{Binding SearchCliente}" 
                                Placeholder="Cliente"></SearchBar>
 
+				<Label x:Name="LblDatosCliente" Text="{Binding DatosCliente}" Grid.Row="5" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
 
-				<Image WidthRequest="35" Grid.Row="5" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cuentas.png" ></Image>
-				<Label x:Name="Label3" Text="Cuentas" Grid.Row="5" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+				<Image WidthRequest="35" Grid.Row="6" Margin="10,0,0,0" Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cuentas.png" ></Image>
+				<Label x:Name="Label3" Text="Cuentas" Margin="10,0,0,0" Grid.Row="6" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
 
-
+				
 				<ListView x:Name="ListCount" Margin="10,0,0,0"
                               ItemsSource="{Binding CuentasCollection}"
-                              Grid.Row="6"
-                              HasUnevenRows="true"                          
-                              HorizontalOptions="Center" VerticalOptions="Start" 
+                              Grid.Row="7"
+						      Grid.Column="0"
+						      Grid.ColumnSpan="4"
+                              HasUnevenRows="true"      
 						      SelectedItem="{Binding SelectedCuenta, Mode=TwoWay}"
-                              HeightRequest="{Binding HeightList}">
-						<ListView.ItemTemplate>
+                              HorizontalOptions="Center" VerticalOptions="Start" 
+                              HeightRequest="{Binding HeightList}">					
+					<ListView.ItemTemplate>
 							<DataTemplate>
 								<ViewCell>
 									<Grid Padding="10" HorizontalOptions="Fill">
@@ -64,28 +90,26 @@
 											<RowDefinition Height="Auto"/>
 										</Grid.RowDefinitions>
 										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*"></ColumnDefinition>
-											<ColumnDefinition Width="*"></ColumnDefinition>
-										    <ColumnDefinition Width="*"></ColumnDefinition>
-										    <ColumnDefinition Width="*"></ColumnDefinition>
-										    <!--<ColumnDefinition Width="*"></ColumnDefinition>-->
+											<ColumnDefinition Width="2.5*"></ColumnDefinition>
+										    <ColumnDefinition Width="4.5*"></ColumnDefinition>
+										    <ColumnDefinition Width="3*"></ColumnDefinition>
 									    </Grid.ColumnDefinitions>
 										<Label  Grid.Column="0" 
-                                                VerticalOptions="Center"
+                                                VerticalOptions="Start"
                                                 FontSize="10"
                                                 FontFamily="Exo"
                                                 Text="{Binding Codigo}" ></Label>
-										<Label  Grid.Column="1" 
+										<!--<Label  Grid.Column="1" 
                                                 VerticalOptions="Start" 
                                                 FontSize="10"
                                                 FontFamily="Exo"
-                                                Text="{Binding NombreProducto}"></Label>
-										<Label  Grid.Column="2" 
+                                                Text="{Binding NombreProducto}"></Label>-->
+										<Label  Grid.Column="1" 
                                                 VerticalOptions="Start"
                                                 FontSize="10"
                                                 FontFamily="Exo"
                                                 Text="{Binding NombreCuenta}"></Label>
-										<Label  Grid.Column="3" 
+										<Label  Grid.Column="2" 
                                                 VerticalOptions="Start" 
                                                 FontSize="10"
                                                 FontFamily="Exo"
@@ -101,18 +125,19 @@
 						</ListView.ItemTemplate>
 
 					</ListView>
+				
 
-				<Grid>
+				<Grid Grid.Row="8" Grid.Column="0" Margin="10,0,0,0" Grid.ColumnSpan="4" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsVisibleButtons}">
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*5" />
-						<ColumnDefinition Width="*5" />
+						<ColumnDefinition Width="5*" />
+						<ColumnDefinition Width="5*" />
 					</Grid.ColumnDefinitions>
 
-					<!--<Button Text="Cancelar" Grid.Column="0" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}" Command="{Binding CancelTrans}"></Button>
-					<Button Text="Siguiente" Grid.Column="1" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}" Command="{Binding NextTrans}"></Button>-->
+					<Button Text="Cancelar" Grid.Column="0" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}" Command="{Binding CancelTrans}"></Button>
+					<Button Text="Siguiente" Grid.Column="1" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}"  ></Button>
 
-					<Button Text="Cancelar" Grid.Column="0" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}"></Button>
-					<Button Text="Siguiente" Grid.Column="1" VerticalOptions="Center" WidthRequest="250" Style="{StaticResource ButtonNext}"></Button>
+					<Button Text="Cancelar" Grid.Column="0" VerticalOptions="End" WidthRequest="220" Style="{StaticResource ButtonNext}"></Button>
+					<Button Text="Siguiente" Grid.Column="1" VerticalOptions="Start" WidthRequest="220" Style="{StaticResource ButtonNext}" Command="{Binding NextTrans}"></Button>
 				</Grid>
 				
 

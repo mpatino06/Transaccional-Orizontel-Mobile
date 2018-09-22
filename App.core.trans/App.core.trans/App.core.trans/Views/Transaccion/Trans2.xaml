@@ -3,10 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.core.trans.Views.Transaccion.Trans2">
     <ContentPage.Content>
+		<ScrollView>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+				<Grid Margin="10,0,0,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1.5*" />
+						<ColumnDefinition Width="3*" />
+						<ColumnDefinition Width="1.5*" />
+						<ColumnDefinition Width="4*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="35"/>
+						<RowDefinition Height="35"/>
+						<RowDefinition Height="35"/>
+						<RowDefinition Height="35"/>
+					</Grid.RowDefinitions>
+
+				
+
+					<Label x:Name="Label1" Text="Oficina"  Grid.Row="0" FontSize="10" FontFamily="Exo" Grid.Column="0"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label2" Text="{Binding SelectedCuenta.NombreDivision}"  Grid.Row="0" FontSize="10" FontFamily="Exo"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
+
+					<Label x:Name="Label3" Text="Oficial"  Grid.Row="0" FontSize="10" FontFamily="Exo"  Grid.Column="2"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label4" Text="{Binding SelectedCuenta.NombreUsuario}"  Grid.Row="0" FontSize="10" FontFamily="Exo"  Grid.Column="3"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
+					
+					<!--<Label x:Name="Label5" Text="Apertura"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label6" Text="Código Transaccion"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
+					
+					<Label x:Name="Label7" Text="Ult Trnasacción"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label8" Text="Código Transaccion"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
+
+				    <Label x:Name="Label9" Text="Moneda"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label10" Text="Código Transaccion"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>-->
+						
+				</Grid>
         </StackLayout>
-    </ContentPage.Content>
+		</ScrollView>
+	</ContentPage.Content>
 </ContentPage>
