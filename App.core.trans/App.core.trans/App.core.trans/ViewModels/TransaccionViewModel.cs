@@ -73,6 +73,17 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private string _datosCuentaSeleccionada;
+		public string DatosCuentaSeleccionada
+		{
+			get { return _datosCuentaSeleccionada; }
+			set
+			{
+				_datosCuentaSeleccionada = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
 		private int _heightList;
 
 		public int HeightList
@@ -81,6 +92,31 @@ namespace App.core.trans.ViewModels
 			set
 			{
 				_heightList = value;
+				RaiseOnPropertyChange();
+			}
+		}
+		//
+
+		private int _heightListDenominacion;
+
+		public int HeightListDenominacion
+		{
+			get { return _heightListDenominacion; }
+			set
+			{
+				_heightListDenominacion = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
+		private int _heightListTipoDeposito;
+
+		public int HeightListTipoDeposito
+		{
+			get { return _heightListTipoDeposito; }
+			set
+			{
+				_heightListTipoDeposito = value;
 				RaiseOnPropertyChange();
 			}
 		}
@@ -176,7 +212,8 @@ namespace App.core.trans.ViewModels
 			get { return _modalidadDeposito; }
 			set
 			{
-				_modalidadDeposito = value;				
+				_modalidadDeposito = value;
+				HeightListTipoDeposito = (_modalidadDeposito.Count * 40) + (_modalidadDeposito.Count * 5);
 				RaiseOnPropertyChange();
 			}
 		}
@@ -188,6 +225,7 @@ namespace App.core.trans.ViewModels
 			set
 			{
 				_denominacionMoneda = value;
+				HeightListDenominacion = (_denominacionMoneda.Count * 40) + (_denominacionMoneda.Count * 5);
 				RaiseOnPropertyChange();
 			}
 		}
@@ -198,7 +236,7 @@ namespace App.core.trans.ViewModels
 
 		private async void LoadTransaccion()
 		{
-
+			clienteServices = new ClienteServices();
 			//string[] transacciones = { "201-DEPOSITO", "58-RETIRO" };
 			//string[] transacciones = { "201-DEPOSITO", "58-RETIRO" };
 
@@ -236,7 +274,7 @@ namespace App.core.trans.ViewModels
 					char[] charSplit = {'-'};
 					string[] transaccionSeleccionada = TransaccionSelect.Split(charSplit);
 
-					var _valueSelect = transaccionSeleccionada[0].ToString();
+					var _valueSelect = transaccionSeleccionada[0].ToString().Trim();
 
 					SecuencialTransaccionVM = TransaccionCollection.FirstOrDefault(a => a.Codigo == _valueSelect).Secuencial;
 
@@ -251,10 +289,9 @@ namespace App.core.trans.ViewModels
 							SecuencialClienteVM = result.SecuencialCliente;
 							DatosCliente = result.Identificacion.ToString() + " " + result.NombreUnido;
 
-							var cuentasCliente = await clienteServices.GetCuentasCliente(SecuencialClienteVM, result.NumeroVerificador);
+							var cuentasCliente = await clienteServices.GetCuentasCliente(SecuencialClienteVM, SecuencialTransaccionVM);
 							if (cuentasCliente != null)
 							{
-
 								Device.BeginInvokeOnMainThread(() =>
 								{
 									IsVisibleButtons = true;
@@ -263,7 +300,6 @@ namespace App.core.trans.ViewModels
 							}
 						}
 					}
-
 
 					IsBusy = false;
 				}
@@ -281,8 +317,8 @@ namespace App.core.trans.ViewModels
 			{
 				if (SelectedCuenta.Secuencial > 0)
 				{
-					
-					var GetListMonedas = await clienteServices.GetMonedasTransaccion(18, SelectedCuenta.SecuencialEmpresa);
+					DatosCuentaSeleccionada = SelectedCuenta.Codigo + " " + SelectedCuenta.NombreCuenta;
+					var GetListMonedas = await clienteServices.GetMonedasTransaccion(SecuencialTransaccionVM, SelectedCuenta.SecuencialEmpresa);
 					if(GetListMonedas != null)
 					{
 						Device.BeginInvokeOnMainThread(async () =>
@@ -290,6 +326,7 @@ namespace App.core.trans.ViewModels
 							DenominacionMoneda = new ObservableCollection<Empresadenominacionfija>(GetListMonedas.DenominacionMoneda);
 							ModalidadDeposito = new ObservableCollection<TransaccionTipoMovimiento>(GetListMonedas.TipoMovimiento);
 							var Transferencia2 = new Trans2() { BindingContext = this };
+							Transferencia2.Title = "Transacción: " + TransaccionSelect;
 							await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync((Page)Transferencia2);
 						});
 					}

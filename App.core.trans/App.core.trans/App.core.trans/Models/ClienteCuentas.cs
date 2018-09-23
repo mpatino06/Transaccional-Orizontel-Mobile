@@ -15,7 +15,7 @@ namespace App.core.trans.Models
 		public string CodigoEstado { get; set; }
 		public string NombreEstado { get; set; }
 		public int SecuencialMoneda { get; set; }
-		public string NombreMondea { get; set; }
+		public string NombreMoneda { get; set; }
 		public int SecuencialOficina { get; set; }
 		public int SecuencialEmpresa { get; set; }
 		public string NombreDivision { get; set; }

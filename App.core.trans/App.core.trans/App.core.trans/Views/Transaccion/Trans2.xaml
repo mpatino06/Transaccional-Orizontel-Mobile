@@ -1,10 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App.core.trans.Views.Transaccion.Trans2">
+             x:Class="App.core.trans.Views.Transaccion.Trans2"
+			 xmlns:localcontrol="clr-namespace:App.core.trans;assembly=MyEntryRenderer"
+			 xmlns:localcontrol1="clr-namespace:App.core.trans">
     <ContentPage.Content>
 		<ScrollView>
         <StackLayout>
+
+				<Grid Margin="10,0,0,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="25" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+					</Grid.RowDefinitions>
+
+					<Image WidthRequest="35" Grid.Row="0"  Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cuentas.png" ></Image>
+					<Label x:Name="Lblcuenta" Text="{Binding DatosCuentaSeleccionada}" Grid.Row="0" FontSize="10" FontFamily="Exo"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+
+					<Image WidthRequest="35" Grid.Row="1"  Grid.Column="0"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="End" Source="cliente.png" ></Image>
+					<Label x:Name="Lblcliente" Text="{Binding DatosCliente}" Grid.Row="1" FontSize="10" FontFamily="Exo"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					
+
+				</Grid>
+
 				<Grid Margin="10,0,0,0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="1.5*" />
@@ -13,10 +35,10 @@
 						<ColumnDefinition Width="4*" />
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
-						<RowDefinition Height="35"/>
-						<RowDefinition Height="35"/>
-						<RowDefinition Height="35"/>
-						<RowDefinition Height="35"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<!--<RowDefinition Height="30"/>-->
 					</Grid.RowDefinitions>
 
 				
@@ -24,20 +46,113 @@
 					<Label x:Name="Label1" Text="Oficina"  Grid.Row="0" FontSize="10" FontFamily="Exo" Grid.Column="0"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
 					<Label x:Name="Label2" Text="{Binding SelectedCuenta.NombreDivision}"  Grid.Row="0" FontSize="10" FontFamily="Exo"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
 
-					<Label x:Name="Label3" Text="Oficial"  Grid.Row="0" FontSize="10" FontFamily="Exo"  Grid.Column="2"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
-					<Label x:Name="Label4" Text="{Binding SelectedCuenta.NombreUsuario}"  Grid.Row="0" FontSize="10" FontFamily="Exo"  Grid.Column="3"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
-					
-					<!--<Label x:Name="Label5" Text="Apertura"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
-					<Label x:Name="Label6" Text="Código Transaccion"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
-					
-					<Label x:Name="Label7" Text="Ult Trnasacción"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
-					<Label x:Name="Label8" Text="Código Transaccion"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
+					<Label x:Name="Label3" Text="Oficial"  Grid.Row="1" FontSize="10" FontFamily="Exo"  Grid.Column="0"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label4" Text="{Binding SelectedCuenta.NombreUsuario}"  Grid.Row="1" FontSize="10" FontFamily="Exo"  Grid.Column="1" Grid.ColumnSpan="3"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
 
-				    <Label x:Name="Label9" Text="Moneda"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
-					<Label x:Name="Label10" Text="Código Transaccion"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>-->
-						
+					<Label x:Name="Label5" Text="Apertura"  Grid.Row="2"  FontSize="10" FontFamily="Exo"  Grid.Column="0"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label6" Text="{Binding SelectedCuenta.FechaSistemaCreacion, StringFormat='{0:dd/MM/yyyy}'}"  Grid.Row="2"  FontSize="10" FontFamily="Exo" Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
+					
+					<!--<Label x:Name="Label7" Text="Ult Trnasacción"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label8" Text="Código Transaccion"  Grid.Row="1" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" FontSize="10" FontFamily="Exo"="Center" ></Label>-->
+
+					<Label x:Name="Label9" Text="Moneda"  Grid.Row="2"  FontSize="10" FontFamily="Exo"  Grid.Column="2"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>
+					<Label x:Name="Label10" Text="{Binding SelectedCuenta.NombreMoneda}"  Grid.Row="2" FontSize="10" FontFamily="Exo"  Grid.Column="3"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
 				</Grid>
-        </StackLayout>
+				
+			    <Grid Margin="10,0,0,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="5*" />
+						<ColumnDefinition Width="5*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+
+					<!--<ListView 
+                        x:Name="ListViewCol0"
+                        Grid.Row="0" Grid.Column="0"
+                        ItemsSource="{Binding ModalidadDeposito}"
+                        HasUnevenRows="True"  
+                        HorizontalOptions="StartAndExpand" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito}">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<Grid Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+
+										<Label 
+                                           Grid.Column="0" 
+                                           Text="{Binding CodigoTipoMovimiento }" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="Start"
+                                           FontFamily="Exo" FontSize="10" FontAttributes="Bold" />
+
+										--><!--<Entry
+										   Grid.Column="1" 
+                                           Text="{Binding ValueInsert}" 
+                                           VerticalOptions="Center" 
+                                           FontSize="10"
+											WidthRequest="50"
+                                           HorizontalOptions="Center" Keyboard="Numeric" />--><!--
+										<localcontrol1:MyEntry Grid.Column="1" 
+                                           Text="{Binding ValueInsert}" 
+                                           VerticalOptions="Center" 
+                                           FontSize="10"
+										   WidthRequest="50"
+                                           HorizontalOptions="Center" Keyboard="Numeric" ></localcontrol1:MyEntry>
+									</Grid>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>-->
+
+					<ListView 
+                        x:Name="ListViewCol1"
+                        Grid.Row="0" Grid.Column="1"
+                        ItemsSource="{Binding DenominacionMoneda}"
+                        HasUnevenRows="True"  
+                        HorizontalOptions="StartAndExpand" VerticalOptions="Start" HeightRequest="{Binding HeightListDenominacion}">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<Grid Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="35"></RowDefinition>
+										</Grid.RowDefinitions>
+										<Entry 
+                                           Grid.Column="0" 
+                                           Text="{Binding ValueInsert}" 
+                                           VerticalOptions="End" 
+                                           HorizontalOptions="Center"
+                                           FontFamily="Exo" FontSize="10"  Keyboard="Numeric" WidthRequest="30" />
+										<!--<localcontrol1:MyEntry Grid.Column="0" 
+                                           Text="{Binding ValueInsert}" 
+                                           VerticalOptions="End" 
+                                           FontSize="10"
+										   WidthRequest="50"
+                                           HorizontalOptions="Center" Keyboard="Numeric" ></localcontrol1:MyEntry>-->
+										<Label
+										   Grid.Column="1" 
+                                           Text="{Binding Denominacion}" 
+                                           VerticalOptions="Center" 
+                                           FontSize="10"
+										   FontAttributes="Bold" 
+                                           HorizontalOptions="Center" />
+									</Grid>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+					
+				</Grid>
+			</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>
 </ContentPage>

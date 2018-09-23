@@ -11,5 +11,6 @@ namespace App.core.trans.Models
 		public string CodigoTipoMovimiento { get; set; }
 		public bool Estaactivo { get; set; }
 		public int Numeroverificador { get; set; }
+		public int ValueInsert { get; set; }
 	}
 }
