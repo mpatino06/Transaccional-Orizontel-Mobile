@@ -62,13 +62,13 @@
 			    <Grid Margin="10,0,0,0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="5*" />
-						<ColumnDefinition Width="5*" />
+						<ColumnDefinition Width="3*" />
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
 
-					<!--<ListView 
+					<ListView 
                         x:Name="ListViewCol0"
                         Grid.Row="0" Grid.Column="0"
                         ItemsSource="{Binding ModalidadDeposito}"
@@ -90,13 +90,13 @@
                                            HorizontalOptions="Start"
                                            FontFamily="Exo" FontSize="10" FontAttributes="Bold" />
 
-										--><!--<Entry
+										<Entry
 										   Grid.Column="1" 
                                            Text="{Binding ValueInsert}" 
                                            VerticalOptions="Center" 
                                            FontSize="10"
 											WidthRequest="50"
-                                           HorizontalOptions="Center" Keyboard="Numeric" />--><!--
+                                           HorizontalOptions="Center" Keyboard="Numeric" />
 										<localcontrol1:MyEntry Grid.Column="1" 
                                            Text="{Binding ValueInsert}" 
                                            VerticalOptions="Center" 
@@ -107,9 +107,182 @@
 								</ViewCell>
 							</DataTemplate>
 						</ListView.ItemTemplate>
-					</ListView>-->
+					</ListView>
 
-					<ListView 
+
+
+					<Grid  Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" Margin="0,0,20,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="2.5*" />
+							<ColumnDefinition Width="2.5*" />
+							<ColumnDefinition Width="2.5*" />
+							<ColumnDefinition Width="2.5*" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="35"/>
+							<RowDefinition Height="35"/>
+							<RowDefinition Height="35"/>
+							<RowDefinition Height="35"/>
+						</Grid.RowDefinitions>
+						<Label
+							Grid.Row="0"
+							Grid.Column="0" 
+                            Text="100" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+							FontAttributes="Bold" 
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="0" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<Label
+							Grid.Row="0"
+							Grid.Column="2" 
+                            Text="0" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="0" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+                        <!-- ROW 2 -->
+						<Label
+							Grid.Row="1"
+							Grid.Column="0" 
+                            Text="50" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+							FontAttributes="Bold" 
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="1" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<Label
+							Grid.Row="1"
+							Grid.Column="2" 
+                            Text="0" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="1" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<!-- ROW 3 -->
+						<Label
+							Grid.Row="2"
+							Grid.Column="0" 
+                            Text="20" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+							FontAttributes="Bold" 
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="2" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<Label
+							Grid.Row="2"
+							Grid.Column="2" 
+                            Text="0" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="2" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<!-- ROW 4 -->
+						<Label
+							Grid.Row="3"
+							Grid.Column="0" 
+                            Text="10" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+							FontAttributes="Bold" 
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="3" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<Label
+							Grid.Row="3"
+							Grid.Column="2" 
+                            Text="0" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="3" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<!-- ROW 5 -->
+						<Label
+							Grid.Row="4"
+							Grid.Column="0" 
+                            Text="5" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+							FontAttributes="Bold" 
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="4" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<Label
+							Grid.Row="4"
+							Grid.Column="2" 
+                            Text="0" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="4" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<!-- ROW 6 -->
+						<Label
+							Grid.Row="5"
+							Grid.Column="0" 
+                            Text="1" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+							FontAttributes="Bold" 
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="5" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+						<Label
+							Grid.Row="5"
+							Grid.Column="2" 
+                            Text="0" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+                            HorizontalOptions="Center" />
+						<Image WidthRequest="35" Grid.Row="5" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+							<!--<Image.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+							</Image.GestureRecognizers>-->
+						</Image>
+					</Grid>
+
+				
+				<!--<ListView 
                         x:Name="ListViewCol1"
                         Grid.Row="0" Grid.Column="1"
                         ItemsSource="{Binding DenominacionMoneda}"
@@ -132,12 +305,12 @@
                                            VerticalOptions="End" 
                                            HorizontalOptions="Center"
                                            FontFamily="Exo" FontSize="10"  Keyboard="Numeric" WidthRequest="30" />
-										<!--<localcontrol1:MyEntry Grid.Column="0" 
+										--><!--<localcontrol1:MyEntry Grid.Column="0" 
                                            Text="{Binding ValueInsert}" 
                                            VerticalOptions="End" 
                                            FontSize="10"
 										   WidthRequest="50"
-                                           HorizontalOptions="Center" Keyboard="Numeric" ></localcontrol1:MyEntry>-->
+                                           HorizontalOptions="Center" Keyboard="Numeric" ></localcontrol1:MyEntry>--><!--
 										<Label
 										   Grid.Column="1" 
                                            Text="{Binding Denominacion}" 
@@ -149,7 +322,7 @@
 								</ViewCell>
 							</DataTemplate>
 						</ListView.ItemTemplate>
-					</ListView>
+					</ListView>-->
 					
 				</Grid>
 			</StackLayout>
