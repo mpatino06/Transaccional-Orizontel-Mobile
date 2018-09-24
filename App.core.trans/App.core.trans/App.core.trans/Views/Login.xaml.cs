@@ -17,7 +17,7 @@ namespace App.core.trans.Views
 			InitializeComponent ();
 		}
 
-		private async void EnterButton_OnClicked(object sender, EventArgs e)
+		private void EnterButton_OnClicked(object sender, EventArgs e)
 		{
 			try
 			{
@@ -27,22 +27,8 @@ namespace App.core.trans.Views
 				}
 				else
 				{
+					App.Current.MainPage = new MainPage();
 
-					//var _user = EntUser.Text.Trim();
-					//var _pass = EntPassword.Text.Trim();
-
-					//var result = await services.GetProviderName(_user, _pass);
-
-					//if (result == null)
-					//	Lblmsg.Text = "Ha ingresado un Usuario o Password icorrecto";
-					//else
-					//{
-					//await Navigation.PushAsync(new MainMenu(_user));
-					//}
-					await Navigation.PushAsync(new NavigationPage(new MainPage()));
-
-					//await Navigation.PushAsync(new NavigationPage(new MainPage2()));
-					//await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync((Page)new MainPage());
 				}
 			}
 			catch (Exception ex)

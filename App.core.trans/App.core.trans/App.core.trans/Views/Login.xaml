@@ -15,7 +15,7 @@
 		</Grid.ColumnDefinitions>
 
 
-		<Image x:Name="ImgLogin"  Grid.Row="0" Grid.Column="1"  WidthRequest="140" HeightRequest="140" VerticalOptions="Center" HorizontalOptions="Center" Source="logo3.png" />
+		<Image x:Name="ImgLogin"  Grid.Row="0" Grid.Column="1"  WidthRequest="140" HeightRequest="140" VerticalOptions="Center" HorizontalOptions="Center" Source="logo.jpg" />
 		<StackLayout  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="Center">
 
 			<!--<StackLayout Padding="1,1,1,1" BackgroundColor="Green">-->

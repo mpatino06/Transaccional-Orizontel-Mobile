@@ -488,13 +488,25 @@ namespace App.core.trans.ViewModels
 				{
 					if (montoTotal > 0)
 					{
-						var answer = await App.Current.MainPage.DisplayAlert("ORIZONTEL", "Desea GUARDAR la operación, se generará un depostio, Desea Continuar?", "SI", "NO");
+						var answer = await App.Current.MainPage.DisplayAlert("ORIZONTEL", "Desea GUARDAR la operación, se generará un deposito, Desea Continuar?", "SI", "NO");
 						if (answer)
 						{
 							Device.BeginInvokeOnMainThread(async () =>
 							{
 								await Application.Current.MainPage.DisplayAlert("ORIZONTEL", "Deposito Realizado con Exito", "OK");
-								await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync((Page)new MainMenuDetail());
+
+
+
+								((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 2]);
+
+								//((MasterDetailPage)Application.Current.MainPage).Navigation.RemovePage(new Trans2());
+
+
+								//await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PopAsync();
+
+
+								App.Current.MainPage = new MainPage();
+								//await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync((Page)new MainMenuDetail());
 							});
 							
 						}
@@ -680,7 +692,7 @@ namespace App.core.trans.ViewModels
 			try
 			{
 				Money1 += 1;
-				TotalMoneyClic -= 1; 
+				TotalMoneyClic += 1; 
 			}
 			catch (Exception ex)
 			{
@@ -694,7 +706,11 @@ namespace App.core.trans.ViewModels
 			try
 			{
 				if (Money1 > 0)
+				{
 					Money1 -= 1;
+					TotalMoneyClic = TotalMoneyClic - 1;
+				}
+				
 
 			}
 			catch (Exception ex)

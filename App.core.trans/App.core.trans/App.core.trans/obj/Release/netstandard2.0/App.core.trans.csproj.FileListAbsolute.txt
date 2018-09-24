@@ -1,7 +1,6 @@
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Release\netstandard2.0\App.core.trans.deps.json
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Release\netstandard2.0\App.core.trans.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Release\netstandard2.0\App.core.trans.pdb
-E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\App.core.trans.csprojAssemblyReference.cache
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\App.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\MainPage.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\Views\Count\PlanList.xaml.g.cs
