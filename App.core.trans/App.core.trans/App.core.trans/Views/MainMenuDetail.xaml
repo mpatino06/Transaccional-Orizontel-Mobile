@@ -5,10 +5,19 @@
 			 Title="Transaccional Mobile">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <!--<Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-			
-        </StackLayout>
+                HorizontalOptions="CenterAndExpand" />-->
+			<Grid VerticalOptions="CenterAndExpand"   HorizontalOptions="CenterAndExpand">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="145" />
+					<RowDefinition Height="45" />
+					<RowDefinition Height="45" />
+				</Grid.RowDefinitions>		
+			<Image x:Name="ImgLogin" Grid.Row="0"  WidthRequest="140" HeightRequest="140" VerticalOptions="Center" HorizontalOptions="Center" Source="logo.png" />
+				<Label x:Name="LblVersion" Grid.Row="1" TextColor="#092f5e" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Text="Transaccional Mobile" ></Label>
+				<Label x:Name="LblVersion1" Grid.Row="2" TextColor="#092f5e" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="VERSION 0.0.1" ></Label>
+			</Grid>
+		</StackLayout>
     </ContentPage.Content>
 </ContentPage>

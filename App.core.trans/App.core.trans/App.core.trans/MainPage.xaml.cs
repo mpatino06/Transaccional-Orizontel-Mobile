@@ -49,7 +49,7 @@ namespace App.core.trans
 			navigationDrawerList.ItemsSource = (IEnumerable)this.menuList;
 			Detail = (Page)new NavigationPage((Page)Activator.CreateInstance(typeof(MainMenuDetail)))
 			{
-				BarBackgroundColor = Color.FromHex("#082adb"),
+				BarBackgroundColor = Color.FromHex("#092f5e"),
 				BarTextColor = Color.White
 			};
 		}
@@ -61,7 +61,7 @@ namespace App.core.trans
 				return;
 			Detail = (Page)new NavigationPage((Page)Activator.CreateInstance(selectedItem.TargetType))
 			{
-				BarBackgroundColor = Color.FromHex("#082adb"),
+				BarBackgroundColor = Color.FromHex("#092f5e"),
 				BarTextColor = Color.White
 			};
 			navigationDrawerList.SelectedItem = (object)null;

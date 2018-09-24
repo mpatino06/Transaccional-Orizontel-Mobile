@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.core.trans.Views.Login">
+	<Grid HorizontalOptions="Center" VerticalOptions="Center">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+
+		<Image x:Name="ImgLogin"  Grid.Row="0" Grid.Column="1"  WidthRequest="140" HeightRequest="140" VerticalOptions="Center" HorizontalOptions="Center" Source="logo3.png" />
+		<StackLayout  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="Center">
+
+			<!--<StackLayout Padding="1,1,1,1" BackgroundColor="Green">-->
+			<Entry  x:Name="EntUser"     Placeholder="Usuario"  TextColor="#092f5e" WidthRequest="200" ></Entry>
+			<!--</StackLayout>-->
+			<!--<StackLayout Padding="1,1,1,1" BackgroundColor="Green">-->
+			<Entry  x:Name="EntPassword" Placeholder="Password" TextColor="#092f5e" WidthRequest="200" IsPassword="True" ></Entry>
+			<!--</StackLayout>-->
+			<Button 
+                Margin="0,20,0,0"
+                Text="ENTRAR"  
+                x:Name="EnterButton"  
+                Clicked="EnterButton_OnClicked"
+                Style="{StaticResource ButtonNext}"
+                WidthRequest="200" />
+
+
+			<Label x:Name="Lblmsg"  TextColor="Red" HorizontalOptions="CenterAndExpand" Margin="20,0,0,0" ></Label>
+
+		</StackLayout>
+		<Label x:Name="LblVersion" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" TextColor="#092f5e" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Text="VERSION 0.0.1" ></Label>
+	</Grid>
+</ContentPage>

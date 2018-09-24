@@ -63,6 +63,13 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Andro
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\cliente.png
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\menos.png
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\mas.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\cl1.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\ct1.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\tr1.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\logo.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\logo1.jpg
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\favicon.ico
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\res\drawable\logotipo.png
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\R.cs.flag
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\R.txt
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Debug\MonoAndroid81\uploadflags.txt

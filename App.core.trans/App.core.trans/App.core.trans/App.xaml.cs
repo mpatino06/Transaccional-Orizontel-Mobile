@@ -1,4 +1,5 @@
 ﻿using System;
+using App.core.trans.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,8 +12,10 @@ namespace App.core.trans
 		{
 			InitializeComponent();
 
-			MainPage = (Page)new MainPage(); // new MainPage();
-			
+			MainPage = (Page)new MainPage();
+
+
+			//MainPage = new NavigationPage(new Login()); // new MainPage();
 		}
 
 		protected override void OnStart()

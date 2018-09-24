@@ -15,7 +15,7 @@
 				<Grid BackgroundColor="White">
 					<!--<Image Source="bg.png" Aspect="AspectFill" />-->
 					<StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-						<Image Source="logo3.jpg" Aspect="AspectFill" WidthRequest="85" HeightRequest="85" />
+						<Image Source="logo.jpg" Aspect="AspectFill" WidthRequest="125" HeightRequest="85" />
 						<!--<Label Text="Xam Buddy" TextColor="White" FontSize="Large" />-->
 					</StackLayout>
 					<Label Text="MOBILE TRANSACCIONAL V 1.0.0" Grid.Row="1" TextColor="Blue"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="Small" FontAttributes="Bold" />
