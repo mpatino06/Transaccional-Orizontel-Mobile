@@ -155,7 +155,7 @@
 					</ListView>
 				
 
-				<Grid Grid.Row="8" Grid.Column="0" Margin="-10,0,0,0" Grid.ColumnSpan="4" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsVisibleButtons}">
+				<Grid Grid.Row="8" Grid.Column="0" Margin="0,0,20,0" Grid.ColumnSpan="4" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsVisibleButtons}">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="5*" />
 						<ColumnDefinition Width="5*" />
