@@ -42,6 +42,18 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "PSC.Xam.Controls.BindableRadioButton/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "2.3.4.247"
+        },
+        "compile": {
+          "lib/portable45-net45+win8+wp8+wpa81/PSC.Xam.Controls.BindableRadioButton.dll": {}
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/PSC.Xam.Controls.BindableRadioButton.dll": {}
+        }
+      },
       "Xamarin.Android.Support.Animated.Vector.Drawable/25.4.0.2": {
         "type": "package",
         "dependencies": {
@@ -338,6 +350,7 @@
           "MvvmLight": "5.4.1.1",
           "MvvmLightLibs": "5.4.1.1",
           "Newtonsoft.Json": "11.0.2",
+          "PSC.Xam.Controls.BindableRadioButton": "1.0.0",
           "Xamarin.Forms": "3.1.0.697729"
         },
         "compile": {
@@ -523,6 +536,16 @@
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "newtonsoft.json.11.0.2.nupkg.sha512",
         "newtonsoft.json.nuspec"
+      ]
+    },
+    "PSC.Xam.Controls.BindableRadioButton/1.0.0": {
+      "sha512": "kOY3DsnqUVMszX5mTW31R/j3qliM55SCjXhIHMpmr7nJvajk6tU2NE3ZEx8PRzlywvsmK5vYhXyvDRV1OnWX7g==",
+      "type": "package",
+      "path": "psc.xam.controls.bindableradiobutton/1.0.0",
+      "files": [
+        "lib/portable45-net45+win8+wp8+wpa81/PSC.Xam.Controls.BindableRadioButton.dll",
+        "psc.xam.controls.bindableradiobutton.1.0.0.nupkg.sha512",
+        "psc.xam.controls.bindableradiobutton.nuspec"
       ]
     },
     "Xamarin.Android.Support.Animated.Vector.Drawable/25.4.0.2": {
@@ -884,6 +907,7 @@
       "MvvmLight >= 5.4.1.1",
       "MvvmLightLibs >= 5.4.1.1",
       "Newtonsoft.Json >= 11.0.2",
+      "PSC.Xam.Controls.BindableRadioButton >= 1.0.0",
       "Xamarin.Android.Support.Design >= 25.4.0.2",
       "Xamarin.Android.Support.v4 >= 25.4.0.2",
       "Xamarin.Android.Support.v7.AppCompat >= 25.4.0.2",
@@ -940,6 +964,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[11.0.2, )"
+          },
+          "PSC.Xam.Controls.BindableRadioButton": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "Xamarin.Android.Support.Design": {
             "target": "Package",

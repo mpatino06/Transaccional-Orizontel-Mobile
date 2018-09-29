@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "594e4bb16d80d3066e37a096548121add3977c21"
+    "signature": "60db328bb701f9197400ce032cb30c524886a554"
   },
   "compilationOptions": {},
   "targets": {
@@ -13,6 +13,7 @@
           "MvvmLightLibs": "5.4.1.1",
           "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "11.0.2",
+          "PSC.Xam.Controls.BindableRadioButton": "1.0.0",
           "Xamarin.Forms": "3.1.0.697729"
         },
         "runtime": {
@@ -51,6 +52,17 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "11.0.0.0",
             "fileVersion": "11.0.2.21924"
+          }
+        }
+      },
+      "PSC.Xam.Controls.BindableRadioButton/1.0.0": {
+        "dependencies": {
+          "Xamarin.Forms": "3.1.0.697729"
+        },
+        "runtime": {
+          "lib/portable45-net45+win8+wp8+wpa81/PSC.Xam.Controls.BindableRadioButton.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -112,6 +124,13 @@
       "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
       "path": "newtonsoft.json/11.0.2",
       "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
+    },
+    "PSC.Xam.Controls.BindableRadioButton/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kOY3DsnqUVMszX5mTW31R/j3qliM55SCjXhIHMpmr7nJvajk6tU2NE3ZEx8PRzlywvsmK5vYhXyvDRV1OnWX7g==",
+      "path": "psc.xam.controls.bindableradiobutton/1.0.0",
+      "hashPath": "psc.xam.controls.bindableradiobutton.1.0.0.nupkg.sha512"
     },
     "Xamarin.Forms/3.1.0.697729": {
       "type": "package",

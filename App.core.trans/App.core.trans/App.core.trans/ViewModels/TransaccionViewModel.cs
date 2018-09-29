@@ -23,9 +23,14 @@ namespace App.core.trans.ViewModels
 
 		public TransaccionViewModel()
 		{
+			//myList = new Dictionary<int, string>();
+			//selectedIndex = -1;
+			//LoadRadio();
+			LoadBusquedaCliente();
 			LoadTransaccion();
 			IsVisibleButtons = false;
 		}
+
 
 
 		#region PROPIEDADES
@@ -309,11 +314,11 @@ namespace App.core.trans.ViewModels
 			set { _transaccionCollection = value; RaiseOnPropertyChange(); }
 		}
 
-		private ObservableCollection<string> _transCollection;
-		public ObservableCollection<string> TransCollection
+		private ObservableCollection<string> _listClienteCollection;
+		public ObservableCollection<string> ListClienteCollection
 		{
-			get { return _transCollection; }
-			set { _transCollection = value; RaiseOnPropertyChange(); }
+			get { return _listClienteCollection; }
+			set { _listClienteCollection = value; RaiseOnPropertyChange(); }
 		}
 
 		private ObservableCollection<TransaccionTipoMovimiento> _tipoMovimientoCollection;
@@ -323,6 +328,12 @@ namespace App.core.trans.ViewModels
 			set { _tipoMovimientoCollection = value; RaiseOnPropertyChange(); }
 		}
 
+		private ObservableCollection<string> _transCollection;
+		public ObservableCollection<string> TransCollection
+		{
+			get { return _transCollection; }
+			set { _transCollection = value; RaiseOnPropertyChange(); }
+		}
 
 		private string _transaccionSelect;
 		public string TransaccionSelect
@@ -331,6 +342,12 @@ namespace App.core.trans.ViewModels
 			set { _transaccionSelect = value; RaiseOnPropertyChange(); }
 		}
 
+		private string _listClienteSelect;
+		public string ListClienteSelect
+		{
+			get { return _listClienteSelect; }
+			set { _listClienteSelect = value; RaiseOnPropertyChange(); }
+		}
 
 		private ClienteCuentas _selectedCuenta = new ClienteCuentas();
 
@@ -371,8 +388,6 @@ namespace App.core.trans.ViewModels
 		private async void LoadTransaccion()
 		{
 			clienteServices = new ClienteServices();
-			//string[] transacciones = { "201-DEPOSITO", "58-RETIRO" };
-			//string[] transacciones = { "201-DEPOSITO", "58-RETIRO" };
 
 			List<string> termsList = new List<string>();
 			var result = await clienteServices.GetTransaccion(3); //Secuencial empresa
@@ -389,6 +404,28 @@ namespace App.core.trans.ViewModels
 			TransCollection = new ObservableCollection<string>(transacciones);
 		}
 
+		private void LoadBusquedaCliente()
+		{
+			//clienteServices = new ClienteServices();
+
+			//List<string> termsList = new List<string>();
+
+			//var result = await clienteServices.GetTransaccion(3); //Secuencial empresa
+			//if (result != null)
+			//{
+			//	TransaccionCollection = new ObservableCollection<Transaccion>(result);
+			//	foreach (var item in result)
+			//	{
+			//		termsList.Add(item.Codigo + " - " + item.Nombre);
+			//	}
+			//}
+
+			string[] busquedaCliente = { "Código", "Cedula"};
+			ListClienteCollection = new ObservableCollection<string>(busquedaCliente);
+			ListClienteSelect = "Código";
+		}
+
+
 		public void RaiseOnPropertyChange([CallerMemberName] string propertyName = null)
 		{
 			if (PropertyChanged != null)
@@ -403,37 +440,53 @@ namespace App.core.trans.ViewModels
 		{
 			try
 			{
+
 				if (!string.IsNullOrEmpty(SearchName))
 				{
-					char[] charSplit = {'-'};
-					string[] transaccionSeleccionada = TransaccionSelect.Split(charSplit);
-
-					var _valueSelect = transaccionSeleccionada[0].ToString().Trim();
-
-					SecuencialTransaccionVM = TransaccionCollection.FirstOrDefault(a => a.Codigo == _valueSelect).Secuencial;
-
-					if (SecuencialTransaccionVM > 0)
+					if (TransaccionSelect != null)
 					{
+						char[] charSplit = { '-' };
+						string[] transaccionSeleccionada = TransaccionSelect.Split(charSplit);
 
-						IsBusy = true;
-						clienteServices = new ClienteServices();
-						var result = await clienteServices.GetCliente(SecuencialEmpresaVM, int.Parse(SearchName));
-						if (result != null)
+						var _valueSelect = transaccionSeleccionada[0].ToString().Trim();
+
+						SecuencialTransaccionVM = TransaccionCollection.FirstOrDefault(a => a.Codigo == _valueSelect).Secuencial;
+
+						if (SecuencialTransaccionVM > 0)
 						{
-							SecuencialClienteVM = result.SecuencialCliente;
-							DatosCliente = result.Identificacion.ToString() + " " + result.NombreUnido;
-
-							var cuentasCliente = await clienteServices.GetCuentasCliente(SecuencialClienteVM, SecuencialTransaccionVM);
-							if (cuentasCliente != null)
+							int codigoBusquega = (ListClienteSelect == "Código")? 0 : 1;
+							IsBusy = true;
+							clienteServices = new ClienteServices();
+							var result = await clienteServices.GetCliente(int.Parse(SearchName), codigoBusquega);
+							if (result.SecuencialCliente > 0)
 							{
-								Device.BeginInvokeOnMainThread(() =>
+								SecuencialClienteVM = result.SecuencialCliente;
+								DatosCliente = result.Identificacion.ToString() + " " + result.NombreUnido;
+
+								var cuentasCliente = await clienteServices.GetCuentasCliente(SecuencialClienteVM, SecuencialTransaccionVM);
+								if (cuentasCliente != null)
 								{
-									IsVisibleButtons = true;
-									CuentasCollection = new ObservableCollection<ClienteCuentas>(cuentasCliente);
-								});
+									Device.BeginInvokeOnMainThread(() =>
+									{
+										IsVisibleButtons = true;
+										CuentasCollection = new ObservableCollection<ClienteCuentas>(cuentasCliente);
+									});
+								}
+							}
+							else
+							{
+								await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Cliente no resgitrado", "OK");
+								CuentasCollection = new ObservableCollection<ClienteCuentas>(new List<ClienteCuentas>());
+								DatosCliente = null;
+								IsVisibleButtons = false;
 							}
 						}
 					}
+					else
+					{
+						await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Debe seleccionar una Transacción", "OK");
+					}
+
 
 					IsBusy = false;
 				}
@@ -441,7 +494,6 @@ namespace App.core.trans.ViewModels
 			catch (Exception)
 			{
 				IsBusy = false;
-				throw;
 			}
 		}
 
