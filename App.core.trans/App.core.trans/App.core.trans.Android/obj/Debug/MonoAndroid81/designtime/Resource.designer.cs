@@ -2201,6 +2201,9 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F020052
 			public const int abc_vector_test = 2130837586;
 			
+			// aapt resource value: 0x7F010002
+			public const int add = 2130771970;
+			
 			// aapt resource value: 0x7F020053
 			public const int avd_hide_password = 2130837587;
 			
@@ -2225,17 +2228,20 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F02006D
 			public const int avd_show_password_3 = 2130837613;
 			
-			// aapt resource value: 0x7F010002
-			public const int cl1 = 2130771970;
-			
 			// aapt resource value: 0x7F010003
-			public const int cliente = 2130771971;
+			public const int cl1 = 2130771971;
 			
 			// aapt resource value: 0x7F010004
-			public const int ct1 = 2130771972;
+			public const int cliente = 2130771972;
 			
-			// aapt resource value: 0x7F010017
-			public const int cuentas = 2130771991;
+			// aapt resource value: 0x7F010005
+			public const int ct1 = 2130771973;
+			
+			// aapt resource value: 0x7F010019
+			public const int cuentas = 2130771993;
+			
+			// aapt resource value: 0x7F010006
+			public const int del = 2130771974;
 			
 			// aapt resource value: 0x7F020055
 			public const int design_bottom_navigation_item_background = 2130837589;
@@ -2255,11 +2261,11 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F02005A
 			public const int design_snackbar_background = 2130837594;
 			
-			// aapt resource value: 0x7F010005
-			public const int favicon = 2130771973;
+			// aapt resource value: 0x7F010007
+			public const int favicon = 2130771975;
 			
-			// aapt resource value: 0x7F010006
-			public const int ic1 = 2130771974;
+			// aapt resource value: 0x7F010008
+			public const int ic1 = 2130771976;
 			
 			// aapt resource value: 0x7F020053
 			public const int ic_audiotrack_dark = 2130837587;
@@ -2696,26 +2702,26 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F0200E3
 			public const int ic_vol_type_tv_light = 2130837731;
 			
-			// aapt resource value: 0x7F010007
-			public const int lista = 2130771975;
-			
-			// aapt resource value: 0x7F010008
-			public const int logo = 2130771976;
-			
 			// aapt resource value: 0x7F010009
-			public const int logo1 = 2130771977;
+			public const int lista = 2130771977;
 			
 			// aapt resource value: 0x7F010010
-			public const int logo3 = 2130771984;
+			public const int logo = 2130771984;
 			
 			// aapt resource value: 0x7F010011
-			public const int logotipo = 2130771985;
+			public const int logo1 = 2130771985;
 			
 			// aapt resource value: 0x7F010012
-			public const int mas = 2130771986;
+			public const int logo3 = 2130771986;
 			
 			// aapt resource value: 0x7F010013
-			public const int menos = 2130771987;
+			public const int logotipo = 2130771987;
+			
+			// aapt resource value: 0x7F010014
+			public const int mas = 2130771988;
+			
+			// aapt resource value: 0x7F010015
+			public const int menos = 2130771989;
 			
 			// aapt resource value: 0x7F0200E4
 			public const int mr_button_connected_dark = 2130837732;
@@ -2816,17 +2822,17 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F020065
 			public const int notify_panel_notification_icon_bg = 2130837605;
 			
-			// aapt resource value: 0x7F010014
-			public const int operacion = 2130771988;
-			
-			// aapt resource value: 0x7F010015
-			public const int salir = 2130771989;
-			
 			// aapt resource value: 0x7F010016
-			public const int tr1 = 2130771990;
+			public const int operacion = 2130771990;
+			
+			// aapt resource value: 0x7F010017
+			public const int salir = 2130771991;
 			
 			// aapt resource value: 0x7F010018
-			public const int transaccion = 2130771992;
+			public const int tr1 = 2130771992;
+			
+			// aapt resource value: 0x7F010020
+			public const int transaccion = 2130772000;
 			
 			static Drawable()
 			{

@@ -62,10 +62,10 @@
 				</Grid>
 				
 			    <Grid Margin="10,0,0,0">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="5*" />
+					<!--<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="3*" />
-					</Grid.ColumnDefinitions>
+					</Grid.ColumnDefinitions>-->
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
@@ -74,10 +74,10 @@
 
 					<ListView 
                         x:Name="ListViewCol0"
-                        Grid.Row="0" Grid.Column="0"
+                        Grid.Row="0" 
                         ItemsSource="{Binding ModalidadDeposito}"
                         HasUnevenRows="True"  
-                        HorizontalOptions="StartAndExpand" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito}">
+                        HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<ViewCell>
@@ -113,19 +113,19 @@
 						</ListView.ItemTemplate>
 					</ListView>
 
-					<Grid  Grid.Row="1" Grid.Column="0" VerticalOptions="Start">
+					<!--<Grid  Grid.Row="1"  VerticalOptions="Center">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"/>
-							<!--<RowDefinition Height="Auto"/>-->
+							--><!--<RowDefinition Height="Auto"/>--><!--
 						</Grid.RowDefinitions>
 						
-						<!--ROW 0 -->
+						--><!--ROW 0 --><!--
 						<Label Grid.Row="0" Grid.Column="0"  FontFamily="Exo" FontSize="10" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"  Text="Denominacción"></Label>
-						<!--<Label Grid.Row="0" Grid.Column="1" FontFamily="Exo" FontSize="Medium" FontAttributes="Bold" TextColor="#092f5e" Text="{Binding TotalMoneyClic}"></Label>-->
+						
 						<localcontrol1:MyEntry Grid.Row="0" Grid.Column="1" Margin="0,0,75,0"
                                            Text="{Binding TotalMoneyClic}" 
                                            VerticalOptions="Center" 
@@ -133,8 +133,8 @@
 										   WidthRequest="50"
                                            HorizontalOptions="Start" Keyboard="Numeric" ></localcontrol1:MyEntry>
 	
-					</Grid>
-					<Grid Grid.Row="2" Grid.Column="0" Margin="0,10,0,0" VerticalOptions="Start">
+					</Grid>-->
+					<Grid Grid.Row="2"  Margin="22,10,25,0" VerticalOptions="Center">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="*" />
@@ -144,12 +144,12 @@
 						</Grid.RowDefinitions>
 						
 						<Button Text="Cancelar" Grid.Row="0" Grid.Column="0" VerticalOptions="End" WidthRequest="140" FontSize="10" Style="{StaticResource ButtonNext}"></Button>
-						<Button Text="Guardar"  Grid.Row="0" Grid.Column="1" VerticalOptions="Start" WidthRequest="140" FontSize="10" Style="{StaticResource ButtonNext}" Command="{Binding SaveTrans}"></Button>
+						<Button Text="Siguiente"  Grid.Row="0" Grid.Column="1" VerticalOptions="Start" WidthRequest="140" FontSize="10" Style="{StaticResource ButtonNext}" Command="{Binding NextTrans2}"></Button>
 					</Grid>
 					
 					<!--<Label Grid.Row="1" Grid.Column="0" Text="Efectivo"></Label>-->
 					
-                    <Grid  Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,0,30,0">
+                    <!--<Grid  Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,0,30,0">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="2.5*" />
 							<ColumnDefinition Width="2.5*" />
@@ -194,7 +194,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos100}" />
 							</Image.GestureRecognizers>
 						</Image>
-                     <!--ROW 2--> 
+                     --><!--ROW 2--><!-- 
 					<Label
 						Grid.Row="1"
 						Grid.Column="0" 
@@ -220,7 +220,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos50}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 3--> 
+					 --><!--ROW 3--><!-- 
 					<Label
 						Grid.Row="2"
 						Grid.Column="0" 
@@ -246,7 +246,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos20}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 4--> 
+					 --><!--ROW 4--><!-- 
 					<Label
 						Grid.Row="3"
 						Grid.Column="0" 
@@ -272,7 +272,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos10}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 5--> 
+					 --><!--ROW 5--><!-- 
 					<Label
 						Grid.Row="4"
 						Grid.Column="0" 
@@ -298,7 +298,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos5}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 6--> 
+					 --><!--ROW 6--><!-- 
 					<Label
 						Grid.Row="5"
 						Grid.Column="0" 
@@ -324,7 +324,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos1}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 7-->
+					 --><!--ROW 7--><!--
 					<Label
 						Grid.Row="6"
 						Grid.Column="0" 
@@ -350,7 +350,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos050}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 8-->
+					 --><!--ROW 8--><!--
 					<Label
 						Grid.Row="7"
 						Grid.Column="0" 
@@ -376,7 +376,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos025}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 9-->
+					 --><!--ROW 9--><!--
 					<Label
 						Grid.Row="8"
 						Grid.Column="0" 
@@ -402,7 +402,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos010}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 10-->
+					 --><!--ROW 10--><!--
 					<Label
 						Grid.Row="9"
 						Grid.Column="0" 
@@ -428,7 +428,7 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos005}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					 <!--ROW 11-->
+					 --><!--ROW 11--><!--
 					<Label
 						Grid.Row="10"
 						Grid.Column="0" 
@@ -454,50 +454,10 @@
 								<TapGestureRecognizer Command="{Binding onClicmenos001}"/>
 						</Image.GestureRecognizers>
 					</Image>
-					</Grid>
+					</Grid>-->
 
 				
-				<!--<ListView 
-                        x:Name="ListViewCol1"
-                        Grid.Row="0" Grid.Column="1"
-                        ItemsSource="{Binding DenominacionMoneda}"
-                        HasUnevenRows="True"  
-                        HorizontalOptions="StartAndExpand" VerticalOptions="Start" HeightRequest="{Binding HeightListDenominacion}">
-						<ListView.ItemTemplate>
-							<DataTemplate>
-								<ViewCell>
-									<Grid Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="*" />
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="35"></RowDefinition>
-										</Grid.RowDefinitions>
-										<Entry 
-                                           Grid.Column="0" 
-                                           Text="{Binding ValueInsert}" 
-                                           VerticalOptions="End" 
-                                           HorizontalOptions="Center"
-                                           FontFamily="Exo" FontSize="10"  Keyboard="Numeric" WidthRequest="30" />
-										--><!--<localcontrol1:MyEntry Grid.Column="0" 
-                                           Text="{Binding ValueInsert}" 
-                                           VerticalOptions="End" 
-                                           FontSize="10"
-										   WidthRequest="50"
-                                           HorizontalOptions="Center" Keyboard="Numeric" ></localcontrol1:MyEntry>--><!--
-										<Label
-										   Grid.Column="1" 
-                                           Text="{Binding Denominacion}" 
-                                           VerticalOptions="Center" 
-                                           FontSize="10"
-										   FontAttributes="Bold" 
-                                           HorizontalOptions="Center" />
-									</Grid>
-								</ViewCell>
-							</DataTemplate>
-						</ListView.ItemTemplate>
-					</ListView>-->
+				
 					
 				</Grid>
 			</StackLayout>

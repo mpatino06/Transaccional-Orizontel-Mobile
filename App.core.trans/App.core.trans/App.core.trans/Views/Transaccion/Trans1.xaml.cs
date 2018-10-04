@@ -14,9 +14,9 @@ namespace App.core.trans.Views.Transaccion
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Trans1 : ContentPage
 	{
-
+	
 		public Trans1 ()
-		{
+		{					
 			InitializeComponent ();
 			BindingContext = new TransaccionViewModel();
 		}

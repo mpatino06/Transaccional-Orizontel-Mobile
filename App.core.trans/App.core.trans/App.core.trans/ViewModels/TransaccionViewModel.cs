@@ -190,6 +190,59 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private bool _isVisibleEfectivo;
+		public bool IsVisibleEfectivo
+		{
+			get { return _isVisibleEfectivo; }
+			set
+			{
+				_isVisibleEfectivo = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
+		private bool _isVisibleCheque;
+		public bool IsVisibleCheque
+		{
+			get { return _isVisibleCheque; }
+			set
+			{
+				_isVisibleCheque = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
+		private string _chequeCuenta;
+		public string ChequeCuenta
+		{
+			get { return _chequeCuenta;  }
+			set {
+				_chequeCuenta = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
+		private string _chequeNumero;
+		public string ChequeNumero
+		{
+			get { return _chequeNumero; }
+			set
+			{
+				_chequeNumero = value;
+				RaiseOnPropertyChange();
+			}
+		}
+		private decimal _chequeMonto;
+		public decimal ChequeMonto
+		{
+			get { return _chequeMonto; }
+			set
+			{
+				_chequeMonto = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
 		private string _searchName;
 		public string SearchName
 		{
@@ -234,7 +287,18 @@ namespace App.core.trans.ViewModels
 				RaiseOnPropertyChange();
 			}
 		}
-		//
+
+		private int _heightListCheque;
+
+		public int HeightListCheque
+		{
+			get { return _heightListCheque; }
+			set
+			{
+				_heightListCheque = value;
+				RaiseOnPropertyChange();
+			}
+		}
 
 		private int _heightListDenominacion;
 
@@ -294,6 +358,28 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private string _nombreTransaccionVM;
+		public string NombreTransaccionVM
+		{
+			get { return _nombreTransaccionVM; }
+			set
+			{
+				_nombreTransaccionVM = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
+		private string _siglasTransaccionVM;
+		public string SiglasTransaccionVM
+		{
+			get { return _siglasTransaccionVM; }
+			set
+			{
+				_siglasTransaccionVM = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
 		private ObservableCollection<ClienteCuentas> _cuentasCollection;
 		public ObservableCollection<ClienteCuentas> CuentasCollection
 		{
@@ -306,6 +392,17 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private ObservableCollection<Cheque> _chequeAdd;
+		public ObservableCollection<Cheque> ChequeAdd
+		{
+			get { return _chequeAdd; }
+			set
+			{
+				_chequeAdd = value;
+				HeightListCheque = (_chequeAdd.Count * 30) + (_chequeAdd.Count * 5);
+				RaiseOnPropertyChange();
+			}
+		}
 
 		private ObservableCollection<Transaccion> _transaccionCollection;
 		public ObservableCollection<Transaccion> TransaccionCollection
@@ -328,6 +425,20 @@ namespace App.core.trans.ViewModels
 			set { _tipoMovimientoCollection = value; RaiseOnPropertyChange(); }
 		}
 
+		private ObservableCollection<Banco> _listBancosCollection;
+		public ObservableCollection<Banco> ListBancosCollection
+		{
+			get { return _listBancosCollection; }
+			set { _listBancosCollection = value; RaiseOnPropertyChange(); }
+		}
+
+		private ObservableCollection<Banco> _listBancosSelectCollection;
+		public ObservableCollection<Banco> ListBancosSelect
+		{
+			get { return _listBancosSelectCollection; }
+			set { _listBancosSelectCollection = value; RaiseOnPropertyChange(); }
+		}
+
 		private ObservableCollection<string> _transCollection;
 		public ObservableCollection<string> TransCollection
 		{
@@ -341,6 +452,21 @@ namespace App.core.trans.ViewModels
 			get { return _transaccionSelect; }
 			set { _transaccionSelect = value; RaiseOnPropertyChange(); }
 		}
+
+		private ObservableCollection<string> _bancoCollection;
+		public ObservableCollection<string> BancoCollection
+		{
+			get { return _bancoCollection; }
+			set { _bancoCollection = value; RaiseOnPropertyChange(); }
+		}
+
+		private string _bancoSelect;
+		public string BancoSelect
+		{
+			get { return _bancoSelect; }
+			set { _bancoSelect = value; RaiseOnPropertyChange(); }
+		}
+
 
 		private string _listClienteSelect;
 		public string ListClienteSelect
@@ -406,20 +532,6 @@ namespace App.core.trans.ViewModels
 
 		private void LoadBusquedaCliente()
 		{
-			//clienteServices = new ClienteServices();
-
-			//List<string> termsList = new List<string>();
-
-			//var result = await clienteServices.GetTransaccion(3); //Secuencial empresa
-			//if (result != null)
-			//{
-			//	TransaccionCollection = new ObservableCollection<Transaccion>(result);
-			//	foreach (var item in result)
-			//	{
-			//		termsList.Add(item.Codigo + " - " + item.Nombre);
-			//	}
-			//}
-
 			string[] busquedaCliente = { "Código", "Cedula"};
 			ListClienteCollection = new ObservableCollection<string>(busquedaCliente);
 			ListClienteSelect = "Código";
@@ -450,7 +562,12 @@ namespace App.core.trans.ViewModels
 
 						var _valueSelect = transaccionSeleccionada[0].ToString().Trim();
 
-						SecuencialTransaccionVM = TransaccionCollection.FirstOrDefault(a => a.Codigo == _valueSelect).Secuencial;
+						//SecuencialTransaccionVM = TransaccionCollection.FirstOrDefault(a => a.Codigo == _valueSelect).Secuencial;
+
+						var resultTransaccion =  TransaccionCollection.FirstOrDefault(a => a.Codigo == _valueSelect);
+						SecuencialTransaccionVM = resultTransaccion.Secuencial;
+						NombreTransaccionVM = resultTransaccion.Nombre;
+						SiglasTransaccionVM = resultTransaccion.Siglas;
 
 						if (SecuencialTransaccionVM > 0)
 						{
@@ -461,6 +578,8 @@ namespace App.core.trans.ViewModels
 							if (result.SecuencialCliente > 0)
 							{
 								SecuencialClienteVM = result.SecuencialCliente;
+								SecuencialEmpresaVM = result.SecuencialEmpresa;
+
 								DatosCliente = result.Identificacion.ToString() + " " + result.NombreUnido;
 
 								var cuentasCliente = await clienteServices.GetCuentasCliente(SecuencialClienteVM, SecuencialTransaccionVM);
@@ -497,6 +616,40 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		public async void AddCheque()
+		{
+			try
+			{
+
+				char[] charSplit = { '-' };
+				string[] bancoSeleccionado = BancoSelect.Split(charSplit);
+				var _valueBancoSelect = bancoSeleccionado[0].ToString().Trim();
+
+				var resultBancoSeleccionda = ListBancosCollection.FirstOrDefault(a => a.Codigo == _valueBancoSelect);
+
+
+				if ((ChequeCuenta != null) || (ChequeNumero != null) || (ChequeMonto == 0))
+				{
+					ChequeAdd.Add(new Cheque
+					{
+						SecuencialBancoEmisor = Convert.ToInt32(_valueBancoSelect),
+						CodigoCuentaCorriente = ChequeCuenta,
+						CodigoCheque = ChequeNumero,
+						Valor = ChequeMonto,
+						CodigoEstadoCheque = bancoSeleccionado[1].ToString().Trim()
+					});
+				}
+				else
+				{
+					await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Todos los valores son obligatorios", "OK");
+				}
+			}
+			catch (Exception ex)
+			{
+
+			}
+		}
+
 		public async void GoToTrans2()
 		{
 			try
@@ -515,22 +668,75 @@ namespace App.core.trans.ViewModels
 							Transferencia2.Title = "Transacción: " + TransaccionSelect;
 							await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync((Page)Transferencia2);
 						});
-					}
-					
+					}				
 				}
 				else
 				{
-					await Application.Current.MainPage.DisplayAlert("TSHIRT", "Debe Seleccionar una cuenta", "OK");
+					await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Debe Seleccionar una cuenta", "OK");
 				}
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("TSHIRT", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
 
-		public async void SaveTRansaccion()
+
+		public async void GoToTrans3()
+		{
+			try
+			{
+				IsVisibleCheque = false;
+				IsVisibleEfectivo = false;
+
+				if (ModalidadDeposito.Sum(a => a.ValueInsert) > 0)
+				{
+					if (ModalidadDeposito.FirstOrDefault(a => a.CodigoTipoMovimiento == "Cheque").ValueInsert > 0)
+					{
+						clienteServices = new ClienteServices();
+						var _bancos = await clienteServices.GetBanco();
+						
+						IsVisibleCheque = true;
+
+						List<string> _termsList = new List<string>();
+						if (_bancos != null)
+						{
+							ListBancosCollection = new ObservableCollection<Banco>(_bancos);
+							foreach (var item in _bancos)
+							{
+								_termsList.Add(item.Secuencial.ToString() + " - " + item.Nombre);
+							}
+						}
+
+						string[] _collection = _termsList.ToArray();
+						BancoCollection = new ObservableCollection<string>(_collection);
+					}
+
+					if (ModalidadDeposito.FirstOrDefault(a => a.CodigoTipoMovimiento == "Efectivo").ValueInsert > 0)
+					{
+						IsVisibleEfectivo = true;
+					}
+
+
+					var Transferencia3 = new Trans3() { BindingContext = this };
+					Transferencia3.Title = "Transacción: " + TransaccionSelect;
+					await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync((Page)Transferencia3);
+				}
+				else
+				{
+					await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Debe ingresar un monto para Depositar", "OK");
+				}
+			}
+			catch (Exception ex)
+			{
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+				//throw;
+			}
+		}
+
+
+		public async void SaveTransaccion()
 		{
 			try
 			{
@@ -543,6 +749,15 @@ namespace App.core.trans.ViewModels
 						var answer = await App.Current.MainPage.DisplayAlert("ORIZONTEL", "Desea GUARDAR la operación, se generará un deposito, Desea Continuar?", "SI", "NO");
 						if (answer)
 						{
+							RegistrarTransaccion registrarTransaccion = new RegistrarTransaccion();
+
+							registrarTransaccion.CodigoUsuario = "";
+							registrarTransaccion.SecuencialTransaccion = SecuencialTransaccionVM;
+							registrarTransaccion.NombreTransaccion = NombreTransaccionVM;
+							registrarTransaccion.SiglasTransaccion = SiglasTransaccionVM;
+							registrarTransaccion.Transacciones = GetMontoTrnasacciones();
+
+
 							Device.BeginInvokeOnMainThread(async () =>
 							{
 								await Application.Current.MainPage.DisplayAlert("ORIZONTEL", "Deposito Realizado con Exito", "OK");
@@ -576,6 +791,31 @@ namespace App.core.trans.ViewModels
 
 		}
 
+		public TransaccionMoneda GetMontoTrnasacciones()
+		{
+			TransaccionMoneda transaccionMoneda = new TransaccionMoneda();
+			List<Empresadenominacionfija> list = new List<Empresadenominacionfija>();
+
+			list.Add(new Empresadenominacionfija { Secuencial = 1, Denominacion = "100", ValueInsert = Money100 });
+			list.Add(new Empresadenominacionfija { Secuencial = 2, Denominacion = "50", ValueInsert = Money50 });
+			list.Add(new Empresadenominacionfija { Secuencial = 3, Denominacion = "20", ValueInsert = Money20 });
+			list.Add(new Empresadenominacionfija { Secuencial = 4, Denominacion = "10", ValueInsert = Money10 });
+			list.Add(new Empresadenominacionfija { Secuencial = 5, Denominacion = "5", ValueInsert = Money5 });
+			list.Add(new Empresadenominacionfija { Secuencial = 6, Denominacion = "1", ValueInsert = Money1 });
+			list.Add(new Empresadenominacionfija { Secuencial = 7, Denominacion = "0.50", ValueInsert = Money050 });
+			list.Add(new Empresadenominacionfija { Secuencial = 8, Denominacion = "0.25", ValueInsert = Money025 });
+			list.Add(new Empresadenominacionfija { Secuencial = 9, Denominacion = "0.10", ValueInsert = Money010 });
+			list.Add(new Empresadenominacionfija { Secuencial = 10, Denominacion = "0.05", ValueInsert = Money005 });
+			list.Add(new Empresadenominacionfija { Secuencial = 11, Denominacion = "0.01", ValueInsert = Money001 });
+
+			transaccionMoneda.DenominacionMoneda = list;
+			transaccionMoneda.TipoMovimiento = ModalidadDeposito.ToList();
+
+
+			return transaccionMoneda;
+		}
+
+		#region "DENOMINACION MONEDA EFECTIVO"
 
 		public async void _onClicmore100()
 		{
@@ -903,6 +1143,9 @@ namespace App.core.trans.ViewModels
 				//throw;
 			}
 		}
+
+		#endregion
+
 		#region COMMANDS 
 
 
@@ -910,8 +1153,11 @@ namespace App.core.trans.ViewModels
 
 		public ICommand NextTrans => new RelayCommand(GoToTrans2);
 
-		public ICommand SaveTrans => new RelayCommand(SaveTRansaccion);
+		public ICommand NextTrans2 => new RelayCommand(GoToTrans3);
 
+		public ICommand SaveTrans => new RelayCommand(SaveTransaccion);
+
+		public ICommand onClicCheque => new RelayCommand(AddCheque);
 
 		public ICommand onClicmore100 => new RelayCommand(_onClicmore100);
 

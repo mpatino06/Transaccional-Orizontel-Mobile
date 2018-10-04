@@ -24,14 +24,30 @@ namespace App.core.trans.Services
 		public async Task<UsuarioExtend> GetUsuario(string code, string pass)
 		{
 			var Items = new UsuarioExtend();
-			string url = "http://" + PATHSERVER + "/OR/usuario/GetUsuarioByCode/" + code + "/" + pass;
+			Login login = new Login();
+			string url = "http://" + PATHSERVER + "/OR/usuario/GetUsuarioByCode";
 			try
 			{
-				var result = await client.GetAsync(url);
+				login.User = code;
+				login.Pass = pass;
+				//var result = await client.GetAsync(url);
+				//if (result.IsSuccessStatusCode)
+				//{
+				//	var content = await result.Content.ReadAsStringAsync();
+				//	Items = JsonConvert.DeserializeObject<UsuarioExtend>(content);
+				//}
+				var json = JsonConvert.SerializeObject(login);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+				HttpResponseMessage result = null;
+
+				result = await client.PostAsync(url, content);
+
 				if (result.IsSuccessStatusCode)
 				{
-					var content = await result.Content.ReadAsStringAsync();
-					Items = JsonConvert.DeserializeObject<UsuarioExtend>(content);
+					var content2 = await result.Content.ReadAsStringAsync();
+					Items = JsonConvert.DeserializeObject<UsuarioExtend>(content2);
+
 				}
 			}
 			catch (Exception ex)
@@ -40,6 +56,8 @@ namespace App.core.trans.Services
 			}
 			return Items;
 		}
+
+
 
 	}
 }

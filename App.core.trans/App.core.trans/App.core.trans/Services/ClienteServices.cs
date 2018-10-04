@@ -95,7 +95,7 @@ namespace App.core.trans.Services
 			var Items = new TransaccionMoneda();
 			try
 			{
-				string url = "http://" + PATHSERVER + "/OR/Cliente/GetTransaccionMoneda/" + secuencialTransaccion + "/" + empresa;
+				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetTransaccionMoneda/" + secuencialTransaccion + "/" + empresa;
 				var result = await client.GetAsync(url);
 				if (result.IsSuccessStatusCode)
 				{
@@ -134,7 +134,29 @@ namespace App.core.trans.Services
 				throw;
 			}
 			return Items;
-
 		}
+
+
+		public async Task<List<Banco>> GetBanco()
+		{
+			var Items = new List<Banco>();
+			try
+			{
+				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetBancos";
+				var result = await client.GetAsync(url);
+				if (result.IsSuccessStatusCode)
+				{
+					var content = await result.Content.ReadAsStringAsync();
+					Items = JsonConvert.DeserializeObject<List<Banco>>(content);
+				}
+			}
+			catch (Exception ex)
+			{
+				Items = null;
+				throw;
+			}
+			return Items;
+		}
+
 	}
 }

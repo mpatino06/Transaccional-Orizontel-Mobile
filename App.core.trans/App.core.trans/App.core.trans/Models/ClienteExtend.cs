@@ -8,6 +8,7 @@ namespace App.core.trans.Models
 	{
 		public int SecuencialCliente { get; set; }
 		public int SecuencialOficina { get; set; }
+		public int SecuencialEmpresa { get; set; }
 		public int SecuencialPersona { get; set; }
 		public int NumeroCliente { get; set; }
 		public DateTime FechaIngreso { get; set; }

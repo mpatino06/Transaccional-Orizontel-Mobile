@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.core.trans.Views.Transaccion.Trans3">
+    <ContentPage.Content>
+        <StackLayout>
+			<Grid Margin="10,0,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="7*" />
+					<ColumnDefinition Width="3*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="10"/>
+					<RowDefinition Height="60"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<ListView 
+                        x:Name="ListViewCol0"
+                        Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"				     
+                        ItemsSource="{Binding ModalidadDeposito}"
+                        HasUnevenRows="True"  
+                        HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito}">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<ViewCell>
+								<Grid Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="25" />
+									</Grid.RowDefinitions>
+									<Label 
+                                           Grid.Column="0" 
+                                           Text="{Binding CodigoTipoMovimiento }" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="Start"
+                                           FontFamily="Exo" FontSize="10" FontAttributes="Bold" />
+									<Label 
+                                           Grid.Column="1" 
+                                           Text="{Binding ValueInsert }" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="Start"
+                                           FontFamily="Exo" FontSize="10" FontAttributes="Bold" />
+
+								</Grid>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+
+				<Grid Grid.Row="2" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start"> 
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*" />
+						<ColumnDefinition Width="3*" />
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="2*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40"/>
+						<RowDefinition Height="40"/>
+					</Grid.RowDefinitions>
+
+					<!-- ROW 0 -->
+					<!--<Label Grid.Row="0" Grid.Column="0"
+                            Text="Banco" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="Start"
+                            FontFamily="Exo" FontSize="10" FontAttributes="Bold"/>-->
+					
+					<Picker x:Name="PickerBanco" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                            ItemsSource="{Binding BancoCollection }"
+                            SelectedItem="{Binding BancoSelect }" 
+						    FontSize="10"
+						    Margin="10,0,0,0"
+							Title="Seleccione Bancos"
+						    FontFamily="Exo" 
+							WidthRequest="300"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="StartAndExpand">
+					</Picker>
+
+					<!--ROW 1-->
+					<Entry
+							Grid.Row="1"
+						    Grid.Column="0"
+                            Text="{Binding ChequeCuenta}" 
+                            VerticalOptions="Center" 
+						    Placeholder="Cta Corriente"
+                            FontSize="10"
+							FontFamily="Exo"  
+                            HorizontalOptions="StartAndExpand" />
+					<Entry
+							Grid.Row="1"
+						    Grid.Column="1"
+                            Text="{Binding ChequeNumero}" 
+                            VerticalOptions="Center" 
+						    Placeholder="Nro Cheque"
+                            FontSize="10"
+							FontFamily="Exo"  
+                            HorizontalOptions="StartAndExpand" />
+					<Entry
+							Grid.Row="1"
+						    Grid.Column="2"
+                            Text="{Binding ChequeMonto}" 
+                            VerticalOptions="Center" 
+						    Placeholder="Monto"
+                            FontSize="10"
+							FontFamily="Exo" 
+						    Keyboard="Numeric"
+                            HorizontalOptions="StartAndExpand" />
+					
+					<!--<Button Text=">>>" Grid.Row="1" Grid.Column="3" VerticalOptions="StartAndExpand" FontSize="10" Style="{StaticResource ButtonNext}"></Button>-->
+					
+					<Image x:Name="imgAdd" WidthRequest="40" Grid.Row="1" Grid.Column="3"  HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Start" Source="add.png">
+					    <Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicCheque }"/>
+						</Image.GestureRecognizers>
+					</Image>
+				</Grid>
+				
+				
+
+				<ListView 
+                        x:Name="ListViewCheque"
+                        Grid.Row="3" 
+					    Grid.Column="0"
+                        ItemsSource="{Binding ChequeAdd}"
+                        HasUnevenRows="True"  
+                        HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito}">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<ViewCell>
+								<Grid Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+
+									<Label 
+                                           Grid.Column="0" 
+                                           Text="{Binding CodigoEstadoCheque }" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="Start"
+                                           FontFamily="Exo" FontSize="10" />
+
+									<Label 
+                                           Grid.Column="1" 
+                                           Text="{Binding CodigoCuentaCorriente }" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="Start"
+                                           FontFamily="Exo" FontSize="10" />
+
+									<Label 
+                                           Grid.Column="2" 
+                                           Text="{Binding CodigoCheque }" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="Start"
+                                           FontFamily="Exo" FontSize="10" />
+
+									<Label 
+                                           Grid.Column="3" 
+                                           Text="{Binding Valor }" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="Start"
+                                           FontFamily="Exo" FontSize="10" />
+									<!--<Entry
+										   Grid.Column="1" 
+                                           Text="{Binding ValueInsert}" 
+                                           VerticalOptions="Center" 
+                                           FontSize="10"
+											WidthRequest="50"
+                                           HorizontalOptions="Center" Keyboard="Numeric" />-->
+
+								</Grid>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+
+				<Grid  Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Start" Margin="0,0,10,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*" />
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="3*" />
+						<ColumnDefinition Width="2*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+						<RowDefinition Height="30"/>
+					</Grid.RowDefinitions>
+					<Label
+							Grid.Row="0"
+							Grid.Column="0" 
+                            Text="100" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+							FontAttributes="Bold" 
+                            HorizontalOptions="Center" />
+					<Image x:Name="im1" WidthRequest="35" Grid.Row="0" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore100}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+							Grid.Row="0"
+							Grid.Column="2" 
+                            Text="{Binding Money100}" 
+                            VerticalOptions="Center" 
+                            FontSize="10"
+                            HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="0" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos100}" />
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 2-->
+					<Label
+						Grid.Row="1"
+						Grid.Column="0" 
+                        Text="50" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="1" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore50}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="1"
+						Grid.Column="2" 
+                        Text="{Binding Money50}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="1" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos50}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 3-->
+					<Label
+						Grid.Row="2"
+						Grid.Column="0" 
+                        Text="20" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="2" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore20}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="2"
+						Grid.Column="2" 
+                        Text="{Binding Money20}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="2" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos20}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 4-->
+					<Label
+						Grid.Row="3"
+						Grid.Column="0" 
+                        Text="10" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="3" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore10}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="3"
+						Grid.Column="2" 
+                        Text="{Binding Money10}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="3" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos10}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 5-->
+					<Label
+						Grid.Row="4"
+						Grid.Column="0" 
+                        Text="5" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="4" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore5}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="4"
+						Grid.Column="2" 
+                        Text="{Binding Money5}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="4" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos5}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 6-->
+					<Label
+						Grid.Row="5"
+						Grid.Column="0" 
+                        Text="1" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="5" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore1}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="5"
+						Grid.Column="2" 
+                        Text="{Binding Money1}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="5" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos1}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 7-->
+					<Label
+						Grid.Row="6"
+						Grid.Column="0" 
+                        Text="0.50" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="6" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore050}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="6"
+						Grid.Column="2" 
+                        Text="{Binding Money050}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="6" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos050}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 8-->
+					<Label
+						Grid.Row="7"
+						Grid.Column="0" 
+                        Text="0.25" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="7" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore025}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="7"
+						Grid.Column="2" 
+                        Text="{Binding Money025}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="7" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos025}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 9-->
+					<Label
+						Grid.Row="8"
+						Grid.Column="0" 
+                        Text="0.10" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="8" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore010}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="8"
+						Grid.Column="2" 
+                        Text="{Binding Money010}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="8" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos010}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 10-->
+					<Label
+						Grid.Row="9"
+						Grid.Column="0" 
+                        Text="0.05" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="9" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore005}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="9"
+						Grid.Column="2" 
+                        Text="{Binding Money005}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="9" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos005}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<!--ROW 11-->
+					<Label
+						Grid.Row="10"
+						Grid.Column="0" 
+                        Text="0.01" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+						FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="10" Grid.Column="1"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="mas.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmore001}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Label
+						Grid.Row="10"
+						Grid.Column="2" 
+                        Text="{Binding Money001}" 
+                        VerticalOptions="Center" 
+                        FontSize="10"
+                        HorizontalOptions="Center" />
+					<Image WidthRequest="35" Grid.Row="10" Grid.Column="3"  HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" Source="menos.png" >
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicmenos001}"/>
+						</Image.GestureRecognizers>
+					</Image>
+				</Grid>
+
+			</Grid>
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>

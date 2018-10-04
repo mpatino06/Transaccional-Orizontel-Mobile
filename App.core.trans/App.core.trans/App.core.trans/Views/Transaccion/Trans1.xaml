@@ -75,7 +75,7 @@
 						    FontSize="12"
 							WidthRequest="50"
 						    FontFamily="Exo"  
-                            VerticalOptions="Center" 
+                            VerticalOptions="Center" 						
                             HorizontalOptions="Start">
 					</Picker>
 
@@ -90,6 +90,7 @@
 						       FontFamily="Exo"
 						       WidthRequest="200"
 						       SearchCommand="{Binding SearchCliente}" 
+							   
                                Placeholder="Cliente"></SearchBar>
 
 				</Grid>

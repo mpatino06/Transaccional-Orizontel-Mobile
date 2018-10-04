@@ -24,6 +24,10 @@ namespace App.core.trans.Views
 		{
 			try
 			{
+				DateTime x = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+
+				var y = DateTime.Now.Date;
+
 				///security = new Security();
 				services = new UsuarioServices();
 				if (string.IsNullOrEmpty(EntUser.Text) || string.IsNullOrEmpty(EntPassword.Text))
@@ -34,13 +38,13 @@ namespace App.core.trans.Views
 				else
 				{
 
-					//var result = await services.GetUsuario(EntUser.Text, EntPassword.Text.Trim());
-					//if(result.usuarioComplemento != null)
-					//	App.Current.MainPage = new MainPage();
-					//else
-					//	await Application.Current.MainPage.DisplayAlert("SAC", "Los datos ingresados no son correctos", "OK");
+					var result = await services.GetUsuario(EntUser.Text, EntPassword.Text.Trim());
+					if (result.usuarioComplemento != null)
+						App.Current.MainPage = new MainPage();
+					else
+						await Application.Current.MainPage.DisplayAlert("SAC", "Los datos ingresados no son correctos", "OK");
 
-					App.Current.MainPage = new MainPage();
+					//App.Current.MainPage = new MainPage();
 
 				}				
 			}

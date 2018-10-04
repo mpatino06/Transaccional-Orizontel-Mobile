@@ -16,7 +16,6 @@ namespace App.core.trans
 	public partial class MainPage : MasterDetailPage
 	{
 		public List<MasterPageItem> menuList { get; set; }
-
 		public MainPage()
 		{
 			InitializeComponent();
@@ -32,12 +31,14 @@ namespace App.core.trans
 				Icon = "operacion.png",
 				TargetType = typeof(Trans1)
 			});
+
 			menuList.Add(new MasterPageItem
 			{
 				Title = "Ver registros",
 				Icon = "lista.png",
 				TargetType = typeof(PlanList)
 			});
+
 			menuList.Add(new MasterPageItem
 			{
 				Title = "Salir",
@@ -67,7 +68,6 @@ namespace App.core.trans
 			navigationDrawerList.SelectedItem = (object)null;
 			IsPresented = false;
 		}
-
 
 	}
 }

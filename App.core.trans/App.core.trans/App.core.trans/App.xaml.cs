@@ -12,7 +12,9 @@ namespace App.core.trans
 		{
 			InitializeComponent();
 
-			MainPage = (Page)new Login();
+			//MainPage = (Page)new Login();
+
+			MainPage = (Page)new MainPage();
 
 
 			//MainPage = new NavigationPage(new Login()); // new MainPage();
