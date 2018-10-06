@@ -158,5 +158,30 @@ namespace App.core.trans.Services
 			return Items;
 		}
 
+		public async Task<bool> SaveTransaccion(RegistrarTransaccion transaccion)
+		{
+			bool Items = false;
+			string url = "http://" + PATHSERVER + "/OR/Transaccion/SaveTransaccion";
+			try
+			{
+				var json = JsonConvert.SerializeObject(transaccion);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+				HttpResponseMessage result = null;
+				result = await client.PostAsync(url, content);
+
+				if (result.IsSuccessStatusCode)
+				{
+					var content2 = await result.Content.ReadAsStringAsync();
+					Items = JsonConvert.DeserializeObject<bool>(content2);
+				}
+			}
+			catch (Exception ex)
+			{
+				//Debug.WriteLine(@"				ERROR {0}", ex.Message);
+			}
+			return Items;
+		}
+
 	}
 }

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Paths>
   <ManifestDocuments>
-    <ManifestDocument>obj\\Release\MonoAndroid81\lp\10\jl\AndroidManifest.xml</ManifestDocument>
     <ManifestDocument>obj\\Release\MonoAndroid81\lp\11\jl\AndroidManifest.xml</ManifestDocument>
     <ManifestDocument>obj\\Release\MonoAndroid81\lp\12\jl\AndroidManifest.xml</ManifestDocument>
     <ManifestDocument>obj\\Release\MonoAndroid81\lp\13\jl\AndroidManifest.xml</ManifestDocument>
@@ -15,11 +14,12 @@
     <ManifestDocument>obj\\Release\MonoAndroid81\lp\21\jl\AndroidManifest.xml</ManifestDocument>
     <ManifestDocument>obj\\Release\MonoAndroid81\lp\22\jl\AndroidManifest.xml</ManifestDocument>
     <ManifestDocument>obj\\Release\MonoAndroid81\lp\23\jl\AndroidManifest.xml</ManifestDocument>
-    <ManifestDocument>obj\\Release\MonoAndroid81\lp\8\jl\AndroidManifest.xml</ManifestDocument>
+    <ManifestDocument>obj\\Release\MonoAndroid81\lp\24\jl\AndroidManifest.xml</ManifestDocument>
+    <ManifestDocument>obj\\Release\MonoAndroid81\lp\9\jl\AndroidManifest.xml</ManifestDocument>
   </ManifestDocuments>
   <NativeLibraries />
   <Jars>
-    <Jar>obj\\Release\MonoAndroid81\lp\10\jl\bin\classes.jar</Jar>
+    <Jar>obj\\Release\MonoAndroid81\lp\10\jl\support-annotations.jar</Jar>
     <Jar>obj\\Release\MonoAndroid81\lp\11\jl\bin\classes.jar</Jar>
     <Jar>obj\\Release\MonoAndroid81\lp\12\jl\bin\classes.jar</Jar>
     <Jar>obj\\Release\MonoAndroid81\lp\13\jl\bin\classes.jar</Jar>
@@ -34,7 +34,7 @@
     <Jar>obj\\Release\MonoAndroid81\lp\21\jl\bin\classes.jar</Jar>
     <Jar>obj\\Release\MonoAndroid81\lp\22\jl\bin\classes.jar</Jar>
     <Jar>obj\\Release\MonoAndroid81\lp\23\jl\bin\classes.jar</Jar>
-    <Jar>obj\\Release\MonoAndroid81\lp\8\jl\bin\classes.jar</Jar>
-    <Jar>obj\\Release\MonoAndroid81\lp\9\jl\support-annotations.jar</Jar>
+    <Jar>obj\\Release\MonoAndroid81\lp\24\jl\bin\classes.jar</Jar>
+    <Jar>obj\\Release\MonoAndroid81\lp\9\jl\bin\classes.jar</Jar>
   </Jars>
 </Paths>

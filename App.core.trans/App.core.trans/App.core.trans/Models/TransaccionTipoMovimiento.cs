@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace App.core.trans.Models
 {
@@ -12,5 +13,7 @@ namespace App.core.trans.Models
 		public bool Estaactivo { get; set; }
 		public int Numeroverificador { get; set; }
 		public decimal ValueInsert { get; set; }
+		[JsonIgnore]
+		public string Imagen { get; set; }
 	}
 }

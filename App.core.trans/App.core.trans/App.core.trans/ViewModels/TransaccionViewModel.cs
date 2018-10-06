@@ -8,11 +8,13 @@ using System.Windows.Input;
 using App.core.trans.Models;
 using App.core.trans.Services;
 using Xamarin.Forms;
-
 using GalaSoft.MvvmLight.Command;
 using App.core.trans.Views.Transaccion;
 using System.Linq;
 using App.core.trans.Views;
+using System.Threading.Tasks;
+using Android.Bluetooth;
+using Android.Content;
 
 namespace App.core.trans.ViewModels
 {
@@ -23,15 +25,13 @@ namespace App.core.trans.ViewModels
 
 		public TransaccionViewModel()
 		{
-			//myList = new Dictionary<int, string>();
-			//selectedIndex = -1;
-			//LoadRadio();
+
 			LoadBusquedaCliente();
 			LoadTransaccion();
 			IsVisibleButtons = false;
 		}
 
-
+		
 
 		#region PROPIEDADES
 
@@ -358,6 +358,17 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private int _secuencialOficinaVM;
+		public int SecuencialOficinaVM
+		{
+			get { return _secuencialOficinaVM; }
+			set
+			{
+				_secuencialOficinaVM = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
 		private string _nombreTransaccionVM;
 		public string NombreTransaccionVM
 		{
@@ -380,6 +391,18 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private int _numeroClienteVM;
+		public int NumeroClienteVM
+		{
+			get { return _numeroClienteVM; }
+			set
+			{
+				_numeroClienteVM = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
+
 		private ObservableCollection<ClienteCuentas> _cuentasCollection;
 		public ObservableCollection<ClienteCuentas> CuentasCollection
 		{
@@ -392,7 +415,7 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
-		private ObservableCollection<Cheque> _chequeAdd;
+		private ObservableCollection<Cheque> _chequeAdd = new ObservableCollection<Cheque>();
 		public ObservableCollection<Cheque> ChequeAdd
 		{
 			get { return _chequeAdd; }
@@ -495,6 +518,19 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private ObservableCollection<TransaccionTipoMovimiento> _modalidadDepositoTrans3;
+		public ObservableCollection<TransaccionTipoMovimiento> ModalidadDepositoTrans3 //Efectivo - Cheque
+		{
+			get { return _modalidadDepositoTrans3; }
+			set
+			{
+				_modalidadDepositoTrans3 = value;
+				HeightListTipoDeposito = (_modalidadDepositoTrans3.Count * 40) + (_modalidadDepositoTrans3.Count * 5);
+				RaiseOnPropertyChange();
+			}
+		}
+
+
 		private ObservableCollection<Empresadenominacionfija> _denominacionMoneda;
 		public ObservableCollection<Empresadenominacionfija> DenominacionMoneda //Denominacion de moneda - billetes
 		{
@@ -579,6 +615,8 @@ namespace App.core.trans.ViewModels
 							{
 								SecuencialClienteVM = result.SecuencialCliente;
 								SecuencialEmpresaVM = result.SecuencialEmpresa;
+								NumeroClienteVM = result.NumeroCliente;
+								SecuencialOficinaVM = result.SecuencialOficina;
 
 								DatosCliente = result.Identificacion.ToString() + " " + result.NombreUnido;
 
@@ -620,33 +658,74 @@ namespace App.core.trans.ViewModels
 		{
 			try
 			{
-
-				char[] charSplit = { '-' };
-				string[] bancoSeleccionado = BancoSelect.Split(charSplit);
-				var _valueBancoSelect = bancoSeleccionado[0].ToString().Trim();
-
-				var resultBancoSeleccionda = ListBancosCollection.FirstOrDefault(a => a.Codigo == _valueBancoSelect);
-
-
-				if ((ChequeCuenta != null) || (ChequeNumero != null) || (ChequeMonto == 0))
+				if (ChequeMonto == 0)
 				{
-					ChequeAdd.Add(new Cheque
+					await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "EL monto ingresado debe ser Mayor a 0", "OK");
+				}
+				else if((ChequeCuenta != null) || (ChequeNumero != null))
+				{
+					
+					decimal montoTotalCheque = ModalidadDepositoTrans3.FirstOrDefault(a => a.CodigoTipoMovimiento == "Cheque").ValueInsert;
+					decimal montoChequeAgregados = ChequeAdd.Sum(a => a.Valor) + ChequeMonto;
+					
+					if (montoTotalCheque >= montoChequeAgregados)
 					{
-						SecuencialBancoEmisor = Convert.ToInt32(_valueBancoSelect),
-						CodigoCuentaCorriente = ChequeCuenta,
-						CodigoCheque = ChequeNumero,
-						Valor = ChequeMonto,
-						CodigoEstadoCheque = bancoSeleccionado[1].ToString().Trim()
-					});
+						bool montoChequeOK = (montoTotalCheque == montoChequeAgregados);
+
+						char[] charSplit = { '-' };
+						string[] bancoSeleccionado = BancoSelect.Split(charSplit);
+						var _valueBancoSelect = bancoSeleccionado[0].ToString().Trim();
+						var resultBancoSeleccionda = ListBancosCollection.FirstOrDefault(a => a.Codigo == _valueBancoSelect);
+						var _chequeAdd = new Cheque();
+
+						_chequeAdd.SecuencialBancoEmisor = resultBancoSeleccionda.Secuencial;
+						_chequeAdd.CodigoCuentaCorriente = ChequeCuenta;
+						_chequeAdd.CodigoCheque = ChequeNumero;
+						_chequeAdd.Valor = ChequeMonto;
+						_chequeAdd.CodigoEstadoCheque = bancoSeleccionado[1].ToString().Trim();
+
+						int countItemsDetail = ChequeAdd.Count == 0 ? 1 : ChequeAdd.Count;
+
+						if (ChequeAdd.Count == 1)
+							HeightListCheque = (countItemsDetail * 60) + (countItemsDetail * 15);
+						else
+							HeightListCheque = (countItemsDetail * 40) + (countItemsDetail * 12);
+
+						ChequeAdd.Add(_chequeAdd);
+						ChequeMonto = 0;
+						ChequeCuenta = null;
+						ChequeNumero = null;
+						BancoSelect = null;
+
+						if (montoChequeOK)
+						{
+							var mod = ModalidadDepositoTrans3.Select(a => new TransaccionTipoMovimiento
+							{
+								CodigoTipoMovimiento = a.CodigoTipoMovimiento,
+								ValueInsert = a.ValueInsert,
+								Imagen = (a.CodigoTipoMovimiento =="Cheque")? "check": a.Imagen
+							});
+
+							ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod);
+						}
+
+					}
+					else
+					{
+						await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "EL monto es superior al ingresado en Deposito de Cheques", "OK");
+					}
+
 				}
 				else
 				{
 					await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Todos los valores son obligatorios", "OK");
 				}
+
+
 			}
 			catch (Exception ex)
 			{
-
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Error: " + ex.Message.ToString(), "OK");
 			}
 		}
 
@@ -692,6 +771,15 @@ namespace App.core.trans.ViewModels
 
 				if (ModalidadDeposito.Sum(a => a.ValueInsert) > 0)
 				{
+					var mod = ModalidadDeposito.Select(a => new TransaccionTipoMovimiento
+					{
+                      CodigoTipoMovimiento = a.CodigoTipoMovimiento,
+					  ValueInsert = a.ValueInsert,
+					  Imagen = "fail"
+					});
+
+					ModalidadDeposito = new ObservableCollection<TransaccionTipoMovimiento>(mod);
+
 					if (ModalidadDeposito.FirstOrDefault(a => a.CodigoTipoMovimiento == "Cheque").ValueInsert > 0)
 					{
 						clienteServices = new ClienteServices();
@@ -705,7 +793,7 @@ namespace App.core.trans.ViewModels
 							ListBancosCollection = new ObservableCollection<Banco>(_bancos);
 							foreach (var item in _bancos)
 							{
-								_termsList.Add(item.Secuencial.ToString() + " - " + item.Nombre);
+								_termsList.Add(item.Codigo.ToString() + " - " + item.Nombre);
 							}
 						}
 
@@ -721,6 +809,10 @@ namespace App.core.trans.ViewModels
 
 					var Transferencia3 = new Trans3() { BindingContext = this };
 					Transferencia3.Title = "Transacción: " + TransaccionSelect;
+
+					//ModalidadDeposito = new ObservableCollection<TransaccionTipoMovimiento>(ModalidadDeposito.Where(a=> a.ValueInsert > 0));
+					ChequeAdd = new ObservableCollection<Cheque>(new List<Cheque>());
+					ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(ModalidadDeposito.Where(a => a.ValueInsert > 0));
 					await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync((Page)Transferencia3);
 				}
 				else
@@ -741,51 +833,64 @@ namespace App.core.trans.ViewModels
 			try
 			{
 				var montoTotal = ModalidadDeposito.Sum(a => a.ValueInsert);
+				var montoTotalCheque = ChequeAdd.Sum(a => a.Valor);
 
-				if (montoTotal == TotalMoneyClic)
+				if (montoTotal == (TotalMoneyClic + montoTotalCheque))
 				{
 					if (montoTotal > 0)
 					{
-						var answer = await App.Current.MainPage.DisplayAlert("ORIZONTEL", "Desea GUARDAR la operación, se generará un deposito, Desea Continuar?", "SI", "NO");
+						var answer = await App.Current.MainPage.DisplayAlert("SAC - Pelileo", "Desea GUARDAR la operación, se generará un deposito, Desea Continuar?", "SI", "NO");
 						if (answer)
 						{
 							RegistrarTransaccion registrarTransaccion = new RegistrarTransaccion();
 
-							registrarTransaccion.CodigoUsuario = "";
+							registrarTransaccion.CodigoUsuario = "ADMIN";
 							registrarTransaccion.SecuencialTransaccion = SecuencialTransaccionVM;
 							registrarTransaccion.NombreTransaccion = NombreTransaccionVM;
 							registrarTransaccion.SiglasTransaccion = SiglasTransaccionVM;
+
+							registrarTransaccion.secCliente = SecuencialClienteVM;
+							registrarTransaccion.numCliente = NumeroClienteVM;
+							registrarTransaccion.SecEmpresa = SecuencialEmpresaVM;
+							registrarTransaccion.SecOficina = SecuencialOficinaVM;
+
+							registrarTransaccion.SecuencialCuenta = SelectedCuenta.Secuencial;
+							registrarTransaccion.CodigoCuenta = SelectedCuenta.Codigo;
+							registrarTransaccion.SecuencialMoneda = SelectedCuenta.SecuencialMoneda;
+						
 							registrarTransaccion.Transacciones = GetMontoTrnasacciones();
+							registrarTransaccion.Cheques = ChequeAdd.ToList();
 
+							clienteServices = new ClienteServices();
+							bool resultSaveTransaccion = await clienteServices.SaveTransaccion(registrarTransaccion);
 
-							Device.BeginInvokeOnMainThread(async () =>
+							if (resultSaveTransaccion)
 							{
-								await Application.Current.MainPage.DisplayAlert("ORIZONTEL", "Deposito Realizado con Exito", "OK");
+								Device.BeginInvokeOnMainThread(async () =>
+								{
+									await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Deposito Realizado con Exito", "OK");
 
+									((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 3]);
 
+									App.Current.MainPage = new MainPage();
+								});
+							}
+							else
+							{
+								await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Se presentó un error al momento de Registrar la transacción", "OK");
+							}
 
-								((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 2]);
-
-								//((MasterDetailPage)Application.Current.MainPage).Navigation.RemovePage(new Trans2());
-
-
-								//await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PopAsync();
-
-
-								App.Current.MainPage = new MainPage();
-								//await ((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.PushAsync((Page)new MainMenuDetail());
-							});
 							
 						}
 					}					
 				}
 				else {
-					await Application.Current.MainPage.DisplayAlert("ORIZONTEL", "El monto de la denominación es diferente al Deposito", "OK");
+					await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "El monto de la denominación es diferente al Deposito", "OK");
 				}
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				throw;
 			}
 
@@ -815,18 +920,71 @@ namespace App.core.trans.ViewModels
 			return transaccionMoneda;
 		}
 
+
+
+
 		#region "DENOMINACION MONEDA EFECTIVO"
+
+		public async Task<bool> CheckMontoMoneda(decimal monto)
+		{
+			decimal montoTotalEfectivo = ModalidadDepositoTrans3.FirstOrDefault(a => a.CodigoTipoMovimiento == "Efectivo").ValueInsert;
+			decimal montoEfectivoAgregado = TotalMoneyClic + monto;
+
+			bool result = false;
+
+
+			if (montoTotalEfectivo >= montoEfectivoAgregado)
+			{
+
+				if (monto > 0)
+					TotalMoneyClic += monto;
+				else
+				{
+					TotalMoneyClic += monto;
+					var mod1 = ModalidadDepositoTrans3.Select(a => new TransaccionTipoMovimiento
+					{
+						CodigoTipoMovimiento = a.CodigoTipoMovimiento,
+						ValueInsert = a.ValueInsert,
+						Imagen = (a.CodigoTipoMovimiento == "Efectivo")? "fail" : a.Imagen
+					});
+
+					ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod1);
+				}
+
+				if (montoTotalEfectivo == montoEfectivoAgregado)
+				{
+					var mod = ModalidadDepositoTrans3.Select(a => new TransaccionTipoMovimiento
+					{
+						CodigoTipoMovimiento = a.CodigoTipoMovimiento,
+						ValueInsert = a.ValueInsert,
+						Imagen = (a.CodigoTipoMovimiento == "Efectivo") ? "check" : a.Imagen
+					});
+
+					ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod);
+				}
+
+				result = true;
+			}
+			else
+			{
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "EL monto es superior al ingresado en Deposito de Cheques", "OK");
+			}
+
+
+			return result;
+		}
 
 		public async void _onClicmore100()
 		{
 			try
 			{
-				Money100 += 1;
-				TotalMoneyClic += 100;
+				
+				if(await CheckMontoMoneda(100))
+					Money100 += 1;
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -837,15 +995,17 @@ namespace App.core.trans.ViewModels
 			{
 				if (Money100 > 0)
 				{
-					Money100 -= 1;
-					TotalMoneyClic -= 100;
+					
+					if (await CheckMontoMoneda(-100))
+						Money100 -= 1;
+					//TotalMoneyClic -= 100;
 				}
 					
 
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -853,13 +1013,14 @@ namespace App.core.trans.ViewModels
 		public async void _onClicmore50()
 		{
 			try
-			{
-				Money50 += 1;
-				TotalMoneyClic += 50;
+			{			
+				if(await CheckMontoMoneda(50))
+					Money50 += 1;
+				//TotalMoneyClic += 50;
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -870,15 +1031,17 @@ namespace App.core.trans.ViewModels
 			{
 				if (Money50 > 0)
 				{
-					Money50 -= 1;
-					TotalMoneyClic -= 50;
+					
+					if(await CheckMontoMoneda(-50))
+						Money50 -= 1;
+					//TotalMoneyClic -= 50;
 				}
 					
 
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -886,13 +1049,14 @@ namespace App.core.trans.ViewModels
 		public async void _onClicmore20()
 		{
 			try
-			{
-				Money20 += 1;
-				TotalMoneyClic += 20;
+			{				
+				if(await CheckMontoMoneda(20))
+					Money20 += 1;
+				//TotalMoneyClic += 20;
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -903,14 +1067,16 @@ namespace App.core.trans.ViewModels
 			{
 				if (Money20 > 0)
 				{
-					Money20 -= 1;
-					TotalMoneyClic -= 20;
+					
+					if(await CheckMontoMoneda(-20))
+						Money20 -= 1;
+					//TotalMoneyClic -= 20;
 				}
 				
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -919,12 +1085,14 @@ namespace App.core.trans.ViewModels
 		{
 			try
 			{
-				Money10 += 1;
-				TotalMoneyClic += 10;
+				
+				if(await CheckMontoMoneda(10))
+					Money10 += 1;
+				//TotalMoneyClic += 10;
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -935,13 +1103,15 @@ namespace App.core.trans.ViewModels
 			{
 				if (Money10 > 0)
 				{
-					Money10 -= 1;
-					TotalMoneyClic -= 10;
+					
+					if(await CheckMontoMoneda(-10))
+						Money10 -= 1;
+					//TotalMoneyClic -= 10;
 				}					
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -949,13 +1119,14 @@ namespace App.core.trans.ViewModels
 		public async void _onClicmore5()
 		{
 			try
-			{
-				Money5 += 1;
-				TotalMoneyClic += 5;
+			{				
+				if (await CheckMontoMoneda(5))
+					Money5 += 1;
+				//TotalMoneyClic += 5;
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -966,15 +1137,17 @@ namespace App.core.trans.ViewModels
 			{
 				if (Money5 > 0)
 				{
-					Money5 -= 1;
-					TotalMoneyClic -= 5;
+					
+					if (await CheckMontoMoneda(-5))
+						Money5 -= 1;
+					//TotalMoneyClic -= 5;
 				}
 					
 
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -983,12 +1156,14 @@ namespace App.core.trans.ViewModels
 		{
 			try
 			{
-				Money1 += 1;
-				TotalMoneyClic += 1; 
+				
+				if (await CheckMontoMoneda(1))
+					Money1 += 1;
+				//TotalMoneyClic += 1; 
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -998,16 +1173,17 @@ namespace App.core.trans.ViewModels
 			try
 			{
 				if (Money1 > 0)
-				{
-					Money1 -= 1;
-					TotalMoneyClic = TotalMoneyClic - 1;
+				{					
+					if (await CheckMontoMoneda(-1))
+						Money1 -= 1;
+					//TotalMoneyClic = TotalMoneyClic - 1;
 				}
 				
 
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -1016,12 +1192,14 @@ namespace App.core.trans.ViewModels
 		{
 			try
 			{
-				Money050 += 1;
-				TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.50);
+				
+				if (await CheckMontoMoneda(Convert.ToDecimal(0.50)))
+					Money050 += 1;
+				//TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.50);
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -1032,15 +1210,17 @@ namespace App.core.trans.ViewModels
 			{
 				if (Money050 > 0)
 				{
-					Money050 -= 1;
-					TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.50);
+					
+					if (await CheckMontoMoneda(Convert.ToDecimal(-0.50)))
+						Money050 -= 1;
+					//TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.50);
 				}
 					
 
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -1049,12 +1229,14 @@ namespace App.core.trans.ViewModels
 		{
 			try
 			{
-				Money025 += 1;
-				TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.25);
+				
+				if (await CheckMontoMoneda(Convert.ToDecimal(0.25)))
+					Money025 += 1;
+				//TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.25);
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -1065,15 +1247,18 @@ namespace App.core.trans.ViewModels
 			{
 				if (Money025 > 0)
 				{
-					Money1 -= 1;
-					TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.25);
+					
+					if (await CheckMontoMoneda(Convert.ToDecimal(-0.25)))
+						Money1 -= 1;
+
+					//TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.25);
 				}
 					
 
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -1087,7 +1272,7 @@ namespace App.core.trans.ViewModels
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -1106,7 +1291,7 @@ namespace App.core.trans.ViewModels
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -1120,7 +1305,7 @@ namespace App.core.trans.ViewModels
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}
@@ -1139,7 +1324,7 @@ namespace App.core.trans.ViewModels
 			}
 			catch (Exception ex)
 			{
-				await Application.Current.MainPage.DisplayAlert("ORIZONTEL", ex.Message, "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
 				//throw;
 			}
 		}

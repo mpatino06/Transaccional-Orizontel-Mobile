@@ -70,6 +70,10 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Andro
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\res\drawable\logo1.jpg
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\res\drawable\favicon.ico
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\res\drawable\logotipo.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\res\drawable\add.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\res\drawable\del.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\res\drawable\check.png
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\res\drawable\fail.png
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\R.cs.flag
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\R.txt
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\uploadflags.txt

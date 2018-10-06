@@ -9,6 +9,7 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Andro
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\Mono.Android.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\mscorlib.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\Newtonsoft.Json.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\PSC.Xam.Controls.BindableRadioButton.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Core.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Xml.dll

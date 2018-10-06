@@ -14,3 +14,10 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\R
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\XamlC.stamp
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\App.core.trans.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\App.core.trans.pdb
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Release\netstandard2.0\Mono.Android.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Release\netstandard2.0\Mono.Android.pdb
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Release\netstandard2.0\Mono.Android.xml
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\App.core.trans.csprojAssemblyReference.cache
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\Views\Transaccion\Page3.xaml.g.cs
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\Views\Transaccion\Trans3.xaml.g.cs
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Release\netstandard2.0\App.core.trans.csproj.CopyComplete

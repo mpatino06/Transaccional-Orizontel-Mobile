@@ -14,12 +14,13 @@
 					<RowDefinition Height="60"/>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 
 				<ListView 
-                        x:Name="ListViewCol0"
+                        x:Name="ListViewDeposito"
                         Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"				     
-                        ItemsSource="{Binding ModalidadDeposito}"
+                        ItemsSource="{Binding ModalidadDepositoTrans3}"
                         HasUnevenRows="True"  
                         HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito}">
 					<ListView.ItemTemplate>
@@ -27,8 +28,9 @@
 							<ViewCell>
 								<Grid Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="75" />
+										<ColumnDefinition Width="25" />
+										<ColumnDefinition Width="25" />
 									</Grid.ColumnDefinitions>
 									<Grid.RowDefinitions>
 										<RowDefinition Height="25" />
@@ -45,6 +47,12 @@
                                            VerticalOptions="Center" 
                                            HorizontalOptions="Start"
                                            FontFamily="Exo" FontSize="10" FontAttributes="Bold" />
+									<Image Grid.Column="2"
+                                               WidthRequest="25" 
+                                               HeightRequest="25" 
+                                               VerticalOptions="Center" 
+                                               HorizontalOptions="Center" 
+                                               Source="{Binding Imagen}" ></Image>
 
 								</Grid>
 							</ViewCell>
@@ -52,7 +60,7 @@
 					</ListView.ItemTemplate>
 				</ListView>
 
-				<Grid Grid.Row="2" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start"> 
+				<Grid Grid.Row="2" Grid.Column="0" Margin="0,20,0,0" VerticalOptions="Start" HorizontalOptions="Start" IsVisible="{Binding IsVisibleCheque}"> 
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="3*" />
 						<ColumnDefinition Width="3*" />
@@ -122,68 +130,78 @@
 					</Image>
 				</Grid>
 				
-				
-
+			
 				<ListView 
+					    Margin="0,20,0,0"
+					    IsVisible="{Binding IsVisibleCheque}"
                         x:Name="ListViewCheque"
                         Grid.Row="3" 
 					    Grid.Column="0"
-                        ItemsSource="{Binding ChequeAdd}"
+                        ItemsSource="{Binding ChequeAdd, Mode=TwoWay }"
                         HasUnevenRows="True"  
-                        HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito}">
+                        HorizontalOptions="Start" VerticalOptions="Start" 
+					    HeightRequest="{Binding HeightListCheque, Mode=TwoWay}">
 					<ListView.ItemTemplate>
 						<DataTemplate>
 							<ViewCell>
-								<Grid Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
+								<Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="#C0CDD9">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="35"/>
+									</Grid.RowDefinitions>
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="3*" />
+										<ColumnDefinition Width="2.5*" />
+										<ColumnDefinition Width="2.5*" />
+										<ColumnDefinition Width="2*" />
 									</Grid.ColumnDefinitions>
 
 									<Label 
-                                           Grid.Column="0" 
+                                           Grid.Column="0" Grid.Row="0"
                                            Text="{Binding CodigoEstadoCheque }" 
                                            VerticalOptions="Center" 
                                            HorizontalOptions="Start"
                                            FontFamily="Exo" FontSize="10" />
 
 									<Label 
-                                           Grid.Column="1" 
+                                           Grid.Column="1" Grid.Row="0"
                                            Text="{Binding CodigoCuentaCorriente }" 
                                            VerticalOptions="Center" 
                                            HorizontalOptions="Start"
                                            FontFamily="Exo" FontSize="10" />
 
 									<Label 
-                                           Grid.Column="2" 
+                                           Grid.Column="2" Grid.Row="0"
                                            Text="{Binding CodigoCheque }" 
                                            VerticalOptions="Center" 
                                            HorizontalOptions="Start"
                                            FontFamily="Exo" FontSize="10" />
 
 									<Label 
-                                           Grid.Column="3" 
+                                           Grid.Column="3" Grid.Row="0"
                                            Text="{Binding Valor }" 
                                            VerticalOptions="Center" 
                                            HorizontalOptions="Start"
                                            FontFamily="Exo" FontSize="10" />
-									<!--<Entry
-										   Grid.Column="1" 
-                                           Text="{Binding ValueInsert}" 
-                                           VerticalOptions="Center" 
-                                           FontSize="10"
-											WidthRequest="50"
-                                           HorizontalOptions="Center" Keyboard="Numeric" />-->
-
 								</Grid>
 							</ViewCell>
 						</DataTemplate>
 					</ListView.ItemTemplate>
 				</ListView>
 
-				<Grid  Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Start" Margin="0,0,10,0">
+				<Grid Grid.Row="4" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+
+					<Button Text="Cancelar" Grid.Row="0" Grid.Column="0" VerticalOptions="End" WidthRequest="120" FontSize="10" Style="{StaticResource ButtonNext}"></Button>
+					<Button Text="Guardar"  Grid.Row="0" Grid.Column="1" VerticalOptions="Start" WidthRequest="120" FontSize="10" Style="{StaticResource ButtonNext}" Command="{Binding SaveTrans}"></Button>
+				</Grid>
+
+				<Grid  Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" HorizontalOptions="Start" VerticalOptions="Start" Margin="0,0,10,0" IsVisible="{Binding IsVisibleEfectivo}">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="3*" />
 						<ColumnDefinition Width="2*" />
@@ -490,6 +508,7 @@
 					</Image>
 				</Grid>
 
+				
 			</Grid>
 		</StackLayout>
     </ContentPage.Content>

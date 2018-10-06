@@ -75,9 +75,9 @@
 					<ListView 
                         x:Name="ListViewCol0"
                         Grid.Row="0" 
-                        ItemsSource="{Binding ModalidadDeposito}"
+                        ItemsSource="{Binding ModalidadDeposito, Mode=TwoWay}"
                         HasUnevenRows="True"  
-                        HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito}">
+                        HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="{Binding HeightListTipoDeposito, Mode=TwoWay}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<ViewCell>

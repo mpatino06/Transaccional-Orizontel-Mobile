@@ -15,6 +15,8 @@ namespace App.core.trans.Views.Transaccion
 		public Trans3 ()
 		{
 			InitializeComponent ();
+
+			ListViewDeposito.SelectedItem = (object)null;
 		}
 	}
 }
