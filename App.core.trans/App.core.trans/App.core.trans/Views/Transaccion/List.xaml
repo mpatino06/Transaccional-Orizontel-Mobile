@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.core.trans.Views.Transaccion.List">
+	<ScrollView>
+		<StackLayout>
+
+
+			<Grid HorizontalOptions="Fill">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="70"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="50"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="45"/>
+				</Grid.RowDefinitions>
+
+
+				<Label  Grid.Row="0" 
+                       Text="Lista de Depositos" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       TextColor="{StaticResource TextColor}" 
+                       FontAttributes="Bold" FontSize="Medium"></Label>
+
+
+				<ListView x:Name="ListCount" Margin="10,0,0,0"
+                              ItemsSource="{Binding TransacccionCollection}"
+                              Grid.Row="1"
+                              HasUnevenRows="true"                          
+                              HorizontalOptions="Center" VerticalOptions="Start" 
+                              HeightRequest="{Binding _heightListCollection}">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<ViewCell>
+								<Grid Padding="10" HorizontalOptions="Fill">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"/>
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"></ColumnDefinition>
+										<ColumnDefinition Width="*"></ColumnDefinition>
+									</Grid.ColumnDefinitions>
+									<Label  Grid.Column="0" 
+                                                VerticalOptions="Center" 
+                                                FontSize="10"
+                                                FontFamily="Exo"
+                                                FontAttributes="Bold"
+                                                Text="{Binding CodigoUsuario}" ></Label>
+									<Label  Grid.Column="1" 
+                                                VerticalOptions="Center" 
+                                                FontSize="10"
+                                                FontFamily="Exo"
+                                                Text="{Binding NombreCliente}" LineBreakMode="TailTruncation"></Label>
+									<Label  Grid.Column="1" 
+                                                VerticalOptions="Center"
+                                                FontSize="10"
+                                                FontFamily="Exo"
+                                                Text="{Binding Fecha}" LineBreakMode="TailTruncation"></Label>
+									<Label  Grid.Column="1" 
+                                                VerticalOptions="Center"  
+                                                FontSize="10"
+                                                FontFamily="Exo"
+											    TextColor="{StaticResource TextColor}"
+											    FontAttributes="Bold"
+                                                Text="{Binding Monto}" LineBreakMode="TailTruncation"></Label>
+								</Grid>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+
+				</ListView>
+
+			</Grid>
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

@@ -1,3 +1,5 @@
+Acr.UserDialogs
+AndHUD
 App.core.trans
 CommonServiceLocator
 FormsViewGroup
@@ -6,7 +8,9 @@ GalaSoft.MvvmLight.Extras
 GalaSoft.MvvmLight.Platform
 Newtonsoft.Json
 PSC.Xam.Controls.BindableRadioButton
+System.Collections
 System.Runtime
+System.Threading.Tasks
 Xamarin.Android.Support.Animated.Vector.Drawable
 Xamarin.Android.Support.Annotations
 Xamarin.Android.Support.Compat
@@ -27,6 +31,8 @@ Xamarin.Forms.Core
 Xamarin.Forms.Platform.Android
 Xamarin.Forms.Platform
 Xamarin.Forms.Xaml
+XF.Bluetooth.Printer.Plugin.Abstractions
+XF.Bluetooth.Printer.Plugin
 netstandard
 System.Resources.ResourceManager
 System.ComponentModel

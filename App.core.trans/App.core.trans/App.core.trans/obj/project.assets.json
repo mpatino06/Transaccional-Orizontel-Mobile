@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
+      "Acr.UserDialogs/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Acr.UserDialogs.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Acr.UserDialogs.dll": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -81,10 +90,42 @@
           "build/netstandard2.0/Xamarin.Forms.props": {},
           "build/netstandard2.0/Xamarin.Forms.targets": {}
         }
+      },
+      "XF.Bluetooth.Printer.Plugin/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.Abstractions.dll": {},
+          "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.Abstractions.dll": {},
+          "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "Acr.UserDialogs/7.0.1": {
+      "sha512": "+eGbTgwaFPzcaRnMdnAK5pHA0eoeoxkhy80FNwGeewqvA+DM6fUPM9yMbrN2hw3rcuBaXd2ghy2Xq5XU7m8qkw==",
+      "type": "package",
+      "path": "acr.userdialogs/7.0.1",
+      "files": [
+        "acr.userdialogs.7.0.1.nupkg.sha512",
+        "acr.userdialogs.nuspec",
+        "lib/monoandroid70/Acr.UserDialogs.dll",
+        "lib/monoandroid80/Acr.UserDialogs.dll",
+        "lib/netstandard2.0/Acr.UserDialogs.dll",
+        "lib/uap10.0.16299/Acr.UserDialogs.dll",
+        "lib/uap10.0.16299/Acr.UserDialogs.pri",
+        "lib/uap10.0.16299/Acr.UserDialogs/Acr.UserDialogs.xr.xml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/ActionSheetContentDialog.xaml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/DatePickerControl.xaml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/LoginContentDialog.xaml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/ProgressContentDialog.xaml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/TimePickerControl.xaml",
+        "lib/xamarinios10/Acr.UserDialogs.dll"
+      ]
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
@@ -545,15 +586,38 @@
         "xamarin.forms.3.1.0.697729.nupkg.sha512",
         "xamarin.forms.nuspec"
       ]
+    },
+    "XF.Bluetooth.Printer.Plugin/1.0.0": {
+      "sha512": "YQXwxMi+lvbb+qidLkSIdrWW/T4pWTdOKHwkFO+CBPmd5q58xTwGOHEb/76zbhNZbLC0LJUgGgbMUPJdFdO9Hw==",
+      "type": "package",
+      "path": "xf.bluetooth.printer.plugin/1.0.0",
+      "files": [
+        "lib/MonoAndroid10/XF.Bluetooth.Printer.Plugin.Abstractions.dll",
+        "lib/MonoAndroid10/XF.Bluetooth.Printer.Plugin.Abstractions.pdb",
+        "lib/MonoAndroid10/XF.Bluetooth.Printer.Plugin.Abstractions.xml",
+        "lib/MonoAndroid10/XF.Bluetooth.Printer.Plugin.dll",
+        "lib/MonoAndroid10/XF.Bluetooth.Printer.Plugin.pdb",
+        "lib/MonoAndroid10/XF.Bluetooth.Printer.Plugin.xml",
+        "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.Abstractions.dll",
+        "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.Abstractions.pdb",
+        "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.Abstractions.xml",
+        "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.dll",
+        "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.pdb",
+        "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.xml",
+        "xf.bluetooth.printer.plugin.1.0.0.nupkg.sha512",
+        "xf.bluetooth.printer.plugin.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "Acr.UserDialogs >= 7.0.1",
       "MvvmLight >= 5.4.1.1",
       "MvvmLightLibs >= 5.4.1.1",
       "NETStandard.Library >= 2.0.3",
       "Newtonsoft.Json >= 11.0.2",
       "PSC.Xam.Controls.BindableRadioButton >= 1.0.0",
+      "XF.Bluetooth.Printer.Plugin >= 1.0.0",
       "Xamarin.Forms >= 3.1.0.697729"
     ]
   },
@@ -598,6 +662,10 @@
     "frameworks": {
       "netstandard2.0": {
         "dependencies": {
+          "Acr.UserDialogs": {
+            "target": "Package",
+            "version": "[7.0.1, )"
+          },
           "MvvmLight": {
             "target": "Package",
             "version": "[5.4.1.1, )"
@@ -617,6 +685,10 @@
             "version": "[11.0.2, )"
           },
           "PSC.Xam.Controls.BindableRadioButton": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
+          "XF.Bluetooth.Printer.Plugin": {
             "target": "Package",
             "version": "[1.0.0, )"
           },
@@ -650,6 +722,16 @@
       "warningLevel": 1,
       "message": "El paquete \"PSC.Xam.Controls.BindableRadioButton 1.0.0\" se restauró con \".NETFramework,Version=v4.6.1\" en lugar de la plataforma de destino del proyecto \".NETStandard,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "PSC.Xam.Controls.BindableRadioButton",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"XF.Bluetooth.Printer.Plugin 1.0.0\" se restauró con \".NETFramework,Version=v4.6.1\" en lugar de la plataforma de destino del proyecto \".NETStandard,Version=v2.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "XF.Bluetooth.Printer.Plugin",
       "targetGraphs": [
         ".NETStandard,Version=v2.0"
       ]

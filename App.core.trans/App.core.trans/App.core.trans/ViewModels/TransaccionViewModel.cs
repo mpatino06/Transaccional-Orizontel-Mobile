@@ -15,6 +15,7 @@ using App.core.trans.Views;
 using System.Threading.Tasks;
 using Android.Bluetooth;
 using Android.Content;
+using App.core.trans.Helper;
 
 namespace App.core.trans.ViewModels
 {
@@ -22,6 +23,7 @@ namespace App.core.trans.ViewModels
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private ClienteServices clienteServices;
+		private PrintReport printReport;
 
 		public TransaccionViewModel()
 		{
@@ -868,6 +870,24 @@ namespace App.core.trans.ViewModels
 							{
 								Device.BeginInvokeOnMainThread(async () =>
 								{
+
+									//INICIO - INPRIMIR EN IMPRESORA THERMAL
+									var fechaOperacion = DateTime.Now.ToString("dd/MM/yyyy hh:mm");
+									String dataToPrint = "$big$        SAC - Pelileo$intro$$intro$";
+
+									dataToPrint += "$small$Operador: " + "ADMIN" + "$intro$";
+									dataToPrint += "Fecha: " + fechaOperacion + "$intro$";
+									dataToPrint += "Cliente: " + "SEVILLA MORALES MAYRA REBECA" + "$intro$";
+									dataToPrint += "Monto: " + "100.00" + "$intro$";
+									dataToPrint += "Saldo despues de Operación: " + "725.00" + "$intro$";
+									dataToPrint += "$intro$$intro$$cut$$intro$";
+
+									printReport = new PrintReport();
+
+									printReport.Print(dataToPrint);
+
+									//FIN - INPRIMIR EN IMPRESORA THERMAL
+
 									await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Deposito Realizado con Exito", "OK");
 
 									((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 3]);

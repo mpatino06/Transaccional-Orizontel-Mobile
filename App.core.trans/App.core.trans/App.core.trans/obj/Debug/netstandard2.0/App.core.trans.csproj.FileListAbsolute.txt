@@ -19,9 +19,11 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\D
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Debug\netstandard2.0\Mono.Android.xml
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\App.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Print.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Views\Count\PlanList.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Views\Login.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Views\MainMenuDetail.xaml.g.cs
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Views\Transaccion\List.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Views\Transaccion\Page3.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Views\Transaccion\Trans1.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Views\Transaccion\Trans2.xaml.g.cs

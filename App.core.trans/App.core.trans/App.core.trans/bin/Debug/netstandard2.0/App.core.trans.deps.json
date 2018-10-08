@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "60db328bb701f9197400ce032cb30c524886a554"
+    "signature": "75d8fe592f4eb1817024f0d1738cf8c79f8f01e7"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,16 +9,26 @@
     ".NETStandard,Version=v2.0/": {
       "App.core.trans/1.0.0": {
         "dependencies": {
+          "Acr.UserDialogs": "7.0.1",
           "MvvmLight": "5.4.1.1",
           "MvvmLightLibs": "5.4.1.1",
           "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "11.0.2",
           "PSC.Xam.Controls.BindableRadioButton": "1.0.0",
+          "XF.Bluetooth.Printer.Plugin": "1.0.0",
           "Xamarin.Forms": "3.1.0.697729",
           "Mono.Android": "0.0.0.0"
         },
         "runtime": {
           "App.core.trans.dll": {}
+        }
+      },
+      "Acr.UserDialogs/7.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Acr.UserDialogs.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -83,6 +93,18 @@
           }
         }
       },
+      "XF.Bluetooth.Printer.Plugin/1.0.0": {
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.Abstractions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "lib/portable-net45+wp80+win8+wpa81/XF.Bluetooth.Printer.Plugin.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Mono.Android/0.0.0.0": {
         "runtime": {
           "Mono.Android.dll": {
@@ -98,6 +120,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Acr.UserDialogs/7.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+eGbTgwaFPzcaRnMdnAK5pHA0eoeoxkhy80FNwGeewqvA+DM6fUPM9yMbrN2hw3rcuBaXd2ghy2Xq5XU7m8qkw==",
+      "path": "acr.userdialogs/7.0.1",
+      "hashPath": "acr.userdialogs.7.0.1.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
@@ -147,6 +176,13 @@
       "sha512": "sha512-YlFOM9u8onIRxJwYJ3l+O0wFKqzzrDjDrgnoBr1rct+eaQKU77vFydxvTP+WxYlYzR14hYvyLNC65L84+6ke6w==",
       "path": "xamarin.forms/3.1.0.697729",
       "hashPath": "xamarin.forms.3.1.0.697729.nupkg.sha512"
+    },
+    "XF.Bluetooth.Printer.Plugin/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YQXwxMi+lvbb+qidLkSIdrWW/T4pWTdOKHwkFO+CBPmd5q58xTwGOHEb/76zbhNZbLC0LJUgGgbMUPJdFdO9Hw==",
+      "path": "xf.bluetooth.printer.plugin/1.0.0",
+      "hashPath": "xf.bluetooth.printer.plugin.1.0.0.nupkg.sha512"
     },
     "Mono.Android/0.0.0.0": {
       "type": "reference",

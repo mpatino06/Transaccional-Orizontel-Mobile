@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using App.core.trans.Models;
@@ -17,8 +19,13 @@ namespace App.core.trans.Services
 
 		public ClienteServices()
 		{
-			client = new HttpClient();
-			client.MaxResponseContentBufferSize = 256000000;
+			client = new HttpClient {
+				MaxResponseContentBufferSize = 25600000,
+				Timeout = TimeSpan.FromSeconds(200)
+			};   
+			
+			//client.MaxResponseContentBufferSize = 25600000;
+			//client.Timeout = TimeSpan(),
 			PATHSERVER = "186.4.142.142:81";
 		}
 
@@ -164,11 +171,14 @@ namespace App.core.trans.Services
 			string url = "http://" + PATHSERVER + "/OR/Transaccion/SaveTransaccion";
 			try
 			{
+				ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+
+				client.DefaultRequestHeaders.Accept.Clear();
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 				var json = JsonConvert.SerializeObject(transaccion);
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-				HttpResponseMessage result = null;
-				result = await client.PostAsync(url, content);
+				HttpResponseMessage result =  await client.PostAsync(url, content);
 
 				if (result.IsSuccessStatusCode)
 				{
@@ -179,6 +189,27 @@ namespace App.core.trans.Services
 			catch (Exception ex)
 			{
 				//Debug.WriteLine(@"				ERROR {0}", ex.Message);
+			}
+			return Items;
+		}
+
+		public async Task<List<TransaccionmobileExtend>> GetRegistroTransacciones(string codigoUsuario)
+		{
+			var Items = new List<TransaccionmobileExtend>();
+			try
+			{
+				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetTransaccionMobile/" + codigoUsuario;
+				var result = await client.GetAsync(url);
+				if (result.IsSuccessStatusCode)
+				{
+					var content = await result.Content.ReadAsStringAsync();
+					Items = JsonConvert.DeserializeObject<List<TransaccionmobileExtend>>(content);
+				}
+			}
+			catch (Exception ex)
+			{
+				Items = null;
+				throw;
 			}
 			return Items;
 		}

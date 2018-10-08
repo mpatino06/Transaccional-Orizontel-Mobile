@@ -4,6 +4,7 @@
              x:Class="App.core.trans.App">
     <Application.Resources>
 		<ResourceDictionary>
+			<Color x:Key="TextColor">#092f5e</Color>
 			<Style x:Key="ButtonNext" TargetType="Button">
 				<Setter Property="BackgroundColor" Value="#092f5e" />
 				<Setter Property="HeightRequest" Value="40" />
