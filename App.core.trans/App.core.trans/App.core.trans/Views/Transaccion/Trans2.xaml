@@ -143,7 +143,7 @@
 							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
 						
-						<Button Text="Cancelar" Grid.Row="0" Grid.Column="0" VerticalOptions="End" WidthRequest="140" FontSize="10" Style="{StaticResource ButtonNext}"></Button>
+						<Button Text="Cancelar" Grid.Row="0" Grid.Column="0" VerticalOptions="End" WidthRequest="140" FontSize="10" Style="{StaticResource ButtonNext}" Command="{Binding CancelarTrans2}"></Button>
 						<Button Text="Siguiente"  Grid.Row="0" Grid.Column="1" VerticalOptions="Start" WidthRequest="140" FontSize="10" Style="{StaticResource ButtonNext}" Command="{Binding NextTrans2}"></Button>
 					</Grid>
 					

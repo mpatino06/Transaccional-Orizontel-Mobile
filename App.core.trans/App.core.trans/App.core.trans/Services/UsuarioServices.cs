@@ -18,7 +18,7 @@ namespace App.core.trans.Services
 		{
 			client = new HttpClient();
 			client.MaxResponseContentBufferSize = 256000000;
-			PATHSERVER = "186.4.142.142:81";
+			PATHSERVER = "186.4.142.142:81"; //"192.168.251.14:81"; 
 		}
 
 		public async Task<UsuarioExtend> GetUsuario(string code, string pass)

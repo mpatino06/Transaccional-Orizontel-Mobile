@@ -17,6 +17,7 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\D
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Debug\netstandard2.0\Mono.Android.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Debug\netstandard2.0\Mono.Android.pdb
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\bin\Debug\netstandard2.0\Mono.Android.xml
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\App.core.trans.csprojAssemblyReference.cache
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\App.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans\obj\Debug\netstandard2.0\Print.xaml.g.cs

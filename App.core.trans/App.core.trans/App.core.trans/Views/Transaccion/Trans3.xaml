@@ -62,10 +62,11 @@
 
 				<Grid Grid.Row="2" Grid.Column="0" Margin="0,20,0,0" VerticalOptions="Start" HorizontalOptions="Start" IsVisible="{Binding IsVisibleCheque}"> 
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="3*" />
-						<ColumnDefinition Width="3*" />
-						<ColumnDefinition Width="2*" />
-						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="2.3*" />
+						<ColumnDefinition Width="2.4*" />
+						<ColumnDefinition Width="2.3*" />
+						<ColumnDefinition Width="1.5*" />
+						<ColumnDefinition Width="1.5*" />
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="40"/>
@@ -99,7 +100,8 @@
                             VerticalOptions="Center" 
 						    Placeholder="Cta Corriente"
                             FontSize="10"
-							FontFamily="Exo"  
+							FontFamily="Exo" 
+						    Keyboard="Numeric"
                             HorizontalOptions="StartAndExpand" />
 					<Entry
 							Grid.Row="1"
@@ -109,6 +111,7 @@
 						    Placeholder="Nro Cheque"
                             FontSize="10"
 							FontFamily="Exo"  
+						    Keyboard="Numeric"
                             HorizontalOptions="StartAndExpand" />
 					<Entry
 							Grid.Row="1"
@@ -121,11 +124,15 @@
 						    Keyboard="Numeric"
                             HorizontalOptions="StartAndExpand" />
 					
-					<!--<Button Text=">>>" Grid.Row="1" Grid.Column="3" VerticalOptions="StartAndExpand" FontSize="10" Style="{StaticResource ButtonNext}"></Button>-->
-					
+									
 					<Image x:Name="imgAdd" WidthRequest="40" Grid.Row="1" Grid.Column="3"  HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Start" Source="add.png">
 					    <Image.GestureRecognizers>
-							<TapGestureRecognizer Command="{Binding onClicCheque }"/>
+							<TapGestureRecognizer Command="{Binding onClicCheque}"/>
+						</Image.GestureRecognizers>
+					</Image>
+					<Image x:Name="imgDelete" WidthRequest="40" Grid.Row="1" Grid.Column="4"  HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Start" Source="del.png">
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding onClicDeleteCheque}"/>
 						</Image.GestureRecognizers>
 					</Image>
 				</Grid>
@@ -138,8 +145,9 @@
                         Grid.Row="3" 
 					    Grid.Column="0"
                         ItemsSource="{Binding ChequeAdd, Mode=TwoWay }"
-                        HasUnevenRows="True"  
+                        HasUnevenRows="True"  					  
                         HorizontalOptions="Start" VerticalOptions="Start" 
+					    SelectedItem="{Binding SelectedCheque, Mode=TwoWay}"
 					    HeightRequest="{Binding HeightListCheque, Mode=TwoWay}">
 					<ListView.ItemTemplate>
 						<DataTemplate>
@@ -197,7 +205,7 @@
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
 
-					<Button Text="Cancelar" Grid.Row="0" Grid.Column="0" VerticalOptions="End" WidthRequest="120" FontSize="10" Style="{StaticResource ButtonNext}"></Button>
+					<Button Text="Cancelar" Grid.Row="0" Grid.Column="0" VerticalOptions="End"   WidthRequest="120" FontSize="10" Style="{StaticResource ButtonNext}" Command="{Binding CancelarTrans3}"></Button>
 					<Button Text="Guardar"  Grid.Row="0" Grid.Column="1" VerticalOptions="Start" WidthRequest="120" FontSize="10" Style="{StaticResource ButtonNext}" Command="{Binding SaveTrans}"></Button>
 				</Grid>
 

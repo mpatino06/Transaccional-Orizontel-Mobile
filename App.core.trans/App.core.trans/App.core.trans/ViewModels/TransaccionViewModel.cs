@@ -267,6 +267,17 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private string _nombreCliente;
+		public string NombreCliente
+		{
+			get { return _nombreCliente; }
+			set
+			{
+				_nombreCliente = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
 		private string _datosCuentaSeleccionada;
 		public string DatosCuentaSeleccionada
 		{
@@ -500,12 +511,27 @@ namespace App.core.trans.ViewModels
 			set { _listClienteSelect = value; RaiseOnPropertyChange(); }
 		}
 
+		private string _nombreCuentaVM;
+		public string NombreCuentaVM
+		{
+			get { return _nombreCuentaVM; }
+			set { _nombreCuentaVM = value; RaiseOnPropertyChange(); }
+		}
+
 		private ClienteCuentas _selectedCuenta = new ClienteCuentas();
 
 		public ClienteCuentas SelectedCuenta
 		{
 			get { return _selectedCuenta; }
 			set { _selectedCuenta = value; RaiseOnPropertyChange(); }
+		}
+
+		private Cheque _selectedCheque = new Cheque();
+
+		public Cheque SelectedCheque
+		{
+			get { return _selectedCheque; }
+			set { _selectedCheque = value; RaiseOnPropertyChange(); }
 		}
 
 		private ObservableCollection<TransaccionTipoMovimiento> _modalidadDeposito;
@@ -570,9 +596,9 @@ namespace App.core.trans.ViewModels
 
 		private void LoadBusquedaCliente()
 		{
-			string[] busquedaCliente = { "Código", "Cedula"};
+			string[] busquedaCliente = { "Cuenta", "Cedula"};
 			ListClienteCollection = new ObservableCollection<string>(busquedaCliente);
-			ListClienteSelect = "Código";
+			ListClienteSelect = "Cuenta";
 		}
 
 
@@ -609,7 +635,7 @@ namespace App.core.trans.ViewModels
 
 						if (SecuencialTransaccionVM > 0)
 						{
-							int codigoBusquega = (ListClienteSelect == "Código")? 0 : 1;
+							int codigoBusquega = (ListClienteSelect == "Cuenta")? 0 : 1;
 							IsBusy = true;
 							clienteServices = new ClienteServices();
 							var result = await clienteServices.GetCliente(int.Parse(SearchName), codigoBusquega);
@@ -621,7 +647,7 @@ namespace App.core.trans.ViewModels
 								SecuencialOficinaVM = result.SecuencialOficina;
 
 								DatosCliente = result.Identificacion.ToString() + " " + result.NombreUnido;
-
+								NombreCliente = result.NombreUnido;
 								var cuentasCliente = await clienteServices.GetCuentasCliente(SecuencialClienteVM, SecuencialTransaccionVM);
 								if (cuentasCliente != null)
 								{
@@ -731,12 +757,73 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		public async void DeleteCheque()
+		{
+			try
+			{
+				if (SelectedCheque != null)
+				{
+				 ChequeAdd.Remove(SelectedCheque);
+
+					var mod = ModalidadDepositoTrans3.Select(a => new TransaccionTipoMovimiento
+					{
+						CodigoTipoMovimiento = a.CodigoTipoMovimiento,
+						ValueInsert = a.ValueInsert - SelectedCheque.Valor,
+						Imagen = "fail"
+					});
+
+					ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod);
+
+				}
+			}
+			catch (Exception ex)
+			{
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Error: " + ex.Message.ToString(), "OK");
+				throw;
+			}
+		}
+
+		public async void CancelarTransaccion2()
+		{
+			try
+			{
+				var answer = await App.Current.MainPage.DisplayAlert("SAC - Pelileo", "Desea CANCELAR la operación, perderá los cambios realizados, Desea Continuar?", "SI", "NO");
+				if (answer)
+				{
+					((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 2]);
+					App.Current.MainPage = new MainPage();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
+		}
+
+		public async void CancelarTransaccion3()
+		{
+			try
+			{
+				var answer = await App.Current.MainPage.DisplayAlert("SAC - Pelileo", "Desea CANCELAR la operación, perderá los cambios realizados, Desea Continuar?", "SI", "NO");
+				if (answer)
+				{
+					((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 3]);
+					App.Current.MainPage = new MainPage();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
+		}
+
 		public async void GoToTrans2()
 		{
 			try
 			{
 				if (SelectedCuenta.Secuencial > 0)
 				{
+					NombreCuentaVM = SelectedCuenta.NombreCuenta;
 					DatosCuentaSeleccionada = SelectedCuenta.Codigo + " " + SelectedCuenta.NombreCuenta;
 					var GetListMonedas = await clienteServices.GetMonedasTransaccion(SecuencialTransaccionVM, SelectedCuenta.SecuencialEmpresa);
 					if(GetListMonedas != null)
@@ -864,22 +951,27 @@ namespace App.core.trans.ViewModels
 							registrarTransaccion.Cheques = ChequeAdd.ToList();
 
 							clienteServices = new ClienteServices();
-							bool resultSaveTransaccion = await clienteServices.SaveTransaccion(registrarTransaccion);
+							var resultSaveTransaccion = await clienteServices.SaveTransaccion(registrarTransaccion);
 
-							if (resultSaveTransaccion)
+							if (resultSaveTransaccion.Result)
 							{
 								Device.BeginInvokeOnMainThread(async () =>
 								{
 
 									//INICIO - INPRIMIR EN IMPRESORA THERMAL
 									var fechaOperacion = DateTime.Now.ToString("dd/MM/yyyy hh:mm");
-									String dataToPrint = "$big$        SAC - Pelileo$intro$$intro$";
+									
+									String dataToPrint = "$big$Cooperativa de Ahorro y Credito$intro$   Indigena SAC Pelileo Ltda.$intro$$intro$";
 
 									dataToPrint += "$small$Operador: " + "ADMIN" + "$intro$";
 									dataToPrint += "Fecha: " + fechaOperacion + "$intro$";
-									dataToPrint += "Cliente: " + "SEVILLA MORALES MAYRA REBECA" + "$intro$";
-									dataToPrint += "Monto: " + "100.00" + "$intro$";
-									dataToPrint += "Saldo despues de Operación: " + "725.00" + "$intro$";
+									dataToPrint += "Cliente: " + NombreCliente + "$intro$";
+									dataToPrint += "Monto: " + montoTotal.ToString("N2") + "$intro$";
+									dataToPrint += "Saldo despues de Operación: " + resultSaveTransaccion.Saldodeposito.ToString("N2") + "$intro$";
+									dataToPrint += "Documento: " + resultSaveTransaccion.SecuencialDocumento.ToString() + "$intro$";
+									dataToPrint += "Cliente: " + NumeroClienteVM + "$intro$";
+									dataToPrint += "Cuenta: " + NombreCuentaVM + "$intro$$intro$";
+									dataToPrint += "Firma: " + "_____________________" + "$intro$";
 									dataToPrint += "$intro$$intro$$cut$$intro$";
 
 									printReport = new PrintReport();
@@ -887,6 +979,29 @@ namespace App.core.trans.ViewModels
 									printReport.Print(dataToPrint);
 
 									//FIN - INPRIMIR EN IMPRESORA THERMAL
+
+									var answerPrint = await App.Current.MainPage.DisplayAlert("SAC - Pelileo", "Desea IMPRIMIR otro recibo?", "SI", "NO");
+									if (answerPrint)
+									{
+										String dataToPrint2 = "$big$Cooperativa de Ahorro y Credito$intro$   Indigena SAC Pelileo Ltda.$intro$$intro$";
+
+										dataToPrint2 += "$small$Operador: " + "ADMIN" + "$intro$";
+										dataToPrint2 += "Fecha: " + fechaOperacion + "$intro$";
+										dataToPrint2 += "Cliente: " + NombreCliente + "$intro$";
+										dataToPrint2 += "Monto: " + montoTotal.ToString("N2") + "$intro$";
+										dataToPrint2 += "Saldo despues de Operación: " + resultSaveTransaccion.Saldodeposito.ToString("N2") + "$intro$";
+										dataToPrint += "Documento: " + resultSaveTransaccion.SecuencialDocumento.ToString() + "$intro$";
+										dataToPrint += "Cliente: " + NumeroClienteVM + "$intro$";
+										dataToPrint += "Cuenta: " + NombreCuentaVM + "$intro$$intro$";
+										dataToPrint2 += "Firma: " + "_____________________" + "$intro$";
+										dataToPrint2 += "$intro$$intro$$cut$$intro$";
+
+										printReport = new PrintReport();
+
+										printReport.Print(dataToPrint2);
+
+									}
+
 
 									await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Deposito Realizado con Exito", "OK");
 
@@ -1363,6 +1478,12 @@ namespace App.core.trans.ViewModels
 		public ICommand SaveTrans => new RelayCommand(SaveTransaccion);
 
 		public ICommand onClicCheque => new RelayCommand(AddCheque);
+
+		public ICommand onClicDeleteCheque => new RelayCommand(DeleteCheque);
+
+		public ICommand CancelarTrans2 => new RelayCommand(CancelarTransaccion2);
+
+		public ICommand CancelarTrans3 => new RelayCommand(CancelarTransaccion3);
 
 		public ICommand onClicmore100 => new RelayCommand(_onClicmore100);
 

@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using App.core.trans.Models;
 using Newtonsoft.Json;
@@ -19,14 +20,17 @@ namespace App.core.trans.Services
 
 		public ClienteServices()
 		{
-			client = new HttpClient {
-				MaxResponseContentBufferSize = 25600000,
-				Timeout = TimeSpan.FromSeconds(200)
-			};   
-			
+			//client = new HttpClient {
+			//	//MaxResponseContentBufferSize = 25600000,
+			//	Timeout = TimeSpan.FromSeconds(100)
+			//};
+
+			client = new HttpClient();            
+			client.MaxResponseContentBufferSize = 256000000;
+			client.Timeout = new TimeSpan(0, 1, 0, 0); // TimeSpan.FromSeconds(1000);
 			//client.MaxResponseContentBufferSize = 25600000;
 			//client.Timeout = TimeSpan(),
-			PATHSERVER = "186.4.142.142:81";
+			PATHSERVER = "186.4.142.142:81"; //"192.168.251.14:81"; 
 		}
 
 		public async Task<List<ClienteCuentas>> GetCuentasCliente(int cliente, int transaccion)
@@ -165,25 +169,25 @@ namespace App.core.trans.Services
 			return Items;
 		}
 
-		public async Task<bool> SaveTransaccion(RegistrarTransaccion transaccion)
+		public async Task<ResultTransaccion> SaveTransaccion(RegistrarTransaccion transaccion)
 		{
-			bool Items = false;
+			ResultTransaccion Items = new ResultTransaccion();
 			string url = "http://" + PATHSERVER + "/OR/Transaccion/SaveTransaccion";
 			try
 			{
-				ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
-
-				client.DefaultRequestHeaders.Accept.Clear();
+				ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
+				WebRequest.DefaultWebProxy.Credentials = CredentialCache.DefaultCredentials;
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
 				var json = JsonConvert.SerializeObject(transaccion);
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-				HttpResponseMessage result =  await client.PostAsync(url, content);
+				HttpResponseMessage response = await client.PostAsync(url, content);
 
-				if (result.IsSuccessStatusCode)
+				if (response.IsSuccessStatusCode)
 				{
-					var content2 = await result.Content.ReadAsStringAsync();
-					Items = JsonConvert.DeserializeObject<bool>(content2);
+					var content2 = await response.Content.ReadAsStringAsync();
+					Items = JsonConvert.DeserializeObject<ResultTransaccion>(content2);
 				}
 			}
 			catch (Exception ex)
@@ -193,12 +197,12 @@ namespace App.core.trans.Services
 			return Items;
 		}
 
-		public async Task<List<TransaccionmobileExtend>> GetRegistroTransacciones(string codigoUsuario)
+		public async Task<List<TransaccionmobileExtend>> GetRegistroTransacciones(string codigoUsuario, DateTime fecha)
 		{
 			var Items = new List<TransaccionmobileExtend>();
 			try
 			{
-				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetTransaccionMobile/" + codigoUsuario;
+				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetTransaccionMobile/" + codigoUsuario + "/" + fecha.ToString("dd/MM/yyyy").Replace("/","-");
 				var result = await client.GetAsync(url);
 				if (result.IsSuccessStatusCode)
 				{

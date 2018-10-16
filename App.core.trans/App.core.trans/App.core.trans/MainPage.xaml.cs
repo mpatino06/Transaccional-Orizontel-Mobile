@@ -36,7 +36,7 @@ namespace App.core.trans
 			{
 				Title = "Ver registros",
 				Icon = "lista.png",
-				TargetType = typeof(PlanList)
+				TargetType = typeof(List)
 			});
 
 			menuList.Add(new MasterPageItem

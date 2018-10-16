@@ -11,7 +11,7 @@ namespace App.core.trans.Models
 		public int NumeroCliente { get; set; }
 		public DateTime Fecha { get; set; }
 		public decimal Monto { get; set; }
-		public int Longitud { get; set; }
-		public int Latitud { get; set; }
+		public decimal Longitud { get; set; }
+		public decimal Latitud { get; set; }
 	}
 }

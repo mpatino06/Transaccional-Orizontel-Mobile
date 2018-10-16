@@ -2315,8 +2315,8 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F010006
 			public const int ct1 = 2130771974;
 			
-			// aapt resource value: 0x7F010021
-			public const int cuentas = 2130772001;
+			// aapt resource value: 0x7F010022
+			public const int cuentas = 2130772002;
 			
 			// aapt resource value: 0x7F010007
 			public const int del = 2130771975;
@@ -2360,8 +2360,8 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F020056
 			public const int ic_dialog_close_light = 2130837590;
 			
-			// aapt resource value: 0x7F010025
-			public const int ic_errorstatus = 2130772005;
+			// aapt resource value: 0x7F010026
+			public const int ic_errorstatus = 2130772006;
 			
 			// aapt resource value: 0x7F020057
 			public const int ic_group_collapse_00 = 2130837591;
@@ -2768,8 +2768,8 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F0200DD
 			public const int ic_mr_button_grey = 2130837725;
 			
-			// aapt resource value: 0x7F010026
-			public const int ic_successstatus = 2130772006;
+			// aapt resource value: 0x7F010027
+			public const int ic_successstatus = 2130772007;
 			
 			// aapt resource value: 0x7F0200DE
 			public const int ic_vol_type_speaker_dark = 2130837726;
@@ -2912,20 +2912,23 @@ namespace App.core.trans.Droid
 			// aapt resource value: 0x7F010018
 			public const int operacion = 2130771992;
 			
-			// aapt resource value: 0x7F010023
-			public const int roundedbg = 2130772003;
-			
 			// aapt resource value: 0x7F010024
-			public const int roundedbgdark = 2130772004;
+			public const int roundedbg = 2130772004;
+			
+			// aapt resource value: 0x7F010025
+			public const int roundedbgdark = 2130772005;
 			
 			// aapt resource value: 0x7F010019
 			public const int salir = 2130771993;
 			
 			// aapt resource value: 0x7F010020
-			public const int tr1 = 2130772000;
+			public const int search = 2130772000;
 			
-			// aapt resource value: 0x7F010022
-			public const int transaccion = 2130772002;
+			// aapt resource value: 0x7F010021
+			public const int tr1 = 2130772001;
+			
+			// aapt resource value: 0x7F010023
+			public const int transaccion = 2130772003;
 			
 			static Drawable()
 			{

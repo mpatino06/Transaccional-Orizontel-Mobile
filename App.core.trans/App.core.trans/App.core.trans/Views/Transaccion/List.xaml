@@ -1,21 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App.core.trans.Views.Transaccion.List">
+             x:Class="App.core.trans.Views.Transaccion.List"
+			 Title="Registro de Operaciones">
 	<ScrollView>
 		<StackLayout>
 
 
 			<Grid HorizontalOptions="Fill">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="70"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="50"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="45"/>
+					<RowDefinition Height="60"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
-
-
 				<Label  Grid.Row="0" 
                        Text="Lista de Depositos" 
                        HorizontalOptions="Center" 
@@ -23,13 +21,46 @@
                        TextColor="{StaticResource TextColor}" 
                        FontAttributes="Bold" FontSize="Medium"></Label>
 
+				<Grid Grid.Row="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="70" />
+						<ColumnDefinition Width="80" />
+						<ColumnDefinition Width="50" />
+					</Grid.ColumnDefinitions>
 
-				<ListView x:Name="ListCount" Margin="10,0,0,0"
+					<Label  Grid.Column="0" 
+                       Text="Fecha" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       TextColor="{StaticResource TextColor}" 
+					   FontSize="10"
+                       FontFamily="Exo"
+                       FontAttributes="Bold" ></Label>
+					
+					<DatePicker x:Name="startDatePicker"  Grid.Column="1" 
+                    Format="dd/MM/yyyy"
+				    MaximumDate="{Binding MaxDate}"
+					Date="{Binding SelectedDate}"
+					TextColor="{StaticResource TextColor}" 
+					 FontSize="10"
+                       FontFamily="Exo"
+                       FontAttributes="Bold"/>
+
+					<Image x:Name="imgAdd" WidthRequest="40"  Grid.Column="2"  HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start" Source="search.png">
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding OnDateSelected }"/>
+						</Image.GestureRecognizers>
+					</Image>
+
+
+				</Grid>
+
+				<ListView x:Name="ListCount" Margin="5,0,0,0"
                               ItemsSource="{Binding TransacccionCollection}"
-                              Grid.Row="1"
+                              Grid.Row="2"
                               HasUnevenRows="true"                          
                               HorizontalOptions="Center" VerticalOptions="Start" 
-                              HeightRequest="{Binding _heightListCollection}">
+                              HeightRequest="{Binding HeightListCollection}">
 					<ListView.ItemTemplate>
 						<DataTemplate>
 							<ViewCell>
@@ -38,32 +69,34 @@
 										<RowDefinition Height="Auto"/>
 									</Grid.RowDefinitions>
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"></ColumnDefinition>
-										<ColumnDefinition Width="*"></ColumnDefinition>
+										<!--<ColumnDefinition Width="1.5*"></ColumnDefinition>-->
+										<ColumnDefinition Width="5*"></ColumnDefinition>
+										<ColumnDefinition Width="3*"></ColumnDefinition>
+										<ColumnDefinition Width="2*"></ColumnDefinition>
 									</Grid.ColumnDefinitions>
-									<Label  Grid.Column="0" 
+									<!--<Label  Grid.Column="0" 
                                                 VerticalOptions="Center" 
                                                 FontSize="10"
                                                 FontFamily="Exo"
                                                 FontAttributes="Bold"
-                                                Text="{Binding CodigoUsuario}" ></Label>
-									<Label  Grid.Column="1" 
-                                                VerticalOptions="Center" 
+                                                Text="{Binding CodigoUsuario}" ></Label>-->
+									<Label  Grid.Column="0" 
+                                                VerticalOptions="Start" 
                                                 FontSize="10"
                                                 FontFamily="Exo"
                                                 Text="{Binding NombreCliente}" LineBreakMode="TailTruncation"></Label>
 									<Label  Grid.Column="1" 
-                                                VerticalOptions="Center"
+                                                VerticalOptions="Start"
                                                 FontSize="10"
                                                 FontFamily="Exo"
-                                                Text="{Binding Fecha}" LineBreakMode="TailTruncation"></Label>
-									<Label  Grid.Column="1" 
-                                                VerticalOptions="Center"  
+                                                Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}" LineBreakMode="TailTruncation"></Label>
+									<Label  Grid.Column="2" 
+                                                VerticalOptions="Start"  
                                                 FontSize="10"
                                                 FontFamily="Exo"
 											    TextColor="{StaticResource TextColor}"
 											    FontAttributes="Bold"
-                                                Text="{Binding Monto}" LineBreakMode="TailTruncation"></Label>
+                                                Text="{Binding Monto, StringFormat='{0:N}'}" LineBreakMode="TailTruncation"></Label>
 								</Grid>
 							</ViewCell>
 						</DataTemplate>
@@ -71,6 +104,13 @@
 
 				</ListView>
 
+				<Grid Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsVisibleButtons}">
+
+
+					<Button Text="Imprimir" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="200" Style="{StaticResource ButtonNext}" Command="{Binding Imprimir}"></Button>
+					
+				</Grid>
+				
 			</Grid>
 		</StackLayout>
 	</ScrollView>

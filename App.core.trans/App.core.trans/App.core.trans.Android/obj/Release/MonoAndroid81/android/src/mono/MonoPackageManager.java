@@ -107,6 +107,8 @@ class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
 		/* We need to ensure that "App.core.trans.Android.dll" comes first in this list. */
 		"App.core.trans.Android.dll",
+		"Acr.UserDialogs.dll",
+		"AndHUD.dll",
 		"App.core.trans.dll",
 		"CommonServiceLocator.dll",
 		"FormsViewGroup.dll",
@@ -135,6 +137,8 @@ class MonoPackageManager_Resources {
 		"Xamarin.Forms.Platform.Android.dll",
 		"Xamarin.Forms.Platform.dll",
 		"Xamarin.Forms.Xaml.dll",
+		"XF.Bluetooth.Printer.Plugin.Abstractions.dll",
+		"XF.Bluetooth.Printer.Plugin.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

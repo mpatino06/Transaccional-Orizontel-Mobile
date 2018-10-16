@@ -1,4 +1,6 @@
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\App.core.trans.Android.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\Acr.UserDialogs.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\AndHUD.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\App.core.trans.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\CommonServiceLocator.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\FormsViewGroup.dll
@@ -12,6 +14,8 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Andro
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\PSC.Xam.Controls.BindableRadioButton.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Core.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Net.Http.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Runtime.Serialization.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Xml.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Xml.Linq.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\Xamarin.Android.Support.Animated.Vector.Drawable.dll
@@ -34,9 +38,9 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Andro
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\Xamarin.Forms.Platform.Android.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\Xamarin.Forms.Platform.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\Xamarin.Forms.Xaml.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\XF.Bluetooth.Printer.Plugin.Abstractions.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\XF.Bluetooth.Printer.Plugin.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Data.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Numerics.dll
-E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Net.Http.dll
-E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.Runtime.Serialization.dll
-E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.ServiceModel.Internals.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\Mono.Security.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\android\assets\System.ServiceModel.Internals.dll
