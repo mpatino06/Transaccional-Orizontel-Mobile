@@ -54,9 +54,9 @@ namespace App.core.trans.Services
 			return Items;
 		}
 
-		public async Task<ClienteExtend> GetCliente(int cliente, int seleccion)
+		public async Task<List<ClienteExtend>> GetCliente(string cliente, int seleccion)
 		{
-			var Items = new ClienteExtend();
+			var Items = new List<ClienteExtend>();
 			string url = "http://" + PATHSERVER + "/OR/Cliente/GetClienteBycode/" + cliente  + "/" + seleccion;
 			try
 			{
@@ -64,7 +64,7 @@ namespace App.core.trans.Services
 				if (result.IsSuccessStatusCode)
 				{
 					var content = await result.Content.ReadAsStringAsync();
-					Items = JsonConvert.DeserializeObject<ClienteExtend>(content);
+					Items = JsonConvert.DeserializeObject<List<ClienteExtend>>(content);
 				}
 
 				//string content = "{'secuencialCliente': 35194,'secuencialOficina': 2,'secuencialPersona': 36455,'numeroCliente': 878793,'fechaIngreso': '2016-02-23T00:00:00','codigoUsuarioOficial': 'LJEREZ','codigoSectorEconomico': 'NI','codigoTipoVinculacion': 'N','codigoCalificacionInterna': 'N','secuencialDivisionMercado': 3,'codigoEstadoCliente': 'H','numeroVerificadorCliente': 1,'codigoTipoIDentificacion': 'C','nombreTipoIdentificacion': 'CEDULA','identificacion': '1804326013','nombreUnido': 'SEVILLA MORALES MAYRA REBECA','direccionDomicilio': 'HUACHI CHICO BARRIO EL PROGRESO CLLE OLIMPO CARDENAS Y SOLIS MORAN','referenciaDomiciliaria': 'calles olimpo solis moran','email': 'mrsevilla_22@hotmail.com','secuencialTipoIdentificacion': 2,'secuencialDivPolResidencia': 1406,'codigoPaisOrigen': 'EC','numeroVerificador': 18,'secuencialDivActEcon': 5826}";

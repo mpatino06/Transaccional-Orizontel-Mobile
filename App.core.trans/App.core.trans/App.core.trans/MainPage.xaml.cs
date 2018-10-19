@@ -13,18 +13,22 @@ using Xamarin.Forms;
 
 namespace App.core.trans
 {
-	public partial class MainPage : MasterDetailPage
+	public partial class MainPage: MasterDetailPage
 	{
+		public string s_codigo { get; set; }
 		public List<MasterPageItem> menuList { get; set; }
 		public MainPage()
 		{
 			InitializeComponent();
 			menuList = new List<MasterPageItem>();
 			LoadMenu();
+
+			MessagingCenter.Subscribe<Views.Login, string>(this, "HelloMessage", (sender, a) => { s_codigo = a; });
 		}
 
 		public void LoadMenu()
 		{
+			var x = s_codigo;
 			menuList.Add(new MasterPageItem
 			{
 				Title = "Transacciones",

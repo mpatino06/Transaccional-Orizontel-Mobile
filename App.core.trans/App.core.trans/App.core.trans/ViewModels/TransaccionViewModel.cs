@@ -31,6 +31,8 @@ namespace App.core.trans.ViewModels
 			LoadBusquedaCliente();
 			LoadTransaccion();
 			IsVisibleButtons = false;
+			IsvisibleLabel = false;
+			IsvisiblePicker = false;
 		}
 
 		
@@ -214,6 +216,28 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private bool _isvisibleLabel;
+		public bool IsvisibleLabel
+		{
+			get { return _isvisibleLabel; }
+			set
+			{
+				_isvisibleLabel = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
+		private bool _isvisiblePicker;
+		public bool IsvisiblePicker
+		{
+			get { return _isvisiblePicker; }
+			set
+			{
+				_isvisiblePicker = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
 		private string _chequeCuenta;
 		public string ChequeCuenta
 		{
@@ -337,6 +361,17 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private string _codigoUsuarioVM;
+		public string CodigoUsuarioVM
+		{
+			get { return _codigoUsuarioVM; }
+			set
+			{
+				_codigoUsuarioVM = value;
+				RaiseOnPropertyChange();
+			}
+		}
+
 
 		private int _secuencialClienteVM;
 		public int SecuencialClienteVM
@@ -454,6 +489,13 @@ namespace App.core.trans.ViewModels
 			set { _listClienteCollection = value; RaiseOnPropertyChange(); }
 		}
 
+		private ObservableCollection<string> _listClienteNameCollection;
+		public ObservableCollection<string> ListClienteNameCollection
+		{
+			get { return _listClienteNameCollection; }
+			set { _listClienteNameCollection = value; RaiseOnPropertyChange(); }
+		}
+
 		private ObservableCollection<TransaccionTipoMovimiento> _tipoMovimientoCollection;
 		public ObservableCollection<TransaccionTipoMovimiento> TipoMovimientoCollection
 		{
@@ -496,6 +538,14 @@ namespace App.core.trans.ViewModels
 			set { _bancoCollection = value; RaiseOnPropertyChange(); }
 		}
 
+
+		private ObservableCollection<ClienteExtend> _ListName = new ObservableCollection<ClienteExtend>();
+		public ObservableCollection<ClienteExtend> ListName
+		{
+			get { return _ListName; }
+			set { _ListName = value; RaiseOnPropertyChange(); }
+		}
+
 		private string _bancoSelect;
 		public string BancoSelect
 		{
@@ -509,6 +559,13 @@ namespace App.core.trans.ViewModels
 		{
 			get { return _listClienteSelect; }
 			set { _listClienteSelect = value; RaiseOnPropertyChange(); }
+		}
+
+		private string _listClienteNameSelect;
+		public string ListClienteNameSelect
+		{
+			get { return _listClienteNameSelect; }
+			set { _listClienteNameSelect = value; RaiseOnPropertyChange(); }
 		}
 
 		private string _nombreCuentaVM;
@@ -596,7 +653,7 @@ namespace App.core.trans.ViewModels
 
 		private void LoadBusquedaCliente()
 		{
-			string[] busquedaCliente = { "Cuenta", "Cedula"};
+			string[] busquedaCliente = { "Cuenta", "Cedula", "Nombre"};
 			ListClienteCollection = new ObservableCollection<string>(busquedaCliente);
 			ListClienteSelect = "Cuenta";
 		}
@@ -635,27 +692,58 @@ namespace App.core.trans.ViewModels
 
 						if (SecuencialTransaccionVM > 0)
 						{
-							int codigoBusquega = (ListClienteSelect == "Cuenta")? 0 : 1;
+							int codigoBusquega = 0;
+
+							switch (ListClienteSelect)
+							{
+								case "Cuenta":
+									codigoBusquega = 0;
+									break;
+								case "Cedula":
+									codigoBusquega = 1;
+									break;
+								case "Nombre":
+									codigoBusquega = 2;
+									break;
+							}
+							
 							IsBusy = true;
 							clienteServices = new ClienteServices();
-							var result = await clienteServices.GetCliente(int.Parse(SearchName), codigoBusquega);
-							if (result.SecuencialCliente > 0)
-							{
-								SecuencialClienteVM = result.SecuencialCliente;
-								SecuencialEmpresaVM = result.SecuencialEmpresa;
-								NumeroClienteVM = result.NumeroCliente;
-								SecuencialOficinaVM = result.SecuencialOficina;
 
-								DatosCliente = result.Identificacion.ToString() + " " + result.NombreUnido;
-								NombreCliente = result.NombreUnido;
-								var cuentasCliente = await clienteServices.GetCuentasCliente(SecuencialClienteVM, SecuencialTransaccionVM);
-								if (cuentasCliente != null)
+							var result = await clienteServices.GetCliente(SearchName.Trim(), codigoBusquega);
+							if (result.Any())
+							{
+								if (codigoBusquega < 2)
 								{
-									Device.BeginInvokeOnMainThread(() =>
+									IsvisibleLabel = true;
+									IsvisiblePicker = false;
+
+									var resultfirst = result.FirstOrDefault();
+									SecuencialClienteVM = resultfirst.SecuencialCliente;
+									SecuencialEmpresaVM = resultfirst.SecuencialEmpresa;
+									NumeroClienteVM = resultfirst.NumeroCliente;
+									SecuencialOficinaVM = resultfirst.SecuencialOficina;
+
+									DatosCliente = resultfirst.Identificacion.ToString() + " " + resultfirst.NombreUnido;
+									NombreCliente = resultfirst.NombreUnido;
+
+									SearcCuenta();
+								}
+								else
+								{
+									List<string> nameList = new List<string>();
+									ListName = new ObservableCollection<ClienteExtend>(result);
+
+									foreach (var item in result)
 									{
-										IsVisibleButtons = true;
-										CuentasCollection = new ObservableCollection<ClienteCuentas>(cuentasCliente);
-									});
+										nameList.Add(item.NombreUnido);
+									}
+
+									IsvisibleLabel = false;
+									IsvisiblePicker = true;
+
+									ListClienteNameCollection = new ObservableCollection<string>(nameList);
+									ListClienteNameSelect = result.FirstOrDefault().NombreUnido;
 								}
 							}
 							else
@@ -672,13 +760,32 @@ namespace App.core.trans.ViewModels
 						await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Debe seleccionar una Transacción", "OK");
 					}
 
-
 					IsBusy = false;
 				}
 			}
 			catch (Exception)
 			{
 				IsBusy = false;
+			}
+		}
+
+		private async void SearcCuenta()
+		{
+			try
+			{
+				var cuentasCliente = await clienteServices.GetCuentasCliente(SecuencialClienteVM, SecuencialTransaccionVM);
+				if (cuentasCliente != null)
+				{
+					Device.BeginInvokeOnMainThread(() =>
+					{
+						IsVisibleButtons = true;
+						CuentasCollection = new ObservableCollection<ClienteCuentas>(cuentasCliente);
+					});
+				}
+			}
+			catch (Exception)
+			{
+
 			}
 		}
 
@@ -1102,7 +1209,7 @@ namespace App.core.trans.ViewModels
 			}
 			else
 			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "EL monto es superior al ingresado en Deposito de Cheques", "OK");
+				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "EL monto es superior al ingresado en Deposito de Efectivo", "OK");
 			}
 
 

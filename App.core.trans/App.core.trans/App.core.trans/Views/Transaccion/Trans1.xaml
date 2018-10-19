@@ -96,7 +96,19 @@
 				</Grid>
 				
 
-				<Label x:Name="LblDatosCliente" Margin="-10,0,0,0" Text="{Binding DatosCliente}" Grid.Row="5" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" ></Label>
+				<Label x:Name="LblDatosCliente" Margin="-10,0,0,0" Text="{Binding DatosCliente}" Grid.Row="5" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" IsVisible="{Binding IsvisibleLabel}" ></Label>
+
+				<!--si la busqueda es por nombre muestra un picker-->
+				<Picker x:Name="PickerNombre" Grid.Row="5" Grid.Column="1"
+                            ItemsSource="{Binding ListClienteNameCollection }"
+                            SelectedItem="{Binding ListClienteNameSelect}" 
+						    FontSize="12"
+						    FontFamily="Exo"  
+                            VerticalOptions="Center" 						
+                            HorizontalOptions="Start"
+						    IsVisible="{Binding IsvisiblePicker}">
+				</Picker>
+
 
 				<Image WidthRequest="40" Grid.Row="6" Grid.Column="0"  HeightRequest="40" VerticalOptions="Center" HorizontalOptions="End" Source="ct1.png" ></Image>
 				<Label x:Name="Label3" Text="Cuentas" Margin="10,0,0,0" Grid.Row="6" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" ></Label>

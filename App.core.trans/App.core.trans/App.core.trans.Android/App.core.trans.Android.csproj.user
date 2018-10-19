@@ -4,6 +4,6 @@
     <SelectedDevice>VisualStudio_android-23_arm_phone</SelectedDevice>
     <ProjectView>ProjectFiles</ProjectView>
     <DefaultDevice>VisualStudio_android-23_arm_phone</DefaultDevice>
-    <AndroidDesignerPreferredTheme>Theme.DeviceDefault</AndroidDesignerPreferredTheme>
+    <AndroidDesignerPreferredTheme>Theme.DeviceDefault.NoActionBar.Fullscreen</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

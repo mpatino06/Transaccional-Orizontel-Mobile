@@ -24,7 +24,7 @@ namespace App.core.trans.Services
 		public async Task<UsuarioExtend> GetUsuario(string code, string pass)
 		{
 			var Items = new UsuarioExtend();
-			Login login = new Login();
+			Models.Login login = new Models.Login();
 			string url = "http://" + PATHSERVER + "/OR/usuario/GetUsuarioByCode";
 			try
 			{

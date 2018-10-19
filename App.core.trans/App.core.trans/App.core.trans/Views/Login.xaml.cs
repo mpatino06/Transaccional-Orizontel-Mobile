@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.core.trans.Helper;
+using App.core.trans.Models;
 using App.core.trans.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -33,18 +34,25 @@ namespace App.core.trans.Views
 				if (string.IsNullOrEmpty(EntUser.Text) || string.IsNullOrEmpty(EntPassword.Text))
 				{
 					await Application.Current.MainPage.DisplayAlert("SAC", "Debe ingresar nombre de usuario y Password", "OK");
-					//Lblmsg.Text = "Debe ingresar nombre de usuario y Password";
 				}
 				else
 				{
 
 					var result = await services.GetUsuario(EntUser.Text, EntPassword.Text.Trim());
 					if (result.usuarioComplemento != null)
-						App.Current.MainPage = new MainPage();
+					{
+						if (result.AccesoUsuario)
+						{
+							MessagingCenter.Send<Login>(this, result.usuarioComplemento.Codigousuario);
+							App.Current.MainPage = new MainPage();
+						}
+						else {
+							await Application.Current.MainPage.DisplayAlert("SAC", "Horario no permitido para el usuario", "OK");
+						}
+
+					}						
 					else
 						await Application.Current.MainPage.DisplayAlert("SAC", "Los datos ingresados no son correctos", "OK");
-
-					//App.Current.MainPage = new MainPage();
 
 				}				
 			}

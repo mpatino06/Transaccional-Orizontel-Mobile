@@ -135,7 +135,7 @@ namespace App.core.trans.ViewModels
 			{
 
 				decimal totSaldoReporte = 0;
-				var fechaOperacion = SelectedDate.ToString("dd/MM/yyyy hh:mm");
+				var fechaOperacion = SelectedDate.ToString("dd/MM/yyyy HH:mm:ss");
 
 				String dataToPrint = "$big$Cooperativa de Ahorro y Credito$intro$   Indigena SAC Pelileo Ltda.$intro$$intro$";
 
