@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:pscr="clr-namespace:PSC.Xam.Controls.BindableRadioButton;assembly=PSC.Xam.Controls.BindableRadioButton"
+			 xmlns:b="clr-namespace:Xamarin.Behaviors;assembly=Xamarin.Behaviors"
+			 xmlns:b2="clr-namespace:Xamarin.Behaviors;assembly=Xamarin.Behaviors"
+			 xmlns:usercontrols1="clr-namespace:App.core.trans.Controls"
+			 xmlns:usercontrols2="clr-namespace:App.core.trans.Controls"
 			 x:Class="App.core.trans.Views.Transaccion.Trans1"
 			 Title="Transacciones">
     <ContentPage.Content>
@@ -69,15 +72,20 @@
 						<RowDefinition Height="35" />
 					</Grid.RowDefinitions>
 					<Label x:Name="LabelBusquedaCliente" Text="Buscar por:"  FontSize="12" FontFamily="Exo" Grid.Row="0" Grid.Column="0"  HorizontalOptions="End" VerticalOptions="Center"  ></Label>
-					<Picker x:Name="PickerCliente" Grid.Row="0" Grid.Column="1"
-                            ItemsSource="{Binding ListClienteCollection }"
-                            SelectedItem="{Binding ListClienteSelect}" 
+					<usercontrols2:BindablePicker x:Name="PickerCliente" Grid.Row="0" Grid.Column="1"
+                            ItemsSource="{Binding ListClienteCollection, Mode=TwoWay}"
+                            SelectedItem="{Binding ListClienteSelect, Mode=TwoWay}" 
 						    FontSize="12"
-							WidthRequest="50"
+							WidthRequest="70"
 						    FontFamily="Exo"  
                             VerticalOptions="Center" 						
                             HorizontalOptions="Start">
-					</Picker>
+						<!--<b2:Interaction.Behaviors>
+							<b2:BehaviorCollection>
+								<b2:EventToCommand  EventName="SelectedIndexChanged"  Command="{Binding CleanView, Mode=TwoWay}"/>
+							</b2:BehaviorCollection>
+						</b2:Interaction.Behaviors>-->
+					</usercontrols2:BindablePicker>
 
 					<SearchBar x:Name="EntSearch"
 							   Grid.Row="1"
@@ -99,15 +107,21 @@
 				<Label x:Name="LblDatosCliente" Margin="-10,0,0,0" Text="{Binding DatosCliente}" Grid.Row="5" FontSize="Default"  Grid.Column="1"  HorizontalOptions="Start" VerticalOptions="Center" IsVisible="{Binding IsvisibleLabel}" ></Label>
 
 				<!--si la busqueda es por nombre muestra un picker-->
-				<Picker x:Name="PickerNombre" Grid.Row="5" Grid.Column="1"
-                            ItemsSource="{Binding ListClienteNameCollection }"
-                            SelectedItem="{Binding ListClienteNameSelect}" 
-						    FontSize="12"
+				<usercontrols1:BindablePicker x:Name="PickerNombre" Grid.Row="5" Grid.Column="1"
+                            ItemsSource="{Binding ListClienteNameCollection, Mode=TwoWay}"
+                            SelectedItem="{Binding ListClienteNameSelect, Mode=TwoWay}" 
+						    FontSize="12"	  
 						    FontFamily="Exo"  
+							WidthRequest="250"
                             VerticalOptions="Center" 						
                             HorizontalOptions="Start"
 						    IsVisible="{Binding IsvisiblePicker}">
-				</Picker>
+					<b:Interaction.Behaviors>
+						<b:BehaviorCollection>
+							<b:EventToCommand  EventName="SelectedIndexChanged"  Command="{Binding PickerSelect}"/>
+						</b:BehaviorCollection>
+					</b:Interaction.Behaviors>
+				</usercontrols1:BindablePicker>
 
 
 				<Image WidthRequest="40" Grid.Row="6" Grid.Column="0"  HeightRequest="40" VerticalOptions="Center" HorizontalOptions="End" Source="ct1.png" ></Image>

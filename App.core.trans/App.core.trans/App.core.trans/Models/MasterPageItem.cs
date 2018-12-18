@@ -11,6 +11,7 @@ namespace App.core.trans.Models
 		public string Icon { get; set; }
 
 		public Type TargetType { get; set; }
+		public string Usuario { get; set; }
 	}
 }
 

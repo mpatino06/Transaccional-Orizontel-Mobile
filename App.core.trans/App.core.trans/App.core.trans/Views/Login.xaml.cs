@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using App.core.trans.Helper;
 using App.core.trans.Models;
 using App.core.trans.Services;
+using App.core.trans.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,9 +17,12 @@ namespace App.core.trans.Views
 	{
 		//Security security;
 		UsuarioServices services;
+		//private TransaccionViewModel vm;
+		public string _susuario { get; set; }
 		public Login ()
 		{
 			InitializeComponent ();
+			
 		}
 
 		private async void EnterButton_OnClicked(object sender, EventArgs e)
@@ -43,8 +47,13 @@ namespace App.core.trans.Views
 					{
 						if (result.AccesoUsuario)
 						{
-							MessagingCenter.Send<Login>(this, result.usuarioComplemento.Codigousuario);
-							App.Current.MainPage = new MainPage();
+
+							//_susuario = EntUser.Text;
+							_susuario = result.usuarioComplemento.Codigousuario;
+							//vm.CodigoUsuarioVM = EntUser.Text.Trim().ToUpper();
+							//MessagingCenter.Send<Login>(this, result.usuarioComplemento.Codigousuario);
+
+							App.Current.MainPage = new MainPage(_susuario);
 						}
 						else {
 							await Application.Current.MainPage.DisplayAlert("SAC", "Horario no permitido para el usuario", "OK");

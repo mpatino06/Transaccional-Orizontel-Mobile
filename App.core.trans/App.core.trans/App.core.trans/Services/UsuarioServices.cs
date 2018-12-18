@@ -18,14 +18,14 @@ namespace App.core.trans.Services
 		{
 			client = new HttpClient();
 			client.MaxResponseContentBufferSize = 256000000;
-			PATHSERVER = "186.4.142.142:81"; //"192.168.251.14:81"; 
+			PATHSERVER = "vmovil.sac.fin.ec:8443"; //"192.168.251.14:81"; 
 		}
 
 		public async Task<UsuarioExtend> GetUsuario(string code, string pass)
 		{
 			var Items = new UsuarioExtend();
 			Models.Login login = new Models.Login();
-			string url = "http://" + PATHSERVER + "/OR/usuario/GetUsuarioByCode";
+			string url = "https://" + PATHSERVER + "/OR/usuario/GetUsuarioByCode";
 			try
 			{
 				login.User = code;

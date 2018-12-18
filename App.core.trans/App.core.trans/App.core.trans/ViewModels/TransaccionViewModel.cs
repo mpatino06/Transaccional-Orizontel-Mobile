@@ -33,6 +33,8 @@ namespace App.core.trans.ViewModels
 			IsVisibleButtons = false;
 			IsvisibleLabel = false;
 			IsvisiblePicker = false;
+
+
 		}
 
 		
@@ -248,6 +250,8 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+
+
 		private string _chequeNumero;
 		public string ChequeNumero
 		{
@@ -372,6 +376,16 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		private string _codigoUsuarioVM2;
+		public string CodigoUsuarioVM2
+		{
+			get { return _codigoUsuarioVM2; }
+			set
+			{
+				_codigoUsuarioVM2 = value;
+				RaiseOnPropertyChange();
+			}
+		}
 
 		private int _secuencialClienteVM;
 		public int SecuencialClienteVM
@@ -416,6 +430,7 @@ namespace App.core.trans.ViewModels
 				RaiseOnPropertyChange();
 			}
 		}
+
 
 		private string _nombreTransaccionVM;
 		public string NombreTransaccionVM
@@ -722,7 +737,7 @@ namespace App.core.trans.ViewModels
 									SecuencialClienteVM = resultfirst.SecuencialCliente;
 									SecuencialEmpresaVM = resultfirst.SecuencialEmpresa;
 									NumeroClienteVM = resultfirst.NumeroCliente;
-									SecuencialOficinaVM = resultfirst.SecuencialOficina;
+									//SecuencialOficinaVM = resultfirst.SecuencialOficina;
 
 									DatosCliente = resultfirst.Identificacion.ToString() + " " + resultfirst.NombreUnido;
 									NombreCliente = resultfirst.NombreUnido;
@@ -734,16 +749,17 @@ namespace App.core.trans.ViewModels
 									List<string> nameList = new List<string>();
 									ListName = new ObservableCollection<ClienteExtend>(result);
 
+									nameList.Add("Seleccione un Nombre");
 									foreach (var item in result)
 									{
-										nameList.Add(item.NombreUnido);
+										nameList.Add(item.Identificacion.ToString() + "-" +  item.NombreUnido);
 									}
 
 									IsvisibleLabel = false;
 									IsvisiblePicker = true;
 
 									ListClienteNameCollection = new ObservableCollection<string>(nameList);
-									ListClienteNameSelect = result.FirstOrDefault().NombreUnido;
+									ListClienteNameSelect = nameList.FirstOrDefault(); // result.FirstOrDefault().NombreUnido;
 								}
 							}
 							else
@@ -769,6 +785,34 @@ namespace App.core.trans.ViewModels
 			}
 		}
 
+		public void BusquedaClienteporNombre()
+		{
+			try
+			{
+
+				char[] charSplit = { '-' };
+				string[] cedulaSelcionadaPicker = ListClienteNameSelect.Split(charSplit);
+
+
+				var resultBusquedaNombre = ListName.FirstOrDefault(a => a.Identificacion == cedulaSelcionadaPicker[0].ToString());
+				SecuencialClienteVM = resultBusquedaNombre.SecuencialCliente;
+				SecuencialEmpresaVM = resultBusquedaNombre.SecuencialEmpresa;
+				NumeroClienteVM = resultBusquedaNombre.NumeroCliente;
+				//SecuencialOficinaVM = resultBusquedaNombre.SecuencialOficina;
+
+				DatosCliente = resultBusquedaNombre.Identificacion.ToString() + " " + resultBusquedaNombre.NombreUnido;
+				NombreCliente = resultBusquedaNombre.NombreUnido;
+				if (ListClienteNameSelect != "Seleccione un Nombre")
+				{
+					SearcCuenta();
+				}
+			}
+			catch (Exception ex)
+			{
+				//await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Debe seleccionar una Transacción", "OK");
+			}
+		}
+
 		private async void SearcCuenta()
 		{
 			try
@@ -784,6 +828,22 @@ namespace App.core.trans.ViewModels
 				}
 			}
 			catch (Exception)
+			{
+
+			}
+		}
+
+		private async void CleanSearch()
+		{
+			try
+			{
+				IsvisibleLabel = false;
+				IsvisiblePicker = false;
+				CuentasCollection = new ObservableCollection<ClienteCuentas>(new List<ClienteCuentas>());
+				DatosCliente = null;
+				IsVisibleButtons = false;				
+			}
+			catch (Exception ex)
 			{
 
 			}
@@ -879,6 +939,13 @@ namespace App.core.trans.ViewModels
 						Imagen = "fail"
 					});
 
+					int countItemsDetail = ChequeAdd.Count == 0 ? 1 : ChequeAdd.Count;
+
+					if (ChequeAdd.Count == 1)
+						HeightListCheque = (countItemsDetail * 60) - (countItemsDetail * 15);
+					else
+						HeightListCheque = (countItemsDetail * 40) - (countItemsDetail * 12);
+
 					ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod);
 
 				}
@@ -898,7 +965,7 @@ namespace App.core.trans.ViewModels
 				if (answer)
 				{
 					((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 2]);
-					App.Current.MainPage = new MainPage();
+					App.Current.MainPage = new MainPage(CodigoUsuarioVM + "." + SecuencialOficinaVM);
 				}
 			}
 			catch (Exception ex)
@@ -915,7 +982,7 @@ namespace App.core.trans.ViewModels
 				if (answer)
 				{
 					((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 3]);
-					App.Current.MainPage = new MainPage();
+					App.Current.MainPage = new MainPage(CodigoUsuarioVM + "." + SecuencialOficinaVM);
 				}
 			}
 			catch (Exception ex)
@@ -932,6 +999,7 @@ namespace App.core.trans.ViewModels
 				{
 					NombreCuentaVM = SelectedCuenta.NombreCuenta;
 					DatosCuentaSeleccionada = SelectedCuenta.Codigo + " " + SelectedCuenta.NombreCuenta;
+					//SecuencialOficinaCuentaSeleccionadaVM = SelectedCuenta.SecuencialOficina;
 					var GetListMonedas = await clienteServices.GetMonedasTransaccion(SecuencialTransaccionVM, SelectedCuenta.SecuencialEmpresa);
 					if(GetListMonedas != null)
 					{
@@ -1031,7 +1099,9 @@ namespace App.core.trans.ViewModels
 				var montoTotal = ModalidadDeposito.Sum(a => a.ValueInsert);
 				var montoTotalCheque = ChequeAdd.Sum(a => a.Valor);
 
-				if (montoTotal == (TotalMoneyClic + montoTotalCheque))
+				var _montoenEfectivo = CheckMontoMoneda();
+
+				if (montoTotal == (_montoenEfectivo + montoTotalCheque))
 				{
 					if (montoTotal > 0)
 					{
@@ -1040,7 +1110,7 @@ namespace App.core.trans.ViewModels
 						{
 							RegistrarTransaccion registrarTransaccion = new RegistrarTransaccion();
 
-							registrarTransaccion.CodigoUsuario = "ADMIN";
+							registrarTransaccion.CodigoUsuario = CodigoUsuarioVM; // "ADMIN";
 							registrarTransaccion.SecuencialTransaccion = SecuencialTransaccionVM;
 							registrarTransaccion.NombreTransaccion = NombreTransaccionVM;
 							registrarTransaccion.SiglasTransaccion = SiglasTransaccionVM;
@@ -1048,12 +1118,12 @@ namespace App.core.trans.ViewModels
 							registrarTransaccion.secCliente = SecuencialClienteVM;
 							registrarTransaccion.numCliente = NumeroClienteVM;
 							registrarTransaccion.SecEmpresa = SecuencialEmpresaVM;
-							registrarTransaccion.SecOficina = SecuencialOficinaVM;
+							registrarTransaccion.SecOficinaUsuario = SecuencialOficinaVM;
 
 							registrarTransaccion.SecuencialCuenta = SelectedCuenta.Secuencial;
 							registrarTransaccion.CodigoCuenta = SelectedCuenta.Codigo;
 							registrarTransaccion.SecuencialMoneda = SelectedCuenta.SecuencialMoneda;
-						
+							registrarTransaccion.SecuencialOficinaCuenta = SelectedCuenta.SecuencialOficina;
 							registrarTransaccion.Transacciones = GetMontoTrnasacciones();
 							registrarTransaccion.Cheques = ChequeAdd.ToList();
 
@@ -1065,12 +1135,12 @@ namespace App.core.trans.ViewModels
 								Device.BeginInvokeOnMainThread(async () =>
 								{
 
-									//INICIO - INPRIMIR EN IMPRESORA THERMAL
+									//INICIO - INPRIMIR EN IMPRESORA THERMALe 
 									var fechaOperacion = DateTime.Now.ToString("dd/MM/yyyy hh:mm");
 									
 									String dataToPrint = "$big$Cooperativa de Ahorro y Credito$intro$   Indigena SAC Pelileo Ltda.$intro$$intro$";
 
-									dataToPrint += "$small$Operador: " + "ADMIN" + "$intro$";
+									dataToPrint += "$small$Operador: " + CodigoUsuarioVM + "$intro$";
 									dataToPrint += "Fecha: " + fechaOperacion + "$intro$";
 									dataToPrint += "Cliente: " + NombreCliente + "$intro$";
 									dataToPrint += "Monto: " + montoTotal.ToString("N2") + "$intro$";
@@ -1092,7 +1162,7 @@ namespace App.core.trans.ViewModels
 									{
 										String dataToPrint2 = "$big$Cooperativa de Ahorro y Credito$intro$   Indigena SAC Pelileo Ltda.$intro$$intro$";
 
-										dataToPrint2 += "$small$Operador: " + "ADMIN" + "$intro$";
+										dataToPrint2 += "$small$Operador: " + CodigoUsuarioVM + "$intro$";
 										dataToPrint2 += "Fecha: " + fechaOperacion + "$intro$";
 										dataToPrint2 += "Cliente: " + NombreCliente + "$intro$";
 										dataToPrint2 += "Monto: " + montoTotal.ToString("N2") + "$intro$";
@@ -1109,17 +1179,18 @@ namespace App.core.trans.ViewModels
 
 									}
 
-
 									await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Deposito Realizado con Exito", "OK");
-
 									((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 3]);
-
-									App.Current.MainPage = new MainPage();
+									App.Current.MainPage = new MainPage(CodigoUsuarioVM + "." + SecuencialOficinaVM);
 								});
+
 							}
 							else
 							{
-								await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "Se presentó un error al momento de Registrar la transacción", "OK");
+								await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", resultSaveTransaccion.MessageResult, "OK");
+								((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.RemovePage(((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack[((MasterDetailPage)Application.Current.MainPage).Detail.Navigation.NavigationStack.Count - 3]);
+								App.Current.MainPage = new MainPage(CodigoUsuarioVM + "." + SecuencialOficinaVM);
+
 							}
 
 							
@@ -1163,418 +1234,445 @@ namespace App.core.trans.ViewModels
 		}
 
 
-
-
 		#region "DENOMINACION MONEDA EFECTIVO"
 
-		public async Task<bool> CheckMontoMoneda(decimal monto)
+		public decimal CheckMontoMoneda()
 		{
-			decimal montoTotalEfectivo = ModalidadDepositoTrans3.FirstOrDefault(a => a.CodigoTipoMovimiento == "Efectivo").ValueInsert;
-			decimal montoEfectivoAgregado = TotalMoneyClic + monto;
-
-			bool result = false;
-
-
-			if (montoTotalEfectivo >= montoEfectivoAgregado)
+			decimal montoEfectivoAgregado = 0; // TotalMoneyClic + monto;
+			try
 			{
+				decimal montoTotalEfectivo = ModalidadDepositoTrans3.FirstOrDefault(a => a.CodigoTipoMovimiento == "Efectivo").ValueInsert;
 
-				if (monto > 0)
-					TotalMoneyClic += monto;
-				else
+
+				bool result = false;
+
+
+				//suma montos
+				montoEfectivoAgregado += Money100 * 100;
+				montoEfectivoAgregado += Money50 * 50;
+				montoEfectivoAgregado += Money20 * 20;
+				montoEfectivoAgregado += Money10 * 10;
+				montoEfectivoAgregado += Money5 * 5;
+				montoEfectivoAgregado += Money1 * 1;
+				montoEfectivoAgregado += Money050 * Convert.ToDecimal(0.50);
+				montoEfectivoAgregado += Money025 * Convert.ToDecimal(0.25);
+				montoEfectivoAgregado += Money010 * Convert.ToDecimal(0.10);
+				montoEfectivoAgregado += Money005 * Convert.ToDecimal(0.05);
+				montoEfectivoAgregado += Money001 * Convert.ToDecimal(0.01);
+
+				//fin suma montos
+
+
+				if (montoTotalEfectivo >= montoEfectivoAgregado)
 				{
-					TotalMoneyClic += monto;
-					var mod1 = ModalidadDepositoTrans3.Select(a => new TransaccionTipoMovimiento
+
+					//if (monto > 0)
+					//	TotalMoneyClic += monto;
+					//else
+					//{
+					//	TotalMoneyClic += monto;
+					//	var mod1 = ModalidadDepositoTrans3.Select(a => new TransaccionTipoMovimiento
+					//	{
+					//		CodigoTipoMovimiento = a.CodigoTipoMovimiento,
+					//		ValueInsert = a.ValueInsert,
+					//		Imagen = (a.CodigoTipoMovimiento == "Efectivo")? "fail" : a.Imagen
+					//	});
+
+					//	ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod1);
+					//}
+
+					if (montoTotalEfectivo == montoEfectivoAgregado)
 					{
-						CodigoTipoMovimiento = a.CodigoTipoMovimiento,
-						ValueInsert = a.ValueInsert,
-						Imagen = (a.CodigoTipoMovimiento == "Efectivo")? "fail" : a.Imagen
-					});
+						var mod = ModalidadDepositoTrans3.Select(a => new TransaccionTipoMovimiento
+						{
+							CodigoTipoMovimiento = a.CodigoTipoMovimiento,
+							ValueInsert = a.ValueInsert,
+							Imagen = (a.CodigoTipoMovimiento == "Efectivo") ? "check" : a.Imagen
+						});
 
-					ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod1);
+						ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod);
+
+						result = true;
+					}
 				}
-
-				if (montoTotalEfectivo == montoEfectivoAgregado)
-				{
-					var mod = ModalidadDepositoTrans3.Select(a => new TransaccionTipoMovimiento
-					{
-						CodigoTipoMovimiento = a.CodigoTipoMovimiento,
-						ValueInsert = a.ValueInsert,
-						Imagen = (a.CodigoTipoMovimiento == "Efectivo") ? "check" : a.Imagen
-					});
-
-					ModalidadDepositoTrans3 = new ObservableCollection<TransaccionTipoMovimiento>(mod);
-				}
-
-				result = true;
+				//else
+				//{
+				//	await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "EL monto es superior al ingresado en Deposito de Efectivo", "OK");
+				//}
 			}
-			else
+			catch (Exception)
 			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", "EL monto es superior al ingresado en Deposito de Efectivo", "OK");
+
 			}
 
-
-			return result;
+	
+			return montoEfectivoAgregado;
 		}
 
-		public async void _onClicmore100()
-		{
-			try
-			{
+		//public async void _onClicmore100()
+		//{
+		//	try
+		//	{
 				
-				if(await CheckMontoMoneda(100))
-					Money100 += 1;
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//		if(await CheckMontoMoneda(100))
+		//			Money100 += 1;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmenos100()
-		{
-			try
-			{
-				if (Money100 > 0)
-				{
+		//public async void _onClicmenos100()
+		//{
+		//	try
+		//	{
+		//		if (Money100 > 0)
+		//		{
 					
-					if (await CheckMontoMoneda(-100))
-						Money100 -= 1;
-					//TotalMoneyClic -= 100;
-				}
-					
-
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
-
-		public async void _onClicmore50()
-		{
-			try
-			{			
-				if(await CheckMontoMoneda(50))
-					Money50 += 1;
-				//TotalMoneyClic += 50;
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
-
-		public async void _onClicmenos50()
-		{
-			try
-			{
-				if (Money50 > 0)
-				{
-					
-					if(await CheckMontoMoneda(-50))
-						Money50 -= 1;
-					//TotalMoneyClic -= 50;
-				}
+		//			if (await CheckMontoMoneda(-100))
+		//				Money100 -= 1;
+		//			//TotalMoneyClic -= 100;
+		//		}
 					
 
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmore20()
-		{
-			try
-			{				
-				if(await CheckMontoMoneda(20))
-					Money20 += 1;
-				//TotalMoneyClic += 20;
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//public async void _onClicmore50()
+		//{
+		//	try
+		//	{			
+		//		if(await CheckMontoMoneda(50))
+		//			Money50 += 1;
+		//		//TotalMoneyClic += 50;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmenos20()
-		{
-			try
-			{
-				if (Money20 > 0)
-				{
+		//public async void _onClicmenos50()
+		//{
+		//	try
+		//	{
+		//		if (Money50 > 0)
+		//		{
 					
-					if(await CheckMontoMoneda(-20))
-						Money20 -= 1;
-					//TotalMoneyClic -= 20;
-				}
+		//			if(await CheckMontoMoneda(-50))
+		//				Money50 -= 1;
+		//			//TotalMoneyClic -= 50;
+		//		}
+					
+
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
+
+		//public async void _onClicmore20()
+		//{
+		//	try
+		//	{				
+		//		if(await CheckMontoMoneda(20))
+		//			Money20 += 1;
+		//		//TotalMoneyClic += 20;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
+
+		//public async void _onClicmenos20()
+		//{
+		//	try
+		//	{
+		//		if (Money20 > 0)
+		//		{
+					
+		//			if(await CheckMontoMoneda(-20))
+		//				Money20 -= 1;
+		//			//TotalMoneyClic -= 20;
+		//		}
 				
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmore10()
-		{
-			try
-			{
+		//public async void _onClicmore10()
+		//{
+		//	try
+		//	{
 				
-				if(await CheckMontoMoneda(10))
-					Money10 += 1;
-				//TotalMoneyClic += 10;
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//		if(await CheckMontoMoneda(10))
+		//			Money10 += 1;
+		//		//TotalMoneyClic += 10;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmenos10()
-		{
-			try
-			{
-				if (Money10 > 0)
-				{
+		//public async void _onClicmenos10()
+		//{
+		//	try
+		//	{
+		//		if (Money10 > 0)
+		//		{
 					
-					if(await CheckMontoMoneda(-10))
-						Money10 -= 1;
-					//TotalMoneyClic -= 10;
-				}					
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//			if(await CheckMontoMoneda(-10))
+		//				Money10 -= 1;
+		//			//TotalMoneyClic -= 10;
+		//		}					
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmore5()
-		{
-			try
-			{				
-				if (await CheckMontoMoneda(5))
-					Money5 += 1;
-				//TotalMoneyClic += 5;
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//public async void _onClicmore5()
+		//{
+		//	try
+		//	{				
+		//		if (await CheckMontoMoneda(5))
+		//			Money5 += 1;
+		//		//TotalMoneyClic += 5;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmenos5()
-		{
-			try
-			{
-				if (Money5 > 0)
-				{
+		//public async void _onClicmenos5()
+		//{
+		//	try
+		//	{
+		//		if (Money5 > 0)
+		//		{
 					
-					if (await CheckMontoMoneda(-5))
-						Money5 -= 1;
-					//TotalMoneyClic -= 5;
-				}
+		//			if (await CheckMontoMoneda(-5))
+		//				Money5 -= 1;
+		//			//TotalMoneyClic -= 5;
+		//		}
 					
 
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmore1()
-		{
-			try
-			{
+		//public async void _onClicmore1()
+		//{
+		//	try
+		//	{
 				
-				if (await CheckMontoMoneda(1))
-					Money1 += 1;
-				//TotalMoneyClic += 1; 
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//		if (await CheckMontoMoneda(1))
+		//			Money1 += 1;
+		//		//TotalMoneyClic += 1; 
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmenos1()
-		{
-			try
-			{
-				if (Money1 > 0)
-				{					
-					if (await CheckMontoMoneda(-1))
-						Money1 -= 1;
-					//TotalMoneyClic = TotalMoneyClic - 1;
-				}
+		//public async void _onClicmenos1()
+		//{
+		//	try
+		//	{
+		//		if (Money1 > 0)
+		//		{					
+		//			if (await CheckMontoMoneda(-1))
+		//				Money1 -= 1;
+		//			//TotalMoneyClic = TotalMoneyClic - 1;
+		//		}
 				
 
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmore050()
-		{
-			try
-			{
+		//public async void _onClicmore050()
+		//{
+		//	try
+		//	{
 				
-				if (await CheckMontoMoneda(Convert.ToDecimal(0.50)))
-					Money050 += 1;
-				//TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.50);
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//		if (await CheckMontoMoneda(Convert.ToDecimal(0.50)))
+		//			Money050 += 1;
+		//		//TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.50);
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmenos050()
-		{
-			try
-			{
-				if (Money050 > 0)
-				{
+		//public async void _onClicmenos050()
+		//{
+		//	try
+		//	{
+		//		if (Money050 > 0)
+		//		{
 					
-					if (await CheckMontoMoneda(Convert.ToDecimal(-0.50)))
-						Money050 -= 1;
-					//TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.50);
-				}
+		//			if (await CheckMontoMoneda(Convert.ToDecimal(-0.50)))
+		//				Money050 -= 1;
+		//			//TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.50);
+		//		}
 					
 
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmore025()
-		{
-			try
-			{
+		//public async void _onClicmore025()
+		//{
+		//	try
+		//	{
 				
-				if (await CheckMontoMoneda(Convert.ToDecimal(0.25)))
-					Money025 += 1;
-				//TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.25);
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//		if (await CheckMontoMoneda(Convert.ToDecimal(0.25)))
+		//			Money025 += 1;
+		//		//TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.25);
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmenos025()
-		{
-			try
-			{
-				if (Money025 > 0)
-				{
+		//public async void _onClicmenos025()
+		//{
+		//	try
+		//	{
+		//		if (Money025 > 0)
+		//		{
 					
-					if (await CheckMontoMoneda(Convert.ToDecimal(-0.25)))
-						Money1 -= 1;
+		//			if (await CheckMontoMoneda(Convert.ToDecimal(-0.25)))
+		//				Money1 -= 1;
 
-					//TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.25);
-				}
-					
-
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
-
-		public async void _onClicmore010()
-		{
-			try
-			{
-				Money010 += 1;
-				TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.10);
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
-
-		public async void _onClicmenos010()
-		{
-			try
-			{
-				if (Money010 > 0)
-				{
-					Money010 -= 1;
-					TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.10);
-				}
+		//			//TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.25);
+		//		}
 					
 
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmore001()
-		{
-			try
-			{
-				Money001 += 1;
-				TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.01);
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//public async void _onClicmore010()
+		//{
+		//	try
+		//	{
+		//		Money010 += 1;
+		//		TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.10);
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
-		public async void _onClicmenos001()
-		{
-			try
-			{
-				if (Money001 > 0)
-				{
-					Money001 -= 1;
-					TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.01);
-				}
+		//public async void _onClicmenos010()
+		//{
+		//	try
+		//	{
+		//		if (Money010 > 0)
+		//		{
+		//			Money010 -= 1;
+		//			TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.10);
+		//		}
 					
 
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
-				//throw;
-			}
-		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
+
+		//public async void _onClicmore001()
+		//{
+		//	try
+		//	{
+		//		Money001 += 1;
+		//		TotalMoneyClic = TotalMoneyClic + Convert.ToDecimal(0.01);
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
+
+		//public async void _onClicmenos001()
+		//{
+		//	try
+		//	{
+		//		if (Money001 > 0)
+		//		{
+		//			Money001 -= 1;
+		//			TotalMoneyClic = TotalMoneyClic - Convert.ToDecimal(0.01);
+		//		}
+					
+
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		await Application.Current.MainPage.DisplayAlert("SAC - Pelileo", ex.Message, "OK");
+		//		//throw;
+		//	}
+		//}
 
 		#endregion
 
 		#region COMMANDS 
 
+
+		//CleanView
+		public ICommand CleanView => new RelayCommand(CleanSearch);
+
+		public ICommand PickerSelect => new RelayCommand(BusquedaClienteporNombre);
 
 		public ICommand SearchCliente => new RelayCommand(BusquedaCliente);
 
@@ -1592,46 +1690,46 @@ namespace App.core.trans.ViewModels
 
 		public ICommand CancelarTrans3 => new RelayCommand(CancelarTransaccion3);
 
-		public ICommand onClicmore100 => new RelayCommand(_onClicmore100);
+		//public ICommand onClicmore100 => new RelayCommand(_onClicmore100);
 
-		public ICommand onClicmenos100 => new RelayCommand(_onClicmenos100);
+		//public ICommand onClicmenos100 => new RelayCommand(_onClicmenos100);
 
-		public ICommand onClicmore50 => new RelayCommand(_onClicmore50);
+		//public ICommand onClicmore50 => new RelayCommand(_onClicmore50);
 
-		public ICommand onClicmenos50 => new RelayCommand(_onClicmenos50);
+		//public ICommand onClicmenos50 => new RelayCommand(_onClicmenos50);
 
-		public ICommand onClicmore20 => new RelayCommand(_onClicmore20);
+		//public ICommand onClicmore20 => new RelayCommand(_onClicmore20);
 
-		public ICommand onClicmenos20 => new RelayCommand(_onClicmenos20);
+		//public ICommand onClicmenos20 => new RelayCommand(_onClicmenos20);
 
 
-		public ICommand onClicmore10 => new RelayCommand(_onClicmore10);
+		//public ICommand onClicmore10 => new RelayCommand(_onClicmore10);
 
-		public ICommand onClicmenos10 => new RelayCommand(_onClicmenos10);
+		//public ICommand onClicmenos10 => new RelayCommand(_onClicmenos10);
 
-		public ICommand onClicmore5 => new RelayCommand(_onClicmore5);
+		//public ICommand onClicmore5 => new RelayCommand(_onClicmore5);
 
-		public ICommand onClicmenos5 => new RelayCommand(_onClicmenos5);
+		//public ICommand onClicmenos5 => new RelayCommand(_onClicmenos5);
 
-		public ICommand onClicmore1 => new RelayCommand(_onClicmore1);
+		//public ICommand onClicmore1 => new RelayCommand(_onClicmore1);
 
-		public ICommand onClicmenos1 => new RelayCommand(_onClicmenos1);
+		//public ICommand onClicmenos1 => new RelayCommand(_onClicmenos1);
 
-		public ICommand onClicmore050 => new RelayCommand(_onClicmore050);
+		//public ICommand onClicmore050 => new RelayCommand(_onClicmore050);
 
-		public ICommand onClicmenos050 => new RelayCommand(_onClicmenos050);
+		//public ICommand onClicmenos050 => new RelayCommand(_onClicmenos050);
 
-		public ICommand onClicmore025 => new RelayCommand(_onClicmore025);
+		//public ICommand onClicmore025 => new RelayCommand(_onClicmore025);
 
-		public ICommand onClicmenos025 => new RelayCommand(_onClicmenos025);
+		//public ICommand onClicmenos025 => new RelayCommand(_onClicmenos025);
 
-		public ICommand onClicmore010 => new RelayCommand(_onClicmore010);
+		//public ICommand onClicmore010 => new RelayCommand(_onClicmore010);
 
-		public ICommand onClicmenos010 => new RelayCommand(_onClicmenos010);
+		//public ICommand onClicmenos010 => new RelayCommand(_onClicmenos010);
 
-		public ICommand onClicmore001 => new RelayCommand(_onClicmore001);
+		//public ICommand onClicmore001 => new RelayCommand(_onClicmore001);
 
-		public ICommand onClicmenos001 => new RelayCommand(_onClicmenos001);
+		//public ICommand onClicmenos001 => new RelayCommand(_onClicmenos001);
 
 		#endregion
 	}

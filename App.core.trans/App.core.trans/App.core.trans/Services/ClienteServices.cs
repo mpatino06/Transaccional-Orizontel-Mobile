@@ -30,13 +30,13 @@ namespace App.core.trans.Services
 			client.Timeout = new TimeSpan(0, 1, 0, 0); // TimeSpan.FromSeconds(1000);
 			//client.MaxResponseContentBufferSize = 25600000;
 			//client.Timeout = TimeSpan(),
-			PATHSERVER = "186.4.142.142:81"; //"192.168.251.14:81"; 
+			PATHSERVER = "vmovil.sac.fin.ec:8443"; //"192.168.251.14:81"; 
 		}
 
 		public async Task<List<ClienteCuentas>> GetCuentasCliente(int cliente, int transaccion)
 		{
 			var Items = new List<ClienteCuentas>();
-			string url = "http://" + PATHSERVER + "/OR/Cliente/GetCuentas/" + cliente + "/" + transaccion;
+			string url = "https://" + PATHSERVER + "/OR/Cliente/GetCuentas/" + cliente + "/" + transaccion;
 			//string uri = string.Concat(url, name);
 			try
 			{
@@ -57,7 +57,7 @@ namespace App.core.trans.Services
 		public async Task<List<ClienteExtend>> GetCliente(string cliente, int seleccion)
 		{
 			var Items = new List<ClienteExtend>();
-			string url = "http://" + PATHSERVER + "/OR/Cliente/GetClienteBycode/" + cliente  + "/" + seleccion;
+			string url = "https://" + PATHSERVER + "/OR/Cliente/GetClienteBycode/" + cliente  + "/" + seleccion;
 			try
 			{
 				var result = await client.GetAsync(url);
@@ -82,7 +82,7 @@ namespace App.core.trans.Services
 			var Items = new List<TransaccionTipoMovimiento>();
 			try
 			{
-				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetTransaccionTipoMovimiento/" + secuencialTransaccion;
+				string url = "https://" + PATHSERVER + "/OR/Transaccion/GetTransaccionTipoMovimiento/" + secuencialTransaccion;
 				//var result = await client.GetAsync(uri);
 				//if (result.IsSuccessStatusCode)
 				//{
@@ -106,7 +106,7 @@ namespace App.core.trans.Services
 			var Items = new TransaccionMoneda();
 			try
 			{
-				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetTransaccionMoneda/" + secuencialTransaccion + "/" + empresa;
+				string url = "https://" + PATHSERVER + "/OR/Transaccion/GetTransaccionMoneda/" + secuencialTransaccion + "/" + empresa;
 				var result = await client.GetAsync(url);
 				if (result.IsSuccessStatusCode)
 				{
@@ -131,7 +131,7 @@ namespace App.core.trans.Services
 			var Items = new List<Transaccion>();
 			try
 			{
-				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetTransaccion/" + empresa;
+				string url = "https://" + PATHSERVER + "/OR/Transaccion/GetTransaccion/" + empresa;
 				var result = await client.GetAsync(url);
 				if (result.IsSuccessStatusCode)
 				{
@@ -153,7 +153,7 @@ namespace App.core.trans.Services
 			var Items = new List<Banco>();
 			try
 			{
-				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetBancos";
+				string url = "https://" + PATHSERVER + "/OR/Transaccion/GetBancos";
 				var result = await client.GetAsync(url);
 				if (result.IsSuccessStatusCode)
 				{
@@ -172,7 +172,7 @@ namespace App.core.trans.Services
 		public async Task<ResultTransaccion> SaveTransaccion(RegistrarTransaccion transaccion)
 		{
 			ResultTransaccion Items = new ResultTransaccion();
-			string url = "http://" + PATHSERVER + "/OR/Transaccion/SaveTransaccion";
+			string url = "https://" + PATHSERVER + "/OR/Transaccion/SaveTransaccion";
 			try
 			{
 				ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
@@ -202,7 +202,7 @@ namespace App.core.trans.Services
 			var Items = new List<TransaccionmobileExtend>();
 			try
 			{
-				string url = "http://" + PATHSERVER + "/OR/Transaccion/GetTransaccionMobile/" + codigoUsuario + "/" + fecha.ToString("dd/MM/yyyy").Replace("/","-");
+				string url = "https://" + PATHSERVER + "/OR/Transaccion/GetTransaccionMobile/" + codigoUsuario + "/" + fecha.ToString("dd/MM/yyyy").Replace("/","-");
 				var result = await client.GetAsync(url);
 				if (result.IsSuccessStatusCode)
 				{

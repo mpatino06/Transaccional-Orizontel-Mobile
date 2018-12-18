@@ -32,7 +32,7 @@ namespace App.core.trans.Views.Transaccion {
         private global::Xamarin.Forms.Label LabelBusquedaCliente;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Xamarin.Forms.Picker PickerCliente;
+        private global::App.core.trans.Controls.BindablePicker PickerCliente;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private global::Xamarin.Forms.SearchBar EntSearch;
@@ -41,7 +41,7 @@ namespace App.core.trans.Views.Transaccion {
         private global::Xamarin.Forms.Label LblDatosCliente;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Xamarin.Forms.Picker PickerNombre;
+        private global::App.core.trans.Controls.BindablePicker PickerNombre;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private global::Xamarin.Forms.Label Label3;
@@ -57,10 +57,10 @@ namespace App.core.trans.Views.Transaccion {
             PickerWarehouseInit = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Picker>(this, "PickerWarehouseInit");
             Label2 = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "Label2");
             LabelBusquedaCliente = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "LabelBusquedaCliente");
-            PickerCliente = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Picker>(this, "PickerCliente");
+            PickerCliente = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::App.core.trans.Controls.BindablePicker>(this, "PickerCliente");
             EntSearch = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.SearchBar>(this, "EntSearch");
             LblDatosCliente = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "LblDatosCliente");
-            PickerNombre = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Picker>(this, "PickerNombre");
+            PickerNombre = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::App.core.trans.Controls.BindablePicker>(this, "PickerNombre");
             Label3 = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "Label3");
             ListCount = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.ListView>(this, "ListCount");
         }

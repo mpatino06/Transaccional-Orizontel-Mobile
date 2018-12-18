@@ -27,6 +27,7 @@ Xamarin.Android.Support.v7.MediaRouter
 Xamarin.Android.Support.v7.Palette
 Xamarin.Android.Support.v7.RecyclerView
 Xamarin.Android.Support.Vector.Drawable
+Xamarin.Behaviors
 Xamarin.Forms.Core
 Xamarin.Forms.Platform.Android
 Xamarin.Forms.Platform
@@ -34,6 +35,3 @@ Xamarin.Forms.Xaml
 XF.Bluetooth.Printer.Plugin.Abstractions
 XF.Bluetooth.Printer.Plugin
 netstandard
-System.Resources.ResourceManager
-System.ComponentModel
-System.Reflection.Extensions

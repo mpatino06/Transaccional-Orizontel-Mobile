@@ -49,6 +49,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Behaviors">
+      <HintPath>..\..\..\..\core.inventory.mobile\packages\Xamarin.Behaviors.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs">
@@ -77,6 +80,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloseApplication.cs" />
+    <Compile Include="ICloseApp.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MyEntryRenderer.cs" />
     <Compile Include="PrintActivity.cs" />

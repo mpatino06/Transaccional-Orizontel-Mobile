@@ -9,5 +9,6 @@ namespace App.core.trans.Models
 		public bool Result { get; set; }
 		public string SecuencialDocumento { get; set; }
 		public Decimal Saldodeposito { get; set; }
+		public string MessageResult { get; set; }
 	}
 }

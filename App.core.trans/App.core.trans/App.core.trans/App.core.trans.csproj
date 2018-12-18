@@ -23,6 +23,9 @@
     <Reference Include="Mono.Android">
       <HintPath>D:\PROGRAMAS\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v8.1\Mono.Android.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Behaviors">
+      <HintPath>..\..\..\..\core.inventory.mobile\packages\Xamarin.Behaviors.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -53,5 +56,9 @@
     <EmbeddedResource Update="Views\Transaccion\Trans3.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 </Project>

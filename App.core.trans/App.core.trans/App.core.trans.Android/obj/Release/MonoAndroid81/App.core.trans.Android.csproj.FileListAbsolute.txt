@@ -3,6 +3,7 @@ E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Andro
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\bin\Release\com.companyname.App.core.trans.apk
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\bin\Release\com.companyname.App.core.trans-Signed.apk
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\bin\Release\App.core.trans.dll
+E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\bin\Release\Xamarin.Behaviors.dll
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\bin\Release\App.core.trans.pdb
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\App.core.trans.Android.csprojAssemblyReference.cache
 E:\REPOSITORIOS\TransOrMobile\App.core.trans\App.core.trans\App.core.trans.Android\obj\Release\MonoAndroid81\res.flag

@@ -20,12 +20,12 @@ namespace App.core.trans.ViewModels
 		private ClienteServices clienteServices;
 		private PrintReport printReport;
 
-		public RegistrosViewModel(string codigoUsuario)
+		public RegistrosViewModel()
 		{
-			CodigoUsuario = codigoUsuario;
+			//CodigoUsuario = codigoUsuario;
 			MaxDate = DateTime.Now;
 			SelectedDate = DateTime.Now;
-			LoadRegistros();			
+			//LoadRegistros();			
 		}
 
 		private string _codigoUsuario;

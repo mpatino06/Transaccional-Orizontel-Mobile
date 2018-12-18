@@ -17,7 +17,8 @@
           "PSC.Xam.Controls.BindableRadioButton": "1.0.0",
           "XF.Bluetooth.Printer.Plugin": "1.0.0",
           "Xamarin.Forms": "3.1.0.697729",
-          "Mono.Android": "0.0.0.0"
+          "Mono.Android": "0.0.0.0",
+          "Xamarin.Behaviors": "1.2.0.0"
         },
         "runtime": {
           "App.core.trans.dll": {}
@@ -112,6 +113,14 @@
             "fileVersion": "0.0.0.0"
           }
         }
+      },
+      "Xamarin.Behaviors/1.2.0.0": {
+        "runtime": {
+          "Xamarin.Behaviors.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
       }
     }
   },
@@ -185,6 +194,11 @@
       "hashPath": "xf.bluetooth.printer.plugin.1.0.0.nupkg.sha512"
     },
     "Mono.Android/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Xamarin.Behaviors/1.2.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
